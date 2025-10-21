@@ -1,0 +1,23 @@
+Dato un grafo orientato G=(V,E) e pesato con funzione peso w: E->R, scrivere un algoritmo, in pseudocodice, 
+che restituisca TRUE se ogni nodo è raggiungibile da ogni altro nodo e FALSE altrimenti. (7 punti)
+
+//DFS perchè non abbiamo una radice sicura
+
+Connesso(G)
+
+for each vertice S in V[G]
+    for each vertice U in V[G] //Resetta i nodi ogni volta che cambiamo nodo S per controllare se tutti sono adiacenti
+        color[U] = white
+        padre[u] = null
+    DFS(G, S)
+    for each vertice U in V[G]
+        if color[U] = white
+            return FALSE
+        else 
+            return TRUE
+
+
+
+DFS-VISIT(G, U)
+
+classica visit DFS

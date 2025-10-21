@@ -1,0 +1,33 @@
+La Fiat per la produzione della nuova panda ha installato nello stabilimento di Pomigliano d’Arco K catene di montaggio.
+
+Ogni catena di montaggio ha L stazioni di lavoro. 
+
+Ogni stazione di lavoro ha un tempo di lavorazione differente  T.
+
+Inoltre il telaio della nuova panda impiega un tempo iniziale I per entrare nella catena di montaggio 
+ed un tempo differente U per ogni catena di montaggio per uscire. 
+Si assuma che il tempo di migrazione tra due stazioni successive all’interno della stessa catena sia e. 
+Infine, per fornire all’impianto la massima flessibilità si preveda la possibilità che la nuova panda possa migrare 
+da una catena di montaggio all’altra e tale operazione impieghi un tempo, differente per ogni catena, pari ad S.
+
+Si risolva, mediante la programmazione dinamica, il problema di individuazione per ogni vettura del percorso più rapido, 
+scrivendo le relative equazioni di ricorrenza. Successivamente si scriva, un algoritmo di memoization, in pseudocodice, che, 
+utilizzando le equazioni di ricorrenza suddette, individui per ogni vettura il percorso più rapido.
+
+Memo = array[K][L] // inizializza a NIL
+
+function PercorsoRapido(T, I, U, e, S, K, L):
+    for k = 1 to K:
+        Memo[k][1] = I + T[k][1]
+    for l = 2 to L:
+        for k = 1 to K:
+            stay = Memo[k][l-1] + e + T[k][l]
+            migrate = INFINITY
+            for k' = 1 to K:
+                if k' ≠ k:
+                    migrate = min(migrate, Memo[k'][l-1] + S[k'][k] + T[k][l])
+            Memo[k][l] = min(stay, migrate)
+    min_time = INFINITY
+    for k = 1 to K:
+        min_time = min(min_time, Memo[k][L] + U[k])
+    return min_time

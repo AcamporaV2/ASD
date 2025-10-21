@@ -1,0 +1,21 @@
+FRACTIONAL-KNAPSACK-HEAP(W, items)
+1  for each item i in items
+2      i.ratio = i.value / i.weight
+3      INSERT(CODA, i, i.ratio)       // Coda
+
+4  total_value = 0
+5  remaining_capacity = W
+
+6  while remaining_capacity > 0 and not EMPTY(CODA)
+    //Prima del controllo estrai il massimo
+7      i = EXTRACT-MAX(CODA)
+
+8      if i.weight <= remaining_capacity
+9          total_value += i.value
+10         remaining_capacity -= i.weight
+11     else
+12         fraction = remaining_capacity / i.weight
+13         total_value += i.value * fraction
+14         break
+
+15 return total_value

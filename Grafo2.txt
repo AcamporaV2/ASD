@@ -1,0 +1,30 @@
+/*
+
+Dato un grafo non orientato G(V, E), implementare in pseudocodice un algoritmo ricorsivo 
+che restituisca TRUE se in G è presente un ciclo Hamiltoniano e FALSE altrimenti.
+
+Algoritmo:
+
+//Cicla ogni vertice
+HAMILTONIAN-CYCLE(G)
+    for each vertex v in G.V
+        if HAMILTONIAN-UTIL(G, [v], v)
+            return TRUE
+    return FALSE
+\
+
+
+HAMILTONIAN-UTIL(G, path, current)
+    if length(path) == |G.V|
+        if (current, path[0]) ∈ G.E
+            return TRUE
+        else
+            return FALSE
+    for each neighbor u of current in G.E
+        if u not in path
+            append u to path
+            if HAMILTONIAN-UTIL(G, path, u)
+                return TRUE
+            remove u from path
+    return FALSE
+/*
