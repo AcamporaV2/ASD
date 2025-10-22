@@ -1,0 +1,60 @@
+/*
+
+
+
+Dato un grafo non orientato G=(V,E) pesato con funzione peso ω:E->R.
+Si scriva in pseudocodice un algoritmo che restituisca l’arco leggero e non sicuro di peso mediano
+
+*/
+
+
+ARCO_NON_SICURO_MEDIANO(G, w)
+
+Edge_MST <- KRUSKAL(G,w)
+Edge_NonSicuri <- VUOTO
+
+for each edge e ∈ E[G]
+    if e ∉ Edge_MST
+        Edge_NonSicuri <- Edge_NonSicuri U {e}
+
+if Edge_NonSicuri = VUOTO
+    return NIL
+
+//Ordina gli archi in ordine non decrescente di peso W
+n <- |Edge_NonSicuri|
+mediana <- (n/2)
+
+Edge_mediano <- Edge_NonSicuri[mediana]
+
+
+return Edge_mediano
+
+
+
+KRUSKAL(G,w)
+A <- Insieme VUOTO
+for each vertice v in V[G]
+    MAKE-SET(V)
+
+//ordina i vertici in ordine non decrescente di peso W
+
+for each arco (u,v) in E[G]
+    if FIND-SET(u) != FIND-SET(v)
+        A <- A U {(u,v)}
+        UNION(u,v)
+Return A
+
+
+
+MAKE-SET(X)
+    P[X] = X
+    Rank[X] = 0
+
+
+FIND-SET(X)
+    if X != P[x]
+        P[X] = FIND-SET(P[X])
+    return P[X]
+
+UNION(X, Y)
+    LINK(FIND-SET(X), FIND-SET(Y))
