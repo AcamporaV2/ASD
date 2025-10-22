@@ -1,0 +1,58 @@
+/*
+
+
+Dato un grafo orientato G = (V,E) e pesato con funzione peso w: E -> R ed un nodo sorgente s € V, scrivere un algoritmo, 
+in pseudocodice, che restituisca la profondità massima dei cammini minimi (7 punti)
+
+
+*/
+// ALGORITMO: DIJKSTRA modificato per calcolare la profondità massima
+// s = nodo sorgente
+
+
+PROFONDITA-MAX(G, w, s)
+    
+    // Inizializzazione di tutti i vertici
+    for each vertice v ∈ V[G]
+        Distanza[v] = ∞           // Distanza infinita iniziale
+        Padre[v] = NIL            // Nessun predecessore
+        Profondità[v] = 0         // Profondità = numero di archi
+    
+    // Il nodo sorgente ha distanza 0 e profondità 0
+    Distanza[s] = 0 
+    Profondità[s] = 0
+    
+    // Coda di priorità contenente tutti i vertici
+    Q = V[G]
+    
+    // Ciclo principale di Dijkstra
+    while Q ≠ ∅
+        // Estrae il vertice con distanza minima
+        u = EXTRACT-MIN(Q)
+        
+        // RILASSAMENTO: esplora tutti i vertici adiacenti a u
+        for each vertice v ∈ Adj[u]
+            // Se troviamo un cammino più breve verso v
+            if Distanza[v] > Distanza[u] + w(u, v)
+                // Aggiorna la distanza (usa i pesi)
+                Distanza[v] = Distanza[u] + w(u, v)
+                
+                // Aggiorna il predecessore
+                Padre[v] = u
+                
+                // Aggiorna la profondità (conta gli archi)
+                Profondità[v] = Profondità[u] + 1
+                
+                // Aggiorna la priorità di v nella coda
+                DECREASE-KEY(Q, v, Distanza[v])
+    
+    // Trova la profondità massima tra tutti i vertici raggiungibili
+    profondita_max = 0
+    
+    for each vertice v ∈ V[G]
+        // Considera solo vertici raggiungibili (Distanza ≠ ∞)
+        if Distanza[v] ≠ ∞ and Profondità[v] > profondita_max
+            profondita_max = Profondità[v]
+    
+    return profondita_max
+
