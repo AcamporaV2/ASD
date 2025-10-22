@@ -1,0 +1,31 @@
+/*
+
+
+L'aereoporto di Capodichino ha fatto costruire una nuova pista di decollo e di atterraggio. 
+Il direttore dell'aereoporto decide di utilizzare la pista per servire i nuovi N aerei che dovranno decollare dall'aereoporto.
+
+Supponiamo che t¡ sia il tempo necessario all'i-simo aereo per decollare, scrivere un algoritmo, 
+in pseudocodice, che utilizzando la struttura dati coda di priorità minimizzi il tempo totale di attesa 
+(o turnaround) degli N aerei per decollare (7 punti). 
+
+
+*/
+
+
+MIN-TEMPO(T, n)
+
+Q <- CODA_VUOTA
+
+for i<-1 to n 
+    INSERT(Q, T[i])
+
+tempo_totale <- 0
+tempo_corrente <- 0
+
+while Q non è vuota 
+    tempo_aereo <- EXTRACT-MIN(Q)
+    tempo_corrente <- tempo_corrente + tempo_aereo
+    tempo_totale <- tempo_totale + tempo_corrente
+
+
+return tempo_totale

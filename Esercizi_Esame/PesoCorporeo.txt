@@ -27,4 +27,5 @@ MAX-VARIAZIONE-RIC(W, i, M)
    else
        diff ← W[i] - W[i-1]
        M[i] ← max(0, MAX-VARIAZIONE-RIC(W, i-1, M) + diff)
+       
 return M[i]

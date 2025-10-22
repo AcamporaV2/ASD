@@ -1,0 +1,40 @@
+/*
+
+
+Dato un grafo orientato G = (V,E), scrivere un algoritmo, 
+in pseucodice, che calcoli il numero dei cicli, di lunghezza maggiore di 1, presenti nel grafo (7 punti). 
+
+
+*/
+
+
+
+CONTA-CICLI(G)
+
+for each vertice u ∈ V[G]
+    Color[u] = BIANCO
+    Padre[u] = NIL
+
+cicli = 0
+
+
+for each vertice u ∈ V[G]
+    if color[u] == BIANCO
+        DFS(G, u, cicli)
+
+
+return cicli
+
+---------------------------------------------
+DFS(G, u, cicli)
+    Color[u] = GRIGIO
+
+    for each v ∈ Adj[u]
+        if Color[v] == BIANCO
+            Padre[v] = U
+            DFS(G,v,cicli)
+        else if Color[v] == GRIGIO and v !=u    //Evito v = u perchè sarebbe loop su se stesso 
+            cicli = cicli + 1
+
+
+    Color[u] = NERO
