@@ -1,0 +1,30 @@
+Si supponga di registrareil proprio peso corporeo ogni giorno.
+ 
+Dopo ogni n giorni vogliamo conoscere la maggiore variazione di peso che si è verificata in un intervallo di giorni consecutivi.
+Si scriva in pseudocodice un algoritmo ricorsivo che, ricevuto in input le n misurazioni, 
+restituisca la maggiore variazione di peso in giorni consecutivi.
+
+
+MAGGIORE-VARIAZIONE(W, n)
+  crea un array M[1..n] inizializzato a NIL
+  max_var ← 0
+
+   for i ← 2 to n
+     v ← MAX-VARIAZIONE-RIC(W, i, M)
+      if v > max_var
+          max_var ← v
+
+  return max_var
+
+
+
+MAX-VARIAZIONE-RIC(W, i, M)
+  if M[i] ≠ NIL
+      return M[i]
+
+  if i = 1
+       M[i] ← 0
+   else
+       diff ← W[i] - W[i-1]
+       M[i] ← max(0, MAX-VARIAZIONE-RIC(W, i-1, M) + diff)
+return M[i]

@@ -1,0 +1,44 @@
+/*
+
+
+Vostro padre è appassionato di vino. 
+Vostro padre è anche affetto da diabete e non può bere vini con un grado alcolico elevato.
+Poiché domani festeggerà gli anni, avete deciso di regalargli alcune bottiglie, acquistandole su Amazon.
+Supponendo che  il vostro budget è di K euro e che per ognibottiglia disponibile b sia noto
+sia il suo prezzo P(b) e sia il grado alcolemico A(b), scrivete un algoritmo che determini le bottiglie 
+da acquistare minimizzando il grado alcolemico complessivamente acquistato.
+Supponete che P(b) ed A(b) siano interi, per ogni bottiglia b
+
+P = prezzo
+A = tasso alcolemico
+K = budget totale 
+n = numero bottiglie disponibili
+
+
+Knapsack(P, A, K, n)
+
+for b <-1 to n 
+    ratio[b] = A[b] / P[b]  //Rapporto tasso con prezzo
+
+
+//ordiniamo le bottiglie in ordine crescente di ratio 
+
+totaleSpeso = 0
+TotaleAlcol = 0
+
+
+for b <- 1 to n 
+    if totaleSpeso + P[b] <= K 
+        scelta[b] = 1 //prende il 100% della bottiglia
+        totaleSpeso = totaleSpeso + P[b]
+        totaleAlcol = totaleAlcol + A[b]
+    else 
+
+        //prendiamo una parte solo
+        Porzione = (K - totaleSpeso) / P[b]
+        scelta[b] = Porzione
+        totaleSpeso = K 
+        totaleAlcol = totaleAlcol + A[b] * scelta[b]
+    
+
+return scelta, totaleAlcol
