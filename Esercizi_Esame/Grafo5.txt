@@ -1,0 +1,54 @@
+/*
+
+
+Dato un grado orientato di peso unitario ed un nodo sorgente S,
+scrivere un algoritmo in pseudocodice che restituisca la distanza a cui si trova il maggior numero
+di nodi in G.
+
+
+
+FIND-MAX-MAIL-DISTANCE-OPTIMIZED(G, s)
+1  INITIALIZE-SINGLE-SOURCE(G, s)              // Inizializza distanze: d[s]=0, altri=∞
+2  Q ← V[G]                                     // Coda con tutti i vertici
+3  S ← ∅                                        // Insieme vertici processati (vuoto)
+4  max_occ[0...V[G]] ← 0                        // Array contatori per ogni distanza
+5  max_count ← 0                                // Numero massimo di nodi a una distanza
+6  max_distance ← -1                            // Distanza con più nodi (risultato)
+7  
+8  while Q ≠ ∅                                  // Finché ci sono vertici da processare
+9      u ← EXTRACT-MIN(Q)                       // Estrae vertice con distanza minima
+10     S ← S ∪ {u}                              // Aggiunge u ai processati
+11     
+12     if d[u] ≠ ∞                              // Se u è raggiungibile da s
+13         max_occ[d[u]] ← max_occ[d[u]] + 1   // Incrementa contatore per distanza d[u]
+14         
+15         if max_occ[d[u]] > max_count         // Se questa distanza ha più nodi
+16             max_count ← max_occ[d[u]]        // Aggiorna il massimo
+17             max_distance ← d[u]              // Memorizza quale distanza
+18     
+19     for each v ∈ Adj[u]                      // Per ogni vicino di u
+20         RELAX(u, v, w)                       // Prova a migliorare cammino verso v
+21
+22 return max_distance                          // Restituisce distanza con più nodi
+
+
+INITIALIZE-SINGLE-SOURCE(G, s)
+1  for each vertex v ∈ V[G]                     // Per ogni vertice del grafo
+2      d[v] ← ∞                                 // Distanza iniziale infinita
+3      π[v] ← NIL                               // Nessun predecessore
+4  d[s] ← 0                                     // Sorgente ha distanza 0
+
+
+RELAX(u, v, w)
+1  if d[v] > d[u] + w(u, v)                     // Se passare per u migliora il cammino
+2      d[v] ← d[u] + w(u, v)                    // Aggiorna distanza di v
+3      π[v] ← u                                 // u diventa predecessore di v
+4      DECREASE-KEY(Q, v, d[v])                 // Aggiorna priorità di v in coda
+
+
+EXTRACT-MIN(Q)
+1  min ← Q[1]                                   // Salva l'elemento minimo (radice heap)
+2  Q[1] ← Q[heap-size[Q]]                       // Sposta ultimo elemento in radice
+3  heap-size[Q] ← heap-size[Q] - 1             // Riduci dimensione heap
+4  MIN-HEAPIFY(Q, 1)                            // Ripristina proprietà min-heap
+5  return min                                   // Restituisce vertice con distanza minima
