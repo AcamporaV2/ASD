@@ -8,7 +8,7 @@ di nodi in G.
 
 
 FIND-MAX-MAIL-DISTANCE-OPTIMIZED(G, s)
-1  INITIALIZE-SINGLE-SOURCE(G, s)              // Inizializza distanze: d[s]=0, altri=∞
+1  INITIALIZE-SINGLE-SOURCE(G, s)               // Inizializza distanze: d[s]=0, altri=∞
 2  Q ← V[G]                                     // Coda con tutti i vertici
 3  S ← ∅                                        // Insieme vertici processati (vuoto)
 4  max_occ[0...V[G]] ← 0                        // Array contatori per ogni distanza
