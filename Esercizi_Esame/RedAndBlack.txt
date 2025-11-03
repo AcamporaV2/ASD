@@ -1,0 +1,28 @@
+// Sia T un BST in cui ogni nodo ha un attributo c {rosso,nero}. 
+//Scrivere un algoritmo che restituisca TRUE se T è un albero red/black e FALSE altrimenti.
+
+IS-RED-BLACK-TREE(T)
+    if T.root == NIL or T.root.color == BLACK
+        black_height = IS-RB-HELPER(T.root)
+        if black_height != -1
+            return TRUE
+    return FALSE
+
+IS-RB-HELPER(x)
+    if x == NIL
+        return 1
+
+    left_bh = IS-RB-HELPER(x.left)
+    right_bh = IS-RB-HELPER(x.right)
+
+    if left_bh == -1 or right_bh == -1 or left_bh != right_bh
+        return -1
+
+    if x.color == RED
+        if (x.left != NIL and x.left.color == RED) or (x.right != NIL and x.right.color == RED)
+            return -1
+
+    if x.color == BLACK
+        return left_bh + 1
+    else
+        return left_bh

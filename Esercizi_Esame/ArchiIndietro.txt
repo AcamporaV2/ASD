@@ -1,0 +1,45 @@
+/*
+
+
+Dato un grafo orientato e non pesato, scrivere un algoritmo che restituisca TRUE 
+se esiste un arco all’indietro, altrimenti FALSE.
+Determinare il caso peggiore ed il caso migliore
+
+
+
+*/
+
+
+
+DFS(G)
+for each u in V[G]
+    color[u] = white
+    padre[u] = NIL
+
+for each u in V[G]
+    if color[u] = white
+        if DFS-VISIT(u) = TRUE
+            return TRUE
+
+return false
+
+DFS-VISIT(nodo)
+
+color[nodo] = gray
+
+for each v in Adj[nodo]
+    if color[v] = gray 
+        return TRUE
+
+    if color[v] = white
+        padre[v] = nodo
+
+      if  DFS-VISIT(v) = TRUE
+        return TRUE
+
+color[nodo]
+
+
+return FALSE
+
+        

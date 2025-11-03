@@ -1,0 +1,20 @@
+/*
+
+Dato un grafo orientato scrivere un algoritmo che restituisca true 
+se esiste almeno un ciclo formato da due archi altrimenti restituisca false
+
+
+*/
+
+
+
+
+
+for each vertice u in V[G]
+    for each vertice v in Adj[u] //siamo nell'arco u,v
+
+        //Controllo da v verso u (v,u)
+        for each vertice w in Adj[v]
+        if w == u
+            return true
+return false 

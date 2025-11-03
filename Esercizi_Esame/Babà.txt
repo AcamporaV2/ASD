@@ -10,6 +10,8 @@ Ogni torta di babà da c(t) come costo. Quanti babà al massimo puoi ricavare co
 ZAINO 0-1 perchè non possiamo fare parte
 
 
+//Tutti i prodotti sono messi in ordine non decrescente
+
 BABA(B[1..N], Costo[1...N], N, Euro)
 
 Max[i][j] nuova tabella;

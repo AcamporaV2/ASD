@@ -1,0 +1,29 @@
+Dare la definizione formale di dfa e simulare un interruttore domestico in termini di dfa
+
+
+Un automa a stati finiti deterministico è costituito da 5 elementi che formano la seguente quintupla:
+
+-Uno insieme finito Q di stati
+
+-Un insieme finito Sigma di simboli di input
+
+-Una funzione di stato delta : Q x E -> Q che prende come input uno stato ed un simbolo di input 
+e restituisce uno stato 
+
+-Uno stato iniziale q0 appartenente a Q 
+
+-Un insieme di stati finali, accentanti, F contenuti in Q 
+
+
+Per simulare un interruttore domestico con questi termini diremo:
+
+
+- Q = {ON, OFF}
+
+- SIGMA = {PUSH}
+
+- DELTA : {ON,OFF} x {PUSH} ->{ON/OFF}
+
+- Q0 = {ON, OFF}
+
+- F = {ON,OFF}

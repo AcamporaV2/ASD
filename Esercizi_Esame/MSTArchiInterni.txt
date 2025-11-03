@@ -1,0 +1,31 @@
+/*
+
+Dato un grafo non orientato G=(V,E) si scriva un algoritmo che calcoli il MST 
+e ne restituisca l'arco all'interno del MST di peso mediano. 
+Si ricordi che il mediano di un insieme è l'elemento in cui valore è maggiore e minore della parte intera degli elementi. 
+Per semplicità si assuma che la cardinalità dell'insieme dei vertici di V sia pari.
+
+
+
+
+KRUSKAL(G)
+
+A = insieme vuoto
+
+for each v in V[G]
+    MAKE-SET(v)
+
+Sort(E) //ordina per peso non decrescente
+
+for each edge (u,v) in E[G]
+    if FIND-SET(u) != FIND-SET(v)
+
+        A = A U {u,v}
+        UNION(u,v)
+    
+L = array degli elementi di A 
+Sort(L) //Per pesi non decrescente
+
+Mediana = |L| / 2
+
+return A[Mediana]

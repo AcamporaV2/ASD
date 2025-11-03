@@ -1,0 +1,46 @@
+/*
+
+Dato un grafo orientato si scriva in pseudocodice un algoritmo che calcoli le componenti connesse del grafo. 
+Si descriva lo pseudocodice di ogni funzione richiamata
+
+
+
+
+STRONG-COMPONENTS(G)
+
+DFS(G)
+
+//Grafo trsposto G^T
+Calcolo G^T
+
+DFS(G^T)
+
+//OUTPUT della DFS MOSTRATO
+
+
+
+DFS(G)
+For each u in V[G]
+    color[u] = white
+    padre[u] = NIL
+time = 0
+
+for each u in V[G]
+    if color[u] = white
+        DFS-VISIT(u)
+
+
+DFS-VISIT(u)
+ time = time + 1
+ distanza[u] = time
+ color[u] = gray
+
+ for each v in Adj[u]
+    if color[v] = white
+        
+        distanza[v] = distanza[u] +1 
+        padre[v] = u 
+        DFS-VISIT(v)
+ color[u] = black
+ time = time +1 
+ f[u] = time 

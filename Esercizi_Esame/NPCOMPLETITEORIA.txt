@@ -1,0 +1,22 @@
+Definire cosa sono i problemi NP completi e dimostare che se un problema NP completo non è risolvibile in tempo polinomiale 
+allora tutti gli altri problemi non sono risolvibili in tempo polinomiale
+
+
+
+Un problema decisionale appartiene alle NP se una sua possibile soluzione può essere verificata
+in tempo polinomiale
+
+Un problema C viene detto NP-Completo se soddisfa due condizioni:
+
+-C appartiene a NP
+-Per ogni C' appartenente a NP esiste una riduzione polinomiale f L' <=p L per ogni L' appartenentea NP
+
+Dimostazione:
+
+Se un qualsiasi problema NP-completo A non è risolvibile in tempo polinomiale, nessun altro problema B
+NP-completo può essere risolto in tempo polinomiale
+
+Sia L un problema NP-Completo. 
+Supponiamo per contraddizione esista un secondo problema NP-Completo L' appartenente a P.
+
+Poichè L è NP-Completo, in particolare L <=P L0

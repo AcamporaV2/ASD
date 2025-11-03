@@ -13,7 +13,7 @@ il tempo totale di attesa (o turnaround) degli N aerei per decollare.
 
 
 
-SJA(T[1...N])
+SJF(T[1...N])
 
 Coda_aereo = coda vuota
 for i = 1 to n
