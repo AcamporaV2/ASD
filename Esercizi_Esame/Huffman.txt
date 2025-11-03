@@ -1,0 +1,16 @@
+
+
+
+
+n <- |C| 
+Q <- C 
+
+for i = 1 to n-1
+    z=alloca_nodo()
+
+    z[left] <- X <- EXTRACT_MIN(Q)
+    z[right] <- Y <- EXTRACT_MIN(Q)
+
+    f[z] = f[x] + f[y]
+    insert (Q,z)
+return EXTRACT_MIN(Q)

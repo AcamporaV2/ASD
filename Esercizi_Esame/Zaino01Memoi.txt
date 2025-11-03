@@ -1,0 +1,38 @@
+MEMOIZED-KNAPSACK(v, w, n, W)
+
+Sia m[0..n, 0..W] una nuova tabella
+
+// Inizializza la tabella con un valore sentinella
+for i = 0 to n
+    for j = 0 to W
+        m[i, j] = -1  // -1 indica "non calcolato"
+
+// Chiama la funzione 
+return KNAPSACK-RIC(v, w, m, n, W)
+
+KNAPSACK-RIC(v, w, m, i, j)
+
+//Controllo risultato se già presente
+if m[i, j] != -1
+    return m[i, j]
+
+//Caso 1 o 0
+if i == 0 or j == 0
+    q = 0  // Nessun oggetto o nessuna capacità = valore 0
+
+//Caso maggiore del peso 
+else if w[i] > j
+    q = KNAPSACK-RIC(v, w, m, i-1, j) // Non possiamo prenderlo
+
+
+//Caso può essere incluso 
+else
+    // Valore se NON prendiamo l'oggetto i
+    val_leave = KNAPSACK-RIC(v, w, m, i-1, j)
+
+    // Valore se PRENDIAMO l'oggetto i
+    val_take = v[i] + KNAPSACK-RIC(v, w, m, i-1, j - w[i])
+
+    q = max(val_leave, val_take)
+m[i, j] = q
+return q

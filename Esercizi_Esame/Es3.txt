@@ -9,3 +9,25 @@ in pseudocodice, che utilizzando la struttura dati coda di prioritá minimizzi
 il tempo totale di attesa (o turnaround) degli N aerei per decollare.
 
 */
+
+
+
+
+SJA(T[1...N])
+
+Coda_aereo = coda vuota
+for i = 1 to n
+    Insert(Coda_aereo, T[i])
+
+tempo_corrente = 0
+tempo_totale = 0
+
+    while(Coda_aereo non è vuota)
+        Aereo = EXTRACT-MIN(Coda_aereo)
+
+        tempo_corrente = tempo_corrente + Aereo
+
+        tempo_totale = tempo_totale + tempo_corrente
+
+
+return tempo totale 

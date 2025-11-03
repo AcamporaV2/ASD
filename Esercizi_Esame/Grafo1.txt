@@ -1,5 +1,6 @@
 /*
-Dato un grafo G = (V, E), scrivere un algoritmo in pseudocodice che restituisca l' arco non leggero di peso minimo
+Dato un grafo G = (V, E), scrivere un algoritmo in pseudocodice che restituisca l' arco 
+non leggero di peso minimo
 */
 
 

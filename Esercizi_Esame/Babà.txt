@@ -1,0 +1,40 @@
+/*
+
+Sei una madre e vuoi comprare per festeggiare dei babà a tuo figlio. 
+Hai solo E euro e la pasticceria sfortunatamente ha solo N torte di babà e non i babà singoli. 
+Ogni torta di babà però ha B[t] babà interni (cioè la torta di babà è come se fosse un contenitore).
+Ogni torta di babà da c(t) come costo. Quanti babà al massimo puoi ricavare con E euro?
+
+*/
+
+ZAINO 0-1 perchè non possiamo fare parte
+
+
+BABA(B[1..N], Costo[1...N], N, Euro)
+
+Max[i][j] nuova tabella;
+
+//Da i = 0 no torte, j = 0 no euro
+for j = 0 to Euro
+    Max[0,j] = 0
+for i = 0 to N 
+    Max[i,0] = 0
+
+
+
+for i = 1 to N 
+    for j = 1 to Euro 
+        
+        if Costo[i] > j
+            Max[i,j] = Costo[i-1,j]
+
+        else
+            //Non è stata presa è simile a sopra che consideriamo il valore precedente
+            valore_senza_torta = Costo[i-1,j]
+        
+            valore_con_torta = B[i] + Max[i-1, j-Costo[i]]
+
+
+            Max[i,j] = max(valore_senza_torta, valore_con_torta)
+
+return Max[i,j]

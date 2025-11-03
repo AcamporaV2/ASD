@@ -1,0 +1,36 @@
+/*
+
+
+Dato un grafo orientato ( G = (V, E) ) e pesato con funzione peso ( w : E ->{R} ), 
+scrivere in pseudocodice 
+un algoritmo ricorsivo che restituisca la somma dei pesi del più lungo ciclo in ( G ).
+
+
+
+DFS(G)
+
+    Peso_max <-  -infinito
+    For each s in V[G]
+        color[s] <- white
+
+    DFS-VISITA(G,s,s ,0, Peso_max)
+
+return Peso_max
+
+
+DFS-VISITA(G, s, u, peso_corrente, Peso_max)
+    color[u] <- GRAY
+
+    for each v in Adj[u]
+        if v == s 
+            peso_corrente <- peso_corrente + w(u,v)
+
+            if peso_corrente > Peso_max
+                Peso_max <- peso_corrente
+        else if color[v] == white
+
+            DFS-VISITA(G, s, v, peso_corrente + w(u,v), Peso_max)
+
+
+    color[U] <-BLACK
+
