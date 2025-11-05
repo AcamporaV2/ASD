@@ -7,41 +7,65 @@ di nodi in G.
 
 
 
-  // Step 1: Esegui Dijkstra per calcolare le distanze
-  DIJKSTRA(G, s) / BFS(G,s)
-  // Ora ogni vertice v ha un attributo v.d (distanza da s)
-
-  // Step 2: Conta i nodi per ogni distanza
-  n = G.V.length
-  let counts[0..n-1] be a new array
-
-
-
-   //Inizializzo a 0 l'array delle distanze 
-   for i = 0 to n-1
-     counts[i] = 0
-
-
-
-
- for each v in G.V
-     if v.d < ∞               // Se il nodo è raggiungibile
-         counts[v.d] = counts[v.d] + 1 //Calcolo distanza come d[v] + 1 
- // Step 3: Trova la distanza con il conteggio massimo
- maxCount = 0
- maxDistance = 0             // Distanza da restituire
-
- for d = 0 to n-1            // Itera attraverso le distanze possibili
-     if counts[d] > maxCount
-         maxCount = counts[d]
-         maxDistance = d
-
- return maxDistance
 
 
 
 
 
+  for each vetice u in V[G] - {s}
+      color[u] = WHITE
+      d[u] = infintio
+      padre[u] = NIL
+  color[s] = GRAY
+  d[s] = 0
+  padre[s] = NIL
+
+  //Parte mia
+  n = |V[G]|
+  Sia nodes_at_distance[0..n] un array inizializzato a 0
+
+  nodes_at_distance[0] = 1    // La sorgente si trova a distanza 0
+  max_count = 1               // Conteggio massimo di nodi trovati finora
+  result_distance = 0         // La distanza da restituire
+
+  Q = nuova coda
+  ENQUEUE(Q, s)
+
+  while Q != vuota
+      u = DEQUEUE(Q)
+      // Esamina gli adiacenti del nodo estratto
+      for each v in Adj[u]
+          if color[v] == WHITE
+              color[v] = GRAY
+              d[v] = d[u] + 1
+              padre[v] = u
+              
+              // Aggiorna il conteggio per la nuova distanza
+              nodes_at_distance[d[v]] = nodes_at_distance[d[v]] + 1
+              
+              // Controlla se questa distanza ha un numero maggiore di nodi
+              if nodes_at_distance[d[v]] > max_count
+                  max_count = nodes_at_distance[d[v]]
+                  result_distance = d[v]
+              
+              ENQUEUE(Q, v)
+        color[u] = BLACK
+
+  return result_distance
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------
+BFS MEGLIO PERCHé PIU 
 FIND-MAX-MAIL-DISTANCE-OPTIMIZED(G, s)
 1  INITIALIZE-SINGLE-SOURCE(G, s)               // Inizializza distanze: d[s]=0, altri=∞
 2  Q ← V[G]                                     // Coda con tutti i vertici
