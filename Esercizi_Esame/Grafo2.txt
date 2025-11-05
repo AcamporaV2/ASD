@@ -28,3 +28,48 @@ HAMILTONIAN-UTIL(G, path, current)
             remove u from path
     return FALSE
 /*
+
+
+
+// Funzione Principale
+HAMILTONIAN-CYCLE(G)
+  n = G.V.length
+  let path[1..n] be a new array
+  let visited[1..n] be a new boolean array
+  
+  for i = 1 to n
+      visited[i] = FALSE
+
+  path[1] = 1                // Inizia il percorso dal vertice 1
+  visited[1] = TRUE
+ 
+ if HAMILTONIAN-CYCLE-VISIT(G, path, visited, 2)
+     then return TRUE
+ else return FALSE
+
+// Funzione Ricorsiva di Backtracking
+// k è la posizione corrente nel percorso da riempire
+HAMILTONIAN-CYCLE-VISIT(G, path, visited, k)
+  n = G.V.length
+
+  // Caso Base: Il percorso ha n vertici
+  if k == n + 1
+      // Controlla se l'ultimo vertice è connesso al primo
+      if (path[n], path[1]) ∈ G.E
+          then return TRUE     // Ciclo Hamiltoniano trovato
+      else return FALSE    // Percorso Hamiltoniano, ma non un ciclo
+
+ // Passo Ricorsivo: Prova ad aggiungere un nuovo vertice
+ u = path[k-1]                  // Ultimo vertice aggiunto al percorso
+
+ for each v ∈ G.Adj[u]            // Per ogni vicino dell'ultimo vertice
+     if visited[v] == FALSE
+         visited[v] = TRUE      // Scegli (Choose)
+         path[k] = v
+ 
+         if HAMILTONIAN-CYCLE-VISIT(G, path, visited, k + 1)
+             then return TRUE
+ 
+         visited[v] = FALSE     // Annulla (Backtrack)
+ 
+  return FALSE                       // Nessun vicino ha portato a una soluzione

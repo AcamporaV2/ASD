@@ -6,7 +6,7 @@ Dato un grafo non orientato G=(V,E) pesato con funzione peso ω:E->R.
 Si scriva in pseudocodice un algoritmo che restituisca l’arco leggero e non sicuro di peso mediano
 
 */
-
+KRUSKAL OK
 
 ARCO_NON_SICURO_MEDIANO(G, w)
 

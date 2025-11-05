@@ -1,7 +1,7 @@
 Dato una coda di min priorità, implementata mediante un heap, scrivere un algoritmo che restituisca, 
 come output, il numero degli scambi necessari ad eseguire il metodo EXTRACT_MIN.
 
-
+HEAP
 
 EXTRACT-MIN-COUNT(A)
 1  if A.heap-size < 1
