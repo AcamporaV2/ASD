@@ -7,6 +7,41 @@ di nodi in G.
 
 
 
+  // Step 1: Esegui Dijkstra per calcolare le distanze
+  DIJKSTRA(G, s) / BFS(G,s)
+  // Ora ogni vertice v ha un attributo v.d (distanza da s)
+
+  // Step 2: Conta i nodi per ogni distanza
+  n = G.V.length
+  let counts[0..n-1] be a new array
+
+
+
+   //Inizializzo a 0 l'array delle distanze 
+   for i = 0 to n-1
+     counts[i] = 0
+
+
+
+
+ for each v in G.V
+     if v.d < ∞               // Se il nodo è raggiungibile
+         counts[v.d] = counts[v.d] + 1 //Calcolo distanza come d[v] + 1 
+ // Step 3: Trova la distanza con il conteggio massimo
+ maxCount = 0
+ maxDistance = 0             // Distanza da restituire
+
+ for d = 0 to n-1            // Itera attraverso le distanze possibili
+     if counts[d] > maxCount
+         maxCount = counts[d]
+         maxDistance = d
+
+ return maxDistance
+
+
+
+
+
 FIND-MAX-MAIL-DISTANCE-OPTIMIZED(G, s)
 1  INITIALIZE-SINGLE-SOURCE(G, s)               // Inizializza distanze: d[s]=0, altri=∞
 2  Q ← V[G]                                     // Coda con tutti i vertici
