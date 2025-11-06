@@ -1,28 +1,55 @@
 // Sia T un BST in cui ogni nodo ha un attributo c {rosso,nero}. 
 //Scrivere un algoritmo che restituisca TRUE se T è un albero red/black e FALSE altrimenti.
-
 IS-RED-BLACK-TREE(T)
+    // Proprietà 2: La radice è nera (o l'albero è vuoto).
     if T.root == NIL or T.root.color == BLACK
+        
+        // Chiama l'helper per validare le proprietà 3, 4 e 5.
+        // La funzione helper restituirà l'altezza nera se l'albero
+        // è valido, altrimenti restituirà -1.
         black_height = IS-RB-HELPER(T.root)
+        
+        // Se l'helper non ha restituito errori (-1), l'albero è valido.
         if black_height != -1
             return TRUE
+            
+    // Se la radice era rossa (violando la Prop. 2) 
+    // o se l'helper ha trovato un errore (violando 3, 4, o 5).
     return FALSE
 
+// --- Funzione Helper Ricorsiva ---
+
 IS-RB-HELPER(x)
+    // Proprietà 3: Ogni foglia (NIL) è considerata nera.
+    // Caso base della ricorsione. Una foglia NIL contribuisce
+    // con 1 all'altezza nera del cammino.
     if x == NIL
         return 1
 
+    // Chiamate ricorsive per ottenere l'altezza nera dai figli
     left_bh = IS-RB-HELPER(x.left)
     right_bh = IS-RB-HELPER(x.right)
 
-    if left_bh == -1 or right_bh == -1 or left_bh != right_bh
+    // Se uno dei sottoalberi non è valido (ha restituito -1),
+    // propaga l'errore verso l'alto.
+    if left_bh == -1 or right_bh == -1
         return -1
 
+    // Proprietà 4: Se un nodo è rosso, entrambi i suoi figli sono neri.
     if x.color == RED
+        // Controlla se uno dei figli (se esiste) è anch'esso rosso.
         if (x.left != NIL and x.left.color == RED) or (x.right != NIL and x.right.color == RED)
-            return -1
+            return -1 // Errore: Prop 4 violata (rosso-rosso)
 
+    // Proprietà 5 (Controllo A): Tutti i cammini da questo nodo
+    // alle foglie discendenti hanno la stessa altezza nera.
+    if left_bh != right_bh
+        return -1 // Errore: Prop 5 violata (altezze nere diverse)
+
+    // Proprietà 5 (Controllo B): Calcolo dell'altezza nera da restituire.
+    // Se il nodo corrente è nero, aggiunge 1 al conteggio.
     if x.color == BLACK
         return left_bh + 1
+    // Se il nodo corrente è rosso, non contribuisce all'altezza nera.
     else
         return left_bh

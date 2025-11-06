@@ -36,3 +36,5 @@ if r <=A.heapsize and A[r] < A[minimo]
 if minimo != i 
     swap A[i] <-> A[minimo]
     scambi = 1 + (HEAPIFY(A, minimo))
+
+return scambi

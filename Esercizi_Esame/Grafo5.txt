@@ -8,10 +8,6 @@ di nodi in G.
 
 
 
-
-
-
-
   for each vetice u in V[G] - {s}
       color[u] = WHITE
       d[u] = infintio
