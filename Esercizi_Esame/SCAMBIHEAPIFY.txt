@@ -1,0 +1,41 @@
+
+Dato un albero MinHeap H di grandezza Heapsize+1, si estragga il minimo e lo si scambi con l'ultimo
+
+elemento. Si scriva un algoritmo che prendendo in input H e la grandezza Heapsize, restituisce il numero di
+
+scambi in H necessari a ripristinare la proprietà dell'Heap. Qualora l'albero soddisfi la priorità dell'Heap,
+
+l'algoritmo deve restituire valore 0.
+
+COUNT-HEAP-SWAPS(H, Heapsize)
+1  // La violazione, se presente, è alla radice (indice 1)
+2  // Chiamiamo la versione modificata di MIN-HEAPIFY
+3  // che conta gli scambi, partendo dalla radice.
+4  return MIN-HEAPIFY-AND-COUNT(H, 1, Heapsize)
+
+MIN-HEAPIFY-AND-COUNT(H, i, Heapsize)
+1  l = LEFT(i)
+2  r = RIGHT(i)
+3  
+4  // Trova l'indice del valore più piccolo tra
+5  // il nodo corrente (i), il figlio sx (l) e il figlio dx (r)
+6  if l <= Heapsize AND H[l] < H[i]
+7      smallest = l
+8  else
+9      smallest = i
+10 if r <= Heapsize AND H[r] < H[smallest]
+11     smallest = r
+12
+13 // Caso Base: La proprietà dell'Heap è soddisfatta in questo nodo
+14 // (Il nodo i è più piccolo dei suoi figli)
+15 if smallest == i
+16     return 0  // Nessuno scambio necessario
+17
+18 // Caso Ricorsivo: La proprietà è violata
+19 // Scambia il nodo con il suo figlio più piccolo
+20 scambia H[i] con H[smallest]
+21
+22 // Restituisce 1 (per lo scambio appena fatto) + 
+23 // il numero di scambi fatti nella chiamata ricorsiva
+24 // sul sottoalbero modificato.
+25 return 1 + MIN-HEAPIFY-AND-COUNT(H, smallest, Heapsize)

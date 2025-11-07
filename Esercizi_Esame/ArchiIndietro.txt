@@ -9,7 +9,24 @@ Determinare il caso peggiore ed il caso migliore
 
 */
 
+Archi dell'Albero (Tree Edges) Quando si trovano: Quando esplori l'arco (u, v) 
+e il nodo v è BIANCO (non ancora visitato). Significato: Questi sono gli archi che "scoprono" nuovi nodi. 
+Costituiscono la foresta DFS (l'insieme degli alberi di visita). v diventa un figlio di u nell'albero DFS.
 
+Archi all'Indietro (Back Edges) Quando si trovano: Quando esplori l'arco (u, v) 
+e il nodo v è GRIGIO (visitato, ma la sua visita non è ancora terminata). 
+Significato: Questo arco connette un nodo u a un suo antenato v nell'albero DFS. 
+Proprietà chiave: La presenza di un arco all'indietro indica un ciclo nel grafo.
+
+Archi in Avanti (Forward Edges) Quando si trovano: Quando esplori l'arco (u, v) 
+e il nodo v è NERO (già completamente visitato). 
+Significato: Questo arco connette un nodo u a un suo discendente v nell'albero DFS 
+(ma non è un arco dell'albero, perché v era già stato scoperto).
+
+Archi di Attraversamento (Cross Edges) Quando si trovano: Quando esplori l'arco (u, v) 
+e il nodo v è NERO (già completamente visitato). Significato:
+ Questo arco connette due nodi u e v che non hanno una relazione antenato/discendente tra loro. 
+ Tipicamente, collegano rami diversi dello stesso albero DFS o alberi DFS diversi.
 
 DFS(G)
 for each u in V[G]
