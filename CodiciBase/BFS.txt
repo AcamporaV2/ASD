@@ -1,0 +1,26 @@
+BFS(G)
+
+for each u in V[G] - {S}
+    color[u] = white 
+    padre[u] = NIL 
+    d[u] = infinito
+
+color[S] = gray 
+d[S] = 0 
+padre[s] = NIL 
+
+Q = Coda vuota 
+ENQUEUE(Q, s)
+
+while(Q!= Vuoto)
+
+    u = DEQUEUE(Q)
+    
+    for each v in Adj[u]
+        if color[v] = white 
+            color[v] = gray 
+            padre[v] = u 
+            d[v] = d[u] +1
+            ENQUEUE(Q,s)
+        
+    color[u] = BLACK 
