@@ -1,0 +1,16 @@
+KRUSKAL(G)
+
+A = Insieme vuoto 
+
+for each u in V[G]
+    MAKE-SET(V)
+
+Sort(E)
+//ordina per peso w non decrescente
+
+for each (u,v) in E[G]
+    if FIND-SET(u) != FIND-SET(v)
+        A = A u {(u,v)}
+        Union(u,v)
+
+Return A 

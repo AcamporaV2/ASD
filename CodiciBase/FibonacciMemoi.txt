@@ -1,0 +1,13 @@
+
+
+Fibonacci(i)
+
+if(KnFibo[i] != 0 )
+    return KnFibonacci[i]
+
+if(i = 1 OR i = 0)
+    return 1
+
+KnFibo[i] = Fibonacci(i-1) + Fibonacci (i-2)
+
+return KnFibo[i]

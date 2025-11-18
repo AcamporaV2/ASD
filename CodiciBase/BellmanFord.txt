@@ -1,0 +1,21 @@
+BELLMAN-FORD(G, w, s)
+1  // Inizializzazione
+2  for each vertex v ∈ G.V
+3      v.d = ∞
+4      v.p = NIL
+5  s.d = 0
+6
+7  // Rilassamento degli archi
+8  for i = 1 to |G.V| - 1
+9      for each edge (u, v) ∈ G.E
+10         // Relax(u, v, w)
+11         if v.d > u.d + w(u, v)
+12             v.d = u.d + w(u, v)
+13             v.p = u
+14
+15 // Controllo cicli di peso negativo
+16 for each edge (u, v) ∈ G.E
+17     if v.d > u.d + w(u, v)
+18         return FALSE // Esiste un ciclo negativo
+19
+20 return TRUE // Non esistono cicli negativi raggiungibili dalla sorgente

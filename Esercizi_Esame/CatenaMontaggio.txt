@@ -14,6 +14,9 @@ Si risolva, mediante la programmazione dinamica, il problema di individuazione p
 scrivendo le relative equazioni di ricorrenza. Successivamente si scriva, un algoritmo di memoization, in pseudocodice, che, 
 utilizzando le equazioni di ricorrenza suddette, individui per ogni vettura il percorso più rapido.
 
+FASTESR WAY
+
+
 Memo = array[K][L] // inizializza a NIL
 
 function PercorsoRapido(T, I, U, e, S, K, L):

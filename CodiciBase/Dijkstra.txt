@@ -1,0 +1,22 @@
+
+DIJKSTRA(G,w,s)
+
+for each v in V[G]
+    d[v] = infinito
+    padre[v] = nil 
+
+d[s] = 0
+
+S = {}
+Q = V[G] 
+
+while Q non è vuota 
+
+    u = extractMin(Q)
+    S = S u {u}
+
+    for each v in Adj[u]
+        if d[v] > d[u] + w(u,v)
+            d[v] = d[u] + w(u,v)
+            padre[v] = u 
+            DECREASE-KEY(Q,v,d[v])

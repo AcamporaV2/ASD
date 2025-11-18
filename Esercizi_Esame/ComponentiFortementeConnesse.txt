@@ -3,7 +3,7 @@
 Dato un grafo orientato si scriva in pseudocodice un algoritmo che calcoli le componenti connesse del grafo. 
 Si descriva lo pseudocodice di ogni funzione richiamata
 
-
+COMPONENTI FORTEMENTE CONNESSE 
 
 
 STRONG-COMPONENTS(G)

@@ -11,6 +11,7 @@ in pseudocodice, che utilizzando la struttura dati coda di priorità minimizzi i
 
 */
 
+SJF 
 
 MIN-TEMPO(T, n)
 
