@@ -1,0 +1,55 @@
+HEAPSORT(A)
+
+Build-Max-Heap(A)
+for j = A.length downto 2
+    Swap(A[1], A[j])
+    A.heapsize = A.heapsize - 1
+    HEAPIFY(A, 1)
+
+
+
+
+HEAPIFY(A, i)
+
+l = left(i)
+r = right(i)
+
+if (A[i] < l ) and l <=A.heapsize
+    max = l 
+
+else max = i 
+
+if(A[i] < r) and r <=A.heapsize
+    max = r 
+
+
+if max != i 
+    swap(A[i], A[max])
+    HEAPIFY(A,max)
+
+
+
+HEAP-EXTRACT-MAX(A)
+
+if A.heapsize < 1
+    error "size"
+
+max = A[1]
+A[1] = A[heapsize]
+
+A.heapsize = A.heapsize - 1
+HEAPIFY(A, 1)
+
+return max 
+
+
+HEAP-INCREASE-KEY(A,i, key)
+
+if key < A[i]
+    error "data"
+
+A[i] = key 
+
+while i > 1 and A[parent(i)] < A[i]
+    swap (A[parent(i)], A[i])
+    i = parent(i)
