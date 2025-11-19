@@ -1,0 +1,27 @@
+Data l'equazione ricorrente QUAD(n) = QUAD(n-1) + QUAD(n-2) + 6n - 5 scrivere un algoritmo 
+usando la memoization che usandola calcoli il quadrato di n
+
+
+QUAD(N)
+
+Sia Memo[0..N] un array nuovo 
+
+for i = 0 to n 
+    Memo[i] = NIL 
+
+return QUAD-CALC(n)
+
+QUAD-CALC(n)
+    
+    if Memo[n] != NIL 
+        return Memo[n]
+
+
+    if n = 0 or n = 1 
+        Memo[n] = 1
+
+    risultato = Quad-calc(n-1) + Quad-calc(n-2) +6n -5
+
+    Memo[n] = risultato
+
+    return Memo[n]

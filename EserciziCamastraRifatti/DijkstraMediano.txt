@@ -1,0 +1,36 @@
+Fare dijkstra e trovare l'arco di peso mediano
+
+DIJKSTRA(G,w,s)
+
+for each u in V[G]
+    d[v] = infinito 
+    padre[v] = NIL 
+
+d[s] = 0
+
+S = {}
+Q = V[G]
+
+while Q non è vuoto 
+    u = EXTRACT-MIN(Q)
+    S = S u {u}
+
+    for each v in Adj[u]
+
+        if d[v] > w(u,v) + d[u]
+            d[v] = d[u] + w(u,v)
+            padre[v] = U
+
+Pesi = []
+
+ for each v in V[G]
+    if padre[v] !=NIL 
+        INSERT(Pesi, w(padre[v],v))
+
+Sort(Pesi)
+
+mediana = length(Pesi) / 2
+
+ArcoMediano = Pesi[mediana]
+
+return ArcoMediano

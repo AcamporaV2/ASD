@@ -1,0 +1,43 @@
+Dato un grafo non orientato e definito il tempo di visita come tempo di fine - tempo di inizio, 
+calcolare il numero di nodi con tempo di visita = 1 ed il numero di nodi con tempo di visita massimo
+
+DFS(G)
+    for each vertex u in G.V
+        color[u] = WHITE
+        π[u] = NIL
+
+    time = 0
+    max_visit = 0
+    count_1 = 0
+    count_max = 0
+
+    for each vertex u in G.V
+        if color[u] == WHITE
+            DFS-VISIT(G, u)
+
+DFS-VISIT(G, u)
+    time = time + 1
+    d[u] = time
+    color[u] = GRAY
+
+    for each v in G.Adj[u]
+        if color[v] == WHITE
+            π[v] = u
+            DFS-VISIT(G, v)
+
+    color[u] = BLACK
+    time = time + 1
+    f[u] = time
+
+    visit = f[u] - d[u]
+
+    # aggiornamento conteggi
+
+    if visit == 1
+        count_1 = count_1 + 1
+
+    if visit > max_visit
+        max_visit = visit
+        count_max = 1
+    else if visit == max_visit
+        count_max = count_max + 1
