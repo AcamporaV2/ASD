@@ -1,0 +1,33 @@
+Fare dfs e vedere se c'era arco trasversale
+
+
+DFS(G)
+
+for each u in V[G]
+    color[u] = white 
+    padre[u] = NIL
+time = 0
+for each u in V[G]
+    if color[u] == white 
+        DFS-VISIT(u)
+
+
+
+DFS-VISIT(u)
+
+color[u] = gray 
+time = time +1 
+d[u] = time 
+
+for each v in Adj[u]
+    if color[v] == white 
+        padre[v] = u 
+        DFS-VISIT(v)
+
+    else if color[v] == black 
+        if d[u] > d[v] 
+            print("arco trovato")
+
+color[u] = black 
+time = time +1 
+f[u] = time
