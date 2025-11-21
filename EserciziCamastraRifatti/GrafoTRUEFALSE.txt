@@ -1,0 +1,30 @@
+Dato un grafo orientato G=(V,E) e pesato con funzione peso w: E->R, scrivere un algoritmo, in pseudocodice, 
+che restituisca TRUE se ogni nodo è raggiungibile da ogni altro nodo e FALSE altrimenti. (7 punti)
+
+IS_STRONGLY_CONNECTED(G)
+    // 1. Eseguo una prima DFS sul grafo G per calcolare i tempi di fine di ogni nodo
+    DFS(G)
+
+    // 2. Calcolo il grafo trasposto G^T
+    G_T = COMPUTE_TRANSPOSE(G)
+
+    // 3. Eseguo una seconda DFS su G^T 
+    for each vertex u in G_T.V
+        u.color = WHITE
+        u.pi = NIL
+    
+    scc_counter = 0
+    for each vertex u in G.V (in order of decreasing u.f)
+        if u.color == WHITE
+            scc_counter = scc_counter + 1
+            // Se trovo una seconda componente, il grafo non è fortemente connesso
+            if scc_counter > 1
+                return FALSE
+            DFS_VISIT(G_T, u)
+
+    // Se il contatore è esattamente 1, significa che esiste una sola SCC
+    // e quindi il grafo è fortemente connesso.
+    return TRUE
+
+// Le procedure DFS, DFS_VISIT e COMPUTE_TRANSPOSE sono quelle standard.
+// I pesi w non influenzano l'algoritmo.

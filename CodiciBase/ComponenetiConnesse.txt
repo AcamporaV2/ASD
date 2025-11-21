@@ -1,0 +1,28 @@
+CONNECTED-COMPONENTS(G)
+  // Inizializza tutti i vertici come non visitati
+  for each vertex u in G.V
+    u.color = WHITE
+    u.pi = NIL
+  
+  // Inizializza il contatore delle componenti connesse
+  component_count = 0
+  
+  // Itera su tutti i vertici del grafo
+  for each vertex u in G.V
+    // Se un vertice non è stato ancora visitato,
+    // significa che abbiamo trovato una nuova componente connessa.
+    if u.color == WHITE
+      component_count = component_count + 1
+      // Esegui una visita (DFS) a partire da u per trovare
+      // tutti i vertici in questa componente e marcarli come visitati.
+      DFS_VISIT(G, u)
+
+// La procedura DFS_VISIT è quella standard.
+// Tutti i nodi visitati a partire da 'u' appartengono alla stessa componente.
+DFS_VISIT(G, u)
+  u.color = GRAY
+  for each v in G.Adj[u]
+    if v.color == WHITE
+      v.pi = u
+      DFS_VISIT(G, v)
+  u.color = BLACK

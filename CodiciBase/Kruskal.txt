@@ -14,3 +14,20 @@ for each (u,v) in E[G]
         Union(u,v)
 
 Return A 
+
+
+
+A= insieme vuoto
+
+
+for each u in V[G]
+    MAKE-SET(V)
+
+Sort(E)
+
+for each (u,v) in E[G]
+    if FIND-SET(U) != FIND-SET(v)
+        A = A U {(u,v)}
+        union(u,v)
+
+return A \

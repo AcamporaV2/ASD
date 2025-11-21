@@ -1,0 +1,27 @@
+L' aeroporto di Capodichino ha appena fatto costruire una nuova pista di decollo ed atterraggio. 
+Il direttore dell 'aeroporto decide di utilizzare la pista per servire i nuovi N aerei 
+che dovranno decollare dall' aeroporto. 
+Supponiamo che sia t[i] il tempo necessario all' i-esimo aereo per decollare, scrivere un algoritmo, 
+in pseudocodice, che utilizzando la struttura dati coda di prioritá minimizzi 
+il tempo totale di attesa (o turnaround) degli N aerei per decollare.
+
+
+
+
+SJF(T[1...N])
+
+Coda_aereo = Coda di priorità min 
+
+tempo_curr = 0
+tempo_tot = 0
+
+
+while Coda_aereo.heapsize > 0 
+
+    tempo_volo = HEAP-EXTRACT-MIN(Coda_aereo)
+
+    tempo_curr = tempo_curr + tempo_volo 
+
+    tempo_tot = tempo_tot + tempo_curr 
+
+return tempo_tot

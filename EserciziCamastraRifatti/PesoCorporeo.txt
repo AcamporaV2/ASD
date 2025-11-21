@@ -1,0 +1,48 @@
+Si supponga di registrareil proprio peso corporeo ogni giorno. 
+Dopo ogni n giorni vogliamo conoscere la maggiore variazione di peso che si è verificata in un intervallo di giorni consecutivi.
+Si scriva in pseudocodice un algoritmo ricorsivo che, ricevuto in input le n misurazioni, 
+restituisca la maggiore variazione di peso in giorni consecutivi
+
+FIBONACCIMEMOI
+
+MAIN(P)
+    n = length(P)
+    if n < 2 return 0
+
+    D = Array di dimensione n-1
+    for i = 1 to n-1
+        D[i] = P[i+1] - P[i]
+
+    
+    memo = Array di dimensione n-1 inizializzato a -infinito
+    
+    max_globale = -infinito
+
+    // 3. Avvio ricorsione dall'ultimo elemento
+    CALCOLA_RICORSIVO(D, n-1, memo, max_globale)
+
+    return max_globale
+
+
+CALCOLA_RICORSIVO(D, i, memo, max_globale)
+    
+    // Se abbiamo già calcolato questo sottoproblema, restituiscilo (Memoization)
+    if memo[i] != -infinito
+        return memo[i]
+
+    // Caso Base: primo elemento
+    if i == 1
+        memo[i] = D[1]
+    
+    else
+        // Passo Ricorsivo:
+        // È meglio iniziare una nuova sequenza da D[i] 
+        // o estendere la sequenza che finisce in i-1?
+        precedente = CALCOLA_RICORSIVO(D, i-1, memo, max_globale)
+        memo[i] = max(D[i], D[i] + precedente)
+
+    // Aggiorniamo il massimo globale trovato finora
+    if memo[i] > max_globale
+        max_globale = memo[i]
+
+    return memo[i]
