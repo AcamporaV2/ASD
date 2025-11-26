@@ -1,0 +1,37 @@
+Dato un grafo orientato G = (V,E), scrivere un algoritmo, 
+in pseucodice, che calcoli il numero dei cicli, di lunghezza maggiore di 1, presenti nel grafo
+
+
+
+DFS(G)
+
+for each u in V[G]
+    padre[u] = NIL 
+    color[u] = BIANCO
+
+cicli = 0
+
+for each u in V[G]
+    if color == BIANCO
+        DFS-VISIT(u ,cicli)
+
+return cicli 
+
+
+DFS-VISIT(u,cicli)
+
+    color[u] = gray 
+
+    for each v in Adj[u]
+        if color[v] == BIANCO
+            padre[v] = u 
+            DFS-VISIT(v, cicli)
+         
+         else if color[v] == GRIGIO
+            if v!=u 
+                cicli = cicli + 1
+
+
+    color[u] = NERO
+
+return cicli 

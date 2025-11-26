@@ -1,0 +1,39 @@
+dato un grafo orientato G(V,E) e un peso k, scrivere un algoritmo in pseudocodice 
+che restituisce una Lista di nodi 
+che hanno come distanza da un nodo sorgente s il cammino minimo pari a k.
+
+
+
+
+DIJKSTRA(G,w,s,k)
+
+for each u in V[G] 
+    d[v] = infinito 
+    padre[v] = NIL 
+
+d[s] = 0 
+
+Q = V[G]
+
+while Q non è vuota 
+
+    u = EXTRACT-MIN(Q)
+
+    if d[u] > k 
+        break 
+
+    for each v in Adj[u]
+
+        if d[v] > d[u] + w(u,v)
+            d[v] =  d[u] + w(u,v)
+            padre[v] = u 
+            DECREASE-KEY
+
+
+Risultati = lista vuota 
+
+for each v in V[G]
+    if d[v] == k 
+        INSERT(Q, v)
+
+return risultati

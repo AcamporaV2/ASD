@@ -10,22 +10,30 @@ Per semplicità si assuma che la cardinalità dell'insieme dei vertici di V sia 
 
 KRUSKAL(G)
 
-A = insieme vuoto
-
-for each v in V[G]
-    MAKE-SET(v)
-
-Sort(E) //ordina per peso non decrescente
-
-for each edge (u,v) in E[G]
-    if FIND-SET(u) != FIND-SET(v)
-
-        A = A U {u,v}
-        UNION(u,v)
+    // FASE 1: Calcola il MST usando Kruskal
+    A = ∅
     
-L = array degli elementi di A 
-Sort(L) //Per pesi non decrescente
-
-Mediana = |L| / 2
-
-return A[Mediana]
+    for each v in V[G]
+        MAKE-SET(v)
+    
+    // Ordina gli archi per peso non decrescente
+    Ordina E[G] per w(u,v) non decrescente
+    
+    for each (u,v) in E[G] (in ordine di peso)
+        if FIND-SET(u) ≠ FIND-SET(v)
+            A = A ∪ {(u,v)}
+            UNION(u,v)
+    
+    // FASE 2: Trova l'arco mediano nel MST
+    // A contiene |V| - 1 archi
+    
+    // Converti A in array e ordina per peso
+    L = array contenente gli archi di A
+    Ordina L per w(u,v) non decrescente
+    
+    // Calcola l'indice mediano
+    n = |L|
+    indice_mediano = ⌊n / 2⌋
+    
+    // Restituisci l'arco mediano
+    return L[indice_mediano]

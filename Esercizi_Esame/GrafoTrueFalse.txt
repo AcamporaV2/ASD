@@ -13,8 +13,9 @@ for each vertice S in V[G]
     for each vertice U in V[G]
         if color[U] = white
             return FALSE
-        else 
-            return TRUE
+      
+
+ return TRUE
 
 
 

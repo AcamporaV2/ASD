@@ -2,7 +2,7 @@ dato un grafo orientato G(V,E) e un peso k, scrivere un algoritmo in pseudocodic
 che restituisce una Lista di nodi 
 che hanno come distanza da un nodo sorgente s il cammino minimo pari a k.
 
-
+BFS QUI 
 
 for each u in V[G] -{s}
     color[u] = white

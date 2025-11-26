@@ -1,0 +1,45 @@
+
+Un albero binaio T è bilanciato se la profondità di ogni fogli non è maggiore di 1 rispetto alla profondità delle altre foglie.
+ Scrivere un algoritmo in pseudocodice ricororsivo che restituisca TRUE se T è bilanciato o FALSE altrimenti.
+
+basato su DFS
+
+BILANCIO(T) 
+
+min_prof = infinito 
+max_prof = -infinito 
+
+if T == NIL or Radice[T] == NIL 
+    return true 
+
+for each u in V[T]
+    color[u] = WHITE
+
+DFS-BILANCIO(Radice[T], 0, max_prof, min_prof)
+
+if (max_prof - min_prof) <= 1 
+    return TRUE 
+else 
+    return FALSE
+
+
+
+DFS-BILANCIO(u, prof, max_prof, min_prof)
+
+    color[u] = gray 
+
+    if left[u] == NIL and right[u] == NIL 
+
+        if prof < min_prof
+            min_prof = prof
+
+        if prof > max_prof
+            max_prof = prof
+
+    if left[u] != NIL and color[left[u]] == WHITE 
+        DFS-BILANCIO(left[u], prof + 1, max_prof, min_prof)
+
+    if right[u] != NIL and color[right[u]] == WHITE
+        DFS-BILANCIO(right[u], prof +1, max_prof, min_prof)
+
+    color[u] = BLACK

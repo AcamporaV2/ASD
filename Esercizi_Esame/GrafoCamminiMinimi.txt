@@ -30,13 +30,15 @@ while q != vuoto
 Foglie <- insieme vuoto
 PadrePres[num_nodi] <- FALSE per ogni nodo in V[G]
 
-for each u in v[G]
-    if padre[u] != NIL
-        PadrePres[padre[u]] <- TRUE
-    
+// Marca tutti i nodi che SONO padri
 for each u in V[G]
-    if d[u] < infinito and PadrePres[num_nodi] = FALSE 
-        Foglie = Foglie U {u}
+    if padre[u] ≠ NIL
+        PadrePres[padre[u]] <- TRUE
 
+// Un nodo è foglia se è raggiungibile E non è padre di nessuno
+for each u in V[G]
+    if d[u] < ∞ and PadrePres[u] == FALSE
+        Foglie = Foglie ∪ {u}
+        
 return foglie 
 

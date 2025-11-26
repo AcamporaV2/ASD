@@ -14,4 +14,14 @@ Sort(E)
 //ordinati per peso non crescente
 
 for each (u,v) in E[G]
+
+    if FIND-SET(u) != FIND-SET(v)
+        A = A u {(u,v)}
+        Union(u,v)
+    
+    else 
+
+        return (u,v)
+
+return NIL 
     

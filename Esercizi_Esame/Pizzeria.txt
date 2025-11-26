@@ -18,7 +18,6 @@ tempo_attesa_totale = 0
 while Coda_pizze non è vuota
     Pizza = EXTRACT-MIN(Coda_pizze)
 
-
     tempo_completamento = tempo_completamento + tempo_pizza
 
     tempo_attesa_totale = tempo_attesa_totale + tempo_completamento
