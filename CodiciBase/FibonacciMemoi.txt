@@ -11,3 +11,32 @@ if(i = 1 OR i = 0)
 KnFibo[i] = Fibonacci(i-1) + Fibonacci (i-2)
 
 return KnFibo[i]
+
+
+
+FibonacciPriorityQueue(n)
+    // Inizializza array di memoization
+    KnFibo[0...n] = [NIL, NIL, ..., NIL]
+    
+    // Crea min-heap con priorità basata sull'indice
+    Q = BUILD-MIN-HEAP()
+    
+    // Inserisci tutti gli indici da 0 a n nella coda
+    for i = 0 to n
+        INSERT(Q, i)  // priorità = i (indice stesso)
+    
+    // Processa gli elementi in ordine crescente
+    while Q is not empty
+
+        i = EXTRACT-MIN(Q)
+        
+        if KnFibo[i] != NIL 
+            return KnFibo[i]
+             
+        if i == 0 OR i == 1
+            KnFibo[i] = 1
+        else
+            // A questo punto i-1 e i-2 sono già calcolati
+            KnFibo[i] = KnFibo[i-1] + KnFibo[i-2]
+    
+    return KnFibo[n]
