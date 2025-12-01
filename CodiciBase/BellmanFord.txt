@@ -1,3 +1,7 @@
+Funziona con archi a peso negativo
+Rileva cicli negativi 
+V[G]-1 iterazioni su tutti gli archi
+
 BELLMAN-FORD(G,w,s)
 
 for each u in V[G] - {s}

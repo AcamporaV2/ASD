@@ -1,3 +1,7 @@
+Solo pesi non negativi w>=0 
+usa coda di priorità
+fa in ordine
+
 
 DIJKSTRA(G,w,s)
 

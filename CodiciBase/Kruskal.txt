@@ -1,3 +1,7 @@
+Non radicato
+Ordina gli archi per peso non decrescente
+
+
 KRUSKAL(G)
 
 A = Insieme vuoto 
@@ -15,19 +19,3 @@ for each (u,v) in E[G]
 
 Return A 
 
-
-
-A= insieme vuoto
-
-
-for each u in V[G]
-    MAKE-SET(V)
-
-Sort(E)
-
-for each (u,v) in E[G]
-    if FIND-SET(U) != FIND-SET(v)
-        A = A U {(u,v)}
-        union(u,v)
-
-return A \
