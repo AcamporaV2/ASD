@@ -1,0 +1,36 @@
+
+Sei una madre e vuoi comprare per festeggiare dei babà a tuo figlio. 
+Hai solo E euro e la pasticceria sfortunatamente ha solo N torte di babà e non i babà singoli. 
+Ogni torta di babà però ha B[t] babà interni (cioè la torta di babà è come se fosse un contenitore).
+Ogni torta di babà da c(t) come costo. Quanti babà al massimo puoi ricavare con E euro?
+
+// N: Numero di torte (Numero oggetti n)
+    // c: Array dei costi c[1...N] (Pesi)
+    // B: Array dei babà B[1...N] (Valori)
+
+
+Sia M[0...N, 0...W] una matrice nuova 
+
+
+for w = o to W 
+    M[0,j] = 0
+
+for i = 1 to n 
+    M[i, 0] = 0
+
+
+    // Ciclo principale per riempire la matrice
+    // i rappresenta l'indice della torta corrente (da 1 a N)
+    for i = 1 to N
+        // w rappresenta il budget corrente (da 1 a W)
+        for w = 1 to W
+            
+            // Se il costo della torta corrente (c[i]) è maggiore del budget attuale (w)
+            if c[i] > w
+                // Non possiamo prendere la torta, copiamo il valore della riga precedente
+                M[i, w] = M[i-1, w]
+            else
+                
+                
+                //Primo valore Esclusa, secondo inclusa
+                M[i, w] = max(M[i-1, w], M[i-1, w - c[i]] + B[i])

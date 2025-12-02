@@ -1,0 +1,34 @@
+Vostra madre ha comprato il nuovo forno a microonde. Per la cena di stasera, 
+vostra madre ha deciso di utilizzarlo, purtroppo il forno può cuocere solo un piatto alla volta 
+e ciascuno della vostra famiglia chiede un piatto differente. 
+Presupponendo che ogni piatto richieda un tempo di cottura diverso, 
+scrivere un algoritmo che minimizzi il turnaround ossia il tempo medio di attesa di ogni elemento 
+della famiglia (7 punti)
+
+
+
+
+SJF(T[1..N])
+
+
+Q = coda vuota 
+
+for i = 1 to N -1
+    INSERT(Q,T[i])
+
+tempo_curr = 0
+tempo_tot = 0
+
+for i = 0 to N
+
+    tempo = extractMin(Q)
+
+    tempo_curr = tempo_corrente + tempo 
+    tempo_tot = tempo_tot + tempo_curr
+
+
+turnaround_medio = tempo_tot / N
+
+return turnaround_medio
+
+    

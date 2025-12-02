@@ -1,0 +1,48 @@
+Dato un grafo connesso orientato G=(V,E) con funzione peso w: E ->R ed un vertice r in V,
+si scriva un algoritmo in pseudocodice che restituisca un ciclo di peso negativo raggiungibile da r, 
+se esiste, NULL altrimenti. (7 punti)
+
+TROVA-CICLO-NEGATIVO(G, w, r)
+    
+    // 1. Inizializzazione usando r come sorgente
+    for each u in V[G]
+        d[u] = infinito 
+        padre[u] = NIL 
+
+    d[r] = 0  // <-- Qui usiamo r come punto di partenza
+
+    // 2. Rilassamento (Relax)
+    for i = 1 to |V[G]| - 1
+        for each (u,v) in E[G]
+            if d[v] > d[u] + w(u,v)
+                d[v] = d[u] + w(u,v)
+                padre[v] = u 
+
+    // 3. Controllo e ricostruzione del ciclo
+    for each (u,v) in E[G]
+        // Se troviamo un arco che può essere ancora rilassato...
+        if d[v] > d[u] + w(u,v)
+            
+            // ...significa che v è raggiungibile da r ed è influenzato da un ciclo negativo.
+            
+            // Risaliamo di |V| passi per essere sicuri di finire DENTRO il ciclo
+            curr = v
+            for i = 1 to |V[G]|
+                curr = padre[curr]
+            
+            // Ora 'curr' è un nodo del ciclo. Ricostruiamolo.
+            ciclo = lista vuota
+            nodo_start = curr
+            
+            repeat
+                INSERT(ciclo, curr)
+                curr = padre[curr]
+            until curr == nodo_start
+            
+            INSERT(ciclo, nodo_start) // Chiudiamo il cerchio
+            
+            return ciclo
+
+    return NULL
+
+
