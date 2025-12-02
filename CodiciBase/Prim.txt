@@ -1,3 +1,7 @@
+radicato da una sorgente
+key è il peso del singolo arco che Aggiunge
+u all'albero 
+
 PRIM(G,w,r)
 
 Q = V[G]
