@@ -7,25 +7,80 @@ for j = A.length downto 2
     HEAPIFY(A, 1)
 
 
+HEAPIFY-MAX(A, i)
+    l = left(i)
+    r = right(i)
+    
+    if l <= A.heapsize and A[l] > A[i]
+        max = l
+    else 
+        max = i
+    
+    if r <= A.heapsize and A[r] > A[max]
+        max = r
+    
+    if max != i
+        swap(A[i], A[max])
+        HEAPIFY-MAX(A, max)
+
+HEAPIFY-MIN(A, i)
+    l = left(i)
+    r = right(i)
+    
+    if l <= A.heapsize and A[l] < A[i]
+        min = l
+    else 
+        min = i
+    
+    if r <= A.heapsize and A[r] < A[min]
+        min = r
+    
+    if min != i
+        swap(A[i], A[min])
+        HEAPIFY-MIN(A, min)
+-----------------------------------
+
+Build-max-heap 
+for j = A.length to 2
+    swap A[i], A[j]
+    A.heapsize -1
+    HEAPIFY(A,1)
 
 
-HEAPIFY(A, i)
 
-l = left(i)
+l =  left(i)
 r = right(i)
 
-if (A[i] < l ) and l <=A.heapsize
+if (A[i] < l ) and l <= A.heapsize
     max = l 
 
 else max = i 
 
-if(A[i] < r) and r <=A.heapsize
-    max = r 
+if(A[i] < r ) and r <= A.heapsize
+    max = r
 
 
 if max != i 
     swap(A[i], A[max])
     HEAPIFY(A,max)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

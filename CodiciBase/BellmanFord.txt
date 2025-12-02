@@ -18,7 +18,7 @@ for i = 1 to V[G]-1
             d[v] = d[u] + w(u,v)
             padre[u] = u 
 
-
+//ciclo negativo
 for each (u,v) in E[G]
     if d[v] > d[u] + w(u,v)
         return FALSE 

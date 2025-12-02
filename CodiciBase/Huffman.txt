@@ -15,3 +15,24 @@ for i = 1 to n-1
     INSERT(Q,z)
 
 return extractMin(Q)
+
+
+
+
+
+
+HUFFMAN(C)
+n = |C|
+Q = C
+
+
+for i = 1 to n-1
+    z = alloca_nodo
+    x = extractMin(Q)
+    y = extractMin(Q)
+
+    F[z] = f[x] + f[y]
+
+    ENQUEUE(Q,z)
+
+return extractMin(Q)

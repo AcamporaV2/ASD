@@ -1,0 +1,31 @@
+
+
+
+5. Dato un grafo orientato G = (V, E), aciclico e pesato con funzione peso w : E -> R+ e sorgente s, 
+scrivere un algoritmo, in pseudocodice, che restituisca il nodo di grado massimo dell'albero dei cammini minimi di G.
+(7 punti)
+
+
+
+
+DIJKSTRA(G,w,s)
+
+    for each u in V[G]
+        d[u] = infinito
+        padre[u] = NIL 
+
+    d[s] = 0
+
+    S = {}
+    Q = V[G]
+
+    while Q non è vuota 
+        u = extractMin(Q) 
+        S = S U {u}
+
+        for each v in Adj[u]
+            if d[v] > d[u] + w(u,v)
+                d[v]= d[u] + w(u,v)
+                padre[v] = u 
+                DECREASE-KEY
+    

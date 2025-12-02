@@ -1,0 +1,37 @@
+
+
+Dato un grafo orientato ( G = (V, E) ) e pesato con funzione peso ( w : E ->{R} ), 
+scrivere in pseudocodice 
+un algoritmo ricorsivo che restituisca la somma dei pesi del più lungo ciclo in ( G ).
+
+global max_cycle_weight = -infinity
+
+LONGEST-CYCLE-WEIGHT(G)
+    // Inizializzazione dei vertici come nella DFS standard
+    for each vertex u in G.V
+        u.color = WHITE
+        u.d = 0 // u.d memorizzerà il peso accumulato dalla radice dell'albero DFS corrente
+
+    // Eseguiamo la visita partendo da ogni nodo per coprire tutti i possibili cicli
+    for each vertex u in G.V
+        DFS-VISIT-CYCLE(u, 0)
+    
+    return max_cycle_weight
+
+DFS-VISIT-CYCLE(u, current_weight)
+    u.color = GRAY              // Nodo in fase di visita (nello stack)
+    u.d = current_weight        // Memorizza il peso del cammino dall'inizio della ricorsione fino a u
+
+    for each v in G.Adj[u]
+        if v.color == GRAY
+            // Abbiamo trovato un arco all'indietro (back-edge), quindi un ciclo.
+            // Il peso del ciclo è la differenza tra il peso accumulato fino a u 
+            // e quello che avevamo quando abbiamo incontrato v per la prima volta, più l'arco (u,v).
+            current_cycle_w = (u.d - v.d) + w(u, v)
+            
+            if current_cycle_w > max_cycle_weight
+                max_cycle_weight = current_cycle_w
+        
+        else if v.color == WHITE
+            // Ricorsione standard su nodi non visitati
+            DFS-VISIT-CYCLE(v, current_weight + w(u, v))

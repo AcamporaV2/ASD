@@ -1,0 +1,30 @@
+HAMILTONIAN-CYCLE(G)
+    // Prova a partire da ogni vertice
+    for each vertex v in G.V
+        if HAMILTONIAN-UTIL(G, [v], v)
+            return TRUE
+    return FALSE
+
+HAMILTONIAN-UTIL(G, path, current)
+    // CASO BASE: Se ho visitato tutti i nodi
+    if length(path) == |G.V|
+        // Controllo se posso tornare al primo nodo
+        if (current, path[0]) ∈ G.E
+            return TRUE  // ✅ Ciclo trovato!
+        else
+            return FALSE
+    
+    // CASO RICORSIVO: Provo ad aggiungere ogni vicino
+    for each neighbor u of current in G.E
+        if u not in path
+            // 🔹 SCELGO: aggiungo u al percorso
+            append u to path
+            
+            // 🔹 RICORSIONE: provo a completare il ciclo
+            if HAMILTONIAN-UTIL(G, path, u)
+                return TRUE
+            
+            // 🔹 BACKTRACK: u non porta a una soluzione, lo rimuovo
+            remove u from path
+    
+    return FALSE\
