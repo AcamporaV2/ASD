@@ -7,6 +7,7 @@ PRIM(G,w,r)
 Q = V[G]
 For each u in V[G] -{r}
     key[u] = infinito 
+    padre[u] = nil 
 
 key[r] = 0
 padre[r] = NIL 
@@ -18,3 +19,23 @@ while Q != vuoto
         if v in Q and w(u,v) < key[v]
             padre[v] = u 
             key[v] = w(u,v)
+
+
+
+
+
+Q = V[G]
+
+for each u in V[G] - {r}
+    key[u] = infinito
+    padre[u] = nil 
+
+key[r] = 0
+
+while Q != vuoto 
+    u = extractMin(Q)
+
+        for each (u,v) in Adj[u]
+            if v è in Q e w(u,v) < key[v]
+                key[v] = w(u,v)
+                padre[v] = u 
