@@ -24,3 +24,32 @@ while Q non è vuota
             d[v] = d[u] + w(u,v)
             padre[v] = u 
             DECREASE-KEY(Q,v,d[v])
+
+
+
+
+
+
+
+
+
+for each u in v[G]
+    d[u] = inf 
+    padre[u] = NIL 
+
+d[s] = 0
+padre[s] = NIL
+
+S = {}
+Q= V[G]
+
+while Q non è vuota 
+
+    u = extractMin(Q)
+    S = S u {u}
+
+    for each v in Adj[u]
+        if d[v] > d[u] + w(u,v)
+            d[v] = d[u] + w(u,v)
+            padre[v] = u 
+            DECREASE-KEY

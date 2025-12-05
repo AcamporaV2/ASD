@@ -42,3 +42,45 @@ while k<= N and Capacity>0.0
         Capacity = 0.0
 
 k = k+1
+
+
+
+
+
+
+
+
+
+KNAPSACK-01(v, w, n, W)
+
+    // Creiamo la tabella C[0..n, 0..W] e la inizializziamo
+    // Nel Cormen si assume che la riga 0 e la colonna 0 siano 0
+    
+    for j = 0 to W
+       C[0, j] = 0
+       
+    for i = 1 to n
+       C[i, 0] = 0
+       
+       for j = 1 to W
+       
+          // Caso 1: L'oggetto i è troppo pesante per la capacità corrente j
+          if w[i] > j
+             C[i, j] = C[i-1, j]
+             
+          // Caso 2: L'oggetto può entrare. Prendiamo il massimo tra:
+          // a Escluderlo (valore della riga sopra)
+          // b Includerlo (suo valore + valore ottimo con capacità residua)
+          else
+             valore_escluso = C[i-1, j]
+             valore_incluso = v[i] + C[i-1, j - w[i]]
+             
+             if valore_incluso > valore_escluso
+                C[i, j] = valore_incluso
+             else
+                C[i, j] = valore_escluso
+           else
+            
+            C[i, j] = C[i-1, j]
+
+return C[n, W]
