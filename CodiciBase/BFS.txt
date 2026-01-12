@@ -21,7 +21,7 @@ while(Q!= Vuoto)
             color[v] = gray 
             padre[v] = u 
             d[v] = d[u] +1
-            ENQUEUE(Q,s)
+            ENQUEUE(Q,v)
         
     color[u] = BLACK 
 

@@ -8,13 +8,42 @@ se esiste almeno un ciclo formato da due archi altrimenti restituisca false
 
 
 DFS PER FAVORE 
+ 
+
+DFS 
+
+    for each u in V[G]
+        color[u] = white 
+        pi[u] = NIL 
 
 
-for each vertice u in V[G]
-    for each vertice v in Adj[u] //siamo nell'arco u,v
+    for each u in V[G]
+      if color[u] == white 
+        if DFS-CHECK(u) == TRUE
+            return TRUE 
+    
 
-        //Controllo da v verso u (v,u)
-        for each vertice w in Adj[v]
-        if w == u
-            return true
-return false 
+    return false 
+
+
+
+DFS-CHECK(u)
+
+    color[u] = gray 
+
+        for each v in Adj[u] 
+        
+            for each k in Adj[v] 
+                if k == u 
+                    return TRUE 
+
+            if color[v] == white 
+                pi[v] = u 
+                if DFS-CHECK(v) == TRUE 
+                    return TRUE 
+
+           
+    
+    color[u] = black 
+
+    return false

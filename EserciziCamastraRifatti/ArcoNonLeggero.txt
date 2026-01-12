@@ -20,7 +20,7 @@ for each (u,v) in E[G]
         Union(u,v)
     
     else 
-
+        //Il primo arco che forma un ciclo 
         return (u,v)
 
 return NIL 

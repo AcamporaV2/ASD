@@ -1,40 +1,40 @@
 Dato un grafo orientato scrivere un algoritmo che restituisca true 
 se esiste almeno un ciclo formato da due archi altrimenti restituisca false
 
-HAS-CYCLE-LENGTH-2(G)
-    // Inizializzazione standard della DFS
-    for each u in G.V
-        u.color = WHITE
-        u.pi = NIL
+
+DFS(G)
+    for each u in V[G]
+        color[u] = white 
+        pi[u] = NIL 
     time = 0
-    
-    for each u in G.V
-        if u.color == WHITE
-            if DFS-VISIT-CYCLE-2(G, u) == TRUE
-                return TRUE
-    return FALSE
 
-DFS-VISIT-CYCLE-2(G, u)
-    time = time + 1
-    u.d = time
-    u.color = GRAY
-    
-    for each v in G.Adj[u]
-        if v.color == WHITE
-            v.pi = u
-            if DFS-VISIT-CYCLE-2(G, v) == TRUE
-                return TRUE
+    for each u in V[G]
+        if color[u] == white 
+            
+            if DFS-VISIT(u) == true 
+                return true
+
+    return false 
+
+DFS-VISIT(u)
+    time = time +1 
+    d[u] = time 
+    color[u] = gray 
+
+
+    for each v in Adj[u]
+        if color[u] == white
+            pi[v] = u 
+            
+            if DFS-VISIT(v) == true 
+                return true 
         
-        // MODIFICA RISPETTO ALLA DFS STANDARD:
-        // Se incontriamo un nodo GRIGIO (quindi un antenato nell'albero DFS),
-        // controlliamo se è il padre diretto di u.
-        // Se v == u.pi, significa che siamo arrivati a u da v (arco v->u)
-        // e ora abbiamo trovato un arco che torna indietro (u->v).
-        else if v.color == GRAY
-            if v == u.pi
-                return TRUE
+        else if color[v] == gray 
+            if pi[u] == v 
+                return true 
 
-    u.color = BLACK
-    time = time + 1
-    u.f = time
-    return FALSE
+    color[u] = black 
+    time = time +1 
+    f[u] = time 
+
+    return false 

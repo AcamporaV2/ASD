@@ -15,7 +15,7 @@ il tempo totale di attesa (o turnaround) degli N aerei per decollare.
 
 SJF(T[1...N])
 
-Coda_aereo = coda vuota
+Coda_aereo = coda vuota heapo min prio 
 for i = 1 to n
     Insert(Coda_aereo, T[i])
 

@@ -7,28 +7,21 @@ Si scriva in pseudocodice un algoritmo che restituisca l’arco leggero e non si
 KRUSKAL(G)
 
 A = insieme vuoto 
+NonSicuro = insieme vuoto 
 
-for each v in V[G]
-    MAKE-SET(v)
+for each u in V[G]
+    MAKE-SET(u)
 
+Sort(E)
 
 for each (u,v) in E[G]
     if FIND-SET(u) != FIND-SET(v)
-        A = A U {(u,v)}
-        Union(U,v)
+        A = A u {(u,v)}
+        Union(u,v)
+    else 
+        //L'arco è già non sicuro 
+        NonSicuro = NonSicuro u {(u,v)}
 
+n = |NonSicuro|
 
-Edge_NonSicuri = insieme vuoto 
-
-
-//Ipoteticamente fai Varibile = KRUSKAL(?)
-for each (u,v) in E[G]
-    if (u,v) non appartiene all'MST di KRUSKAL
-        Edge_NonSicuri = Edge_NonSicuri u {(u,v)}
-
-n = |Edge_NonSicuri| 
-
-mediana = n/2 
-
-
-return Edge_NonSicuri[mediana]
+return NonSicuro[n/2]

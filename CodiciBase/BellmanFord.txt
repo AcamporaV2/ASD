@@ -2,6 +2,9 @@ Funziona con archi a peso negativo
 Rileva cicli negativi 
 V[G]-1 iterazioni su tutti gli archi
 
+
+il percorso più breve da un nodo sorgente a tutti gli altri nodi in un grafo
+
 BELLMAN-FORD(G,w,s)
 
 for each u in V[G] - {s}

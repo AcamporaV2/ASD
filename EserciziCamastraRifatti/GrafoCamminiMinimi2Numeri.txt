@@ -1,0 +1,39 @@
+Dato un grafo G(V,E) aciclico orientato e pesato con funzione peso non negativa w, due interi l e h contenuti in N con l < h, ed un nodo s contenuto in V. 
+Scrivere un algoritmo in pseudocodice che restituisca il numero di nodi raggiungibili da s con un cammino minimo di lunghezza m tale che l <= m <= h
+
+
+
+
+DIJKSTRA(G,w,s)
+
+
+    for each u in V[G]
+        dist[u] = infinito 
+        pi[u] = NIL 
+    
+    dist[s] = 0 
+
+
+    S = {}
+
+    Q = V[G]
+
+
+    while Q non è vuoto 
+
+        u = extractMin(Q)
+
+        for each v in Adj[u]
+            if d[v] > d[u] + w(u,v)
+                d[v] = d[u] + w(u,v)
+                pi[v] = u 
+
+       
+
+    num_cicli = 0 
+    
+    for each v  in V[G]
+        if v != s
+            if d[v] !=infinito and d[v]=> l and d[v] <=  h 
+
+            num_cicli = num_cicli+1;

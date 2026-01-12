@@ -24,6 +24,7 @@ for each v in Adj[u]
         padre[v] = u 
         DFS-VISIT(v)
 
+    //Condizione arco trasversale
     else if color[v] == black 
         if d[u] > d[v] 
             print("arco trovato")

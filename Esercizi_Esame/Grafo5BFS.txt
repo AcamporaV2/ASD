@@ -6,7 +6,7 @@ scrivere un algoritmo in pseudocodice che restituisca la distanza a cui si trova
 di nodi in G.
 
 
-
+BFS 
 
   for each vetice u in V[G] - {s}
       color[u] = WHITE

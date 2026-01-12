@@ -1,0 +1,50 @@
+5. Dato un grafo connesso non orientato pesato G = (V, E) con pesi w(u, v) ed un vertice r ∈ V, 
+si scriva un algoritmo in pseudocodice che restituisca il nodo di grado massimo del MST radicato in r. (7 punti)
+
+
+
+
+PRIM
+
+
+for each u in V[G]
+    dist[u] = infinito 
+    pi[u] = NIL 
+    Grado[u] = 0
+
+dist[r] = 0 
+
+
+Q = V[G]
+
+
+while Q != vuoto 
+
+    u = extractMin(Q)
+
+    for each v in Adj[u]
+        
+        // CORREZIONE 1: Dobbiamo controllare se v è ancora in Q
+        // CORREZIONE 2: Prim confronta solo il peso dell'arco w(u,v), non la somma
+        if v in Q and w(u,v) < dist[v]
+            
+            dist[v] = w(u,v)
+            pi[v] = u 
+    
+
+for each v in V[G]
+
+    if pi[v] != NIL 
+
+        Grado[v] = Grado[v] +1
+
+        Grado[pi[v]] = Grado[pi[v]] +1 
+
+
+max_nodo = r 
+
+for each v in V[G]
+    if Grado[v] > Grado[max_nodo] 
+        max_nodo = v 
+
+return max_nodo

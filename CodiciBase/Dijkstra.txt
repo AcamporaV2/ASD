@@ -2,9 +2,11 @@ Solo pesi non negativi w>=0
 usa coda di priorità
 fa in ordine
 
+PERCORSO MINIMO DA UN NODO SORGENDE A TUTTI GLI ALTRI NODI 
 
 DIJKSTRA(G,w,s)
 
+//init source 
 for each v in V[G]
     d[v] = infinito
     padre[v] = nil 
@@ -19,6 +21,7 @@ while Q non è vuota
     u = extractMin(Q)
     S = S u {u}
 
+    //relax 
     for each v in Adj[u]
         if d[v] > d[u] + w(u,v)
             d[v] = d[u] + w(u,v)

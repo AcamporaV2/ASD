@@ -3,32 +3,46 @@ come output, il numero degli scambi necessari ad eseguire il metodo EXTRACT_MIN.
 
 HEAP
 
-EXTRACT-MIN-COUNT(A)
-1  if A.heap-size < 1
-2      error "heap underflow"
-3  min = A[1]
-4  A[1] = A[A.heap-size]      // non conta come scambio
-5  A.heap-size = A.heap-size - 1
-6  count = MIN-HEAPIFY-COUNT(A, 1)
-7  return count
+HEAP-EXTRACT-MIN-COUNT(A)
+    // Controllo Underflow
+    if A.heap-size < 1
+        error "heap underflow"
+    
+    // Salviamo il minimo (non serve al conteggio, ma è standard)
+    min = A[1]
+    
+    // Spostiamo l'ultimo elemento nella radice
+    A[1] = A[A.heap-size]
+    
+    // Riduciamo la dimensione dello heap
+    A.heap-size = A.heap-size - 1
+    
+    // Chiamiamo la Min-Heapify modificata per contare gli scambi
+    // e ritorniamo il risultato
+    num_scambi = MIN-HEAPIFY-COUNT(A, 1)
+    
+    return num_scambi
+
 
 MIN-HEAPIFY-COUNT(A, i)
-1  l = LEFT(i)
-2  r = RIGHT(i)
-3  if l ≤ A.heap-size and A[l] < A[i]
-4      smallest = l
-5  else smallest = i
-6  if r ≤ A.heap-size and A[r] < A[smallest]
-7      smallest = r
-8  if smallest ≠ i
-9      exchange A[i] with A[smallest]   // conta come scambio
-10     return 1 + MIN-HEAPIFY-COUNT(A, smallest)
-11 return 0
-
-
-LEFT(i)
-1  return 2i
-
-
-RIGHT(i)
-1  return 2i + 1
+    l = LEFT(i)    // Indice del figlio sinistro (2*i)
+    r = RIGHT(i)   // Indice del figlio destro (2*i + 1)
+    smallest = i
+    
+    // Determina il più piccolo tra i, sinistro e destro
+    if l <= A.heap-size and A[l] < A[i]
+        smallest = l
+    
+    if r <= A.heap-size and A[r] < A[smallest]
+        smallest = r
+        
+    // Se l'elemento i non è il più piccolo, dobbiamo scambiare
+    if smallest != i
+        exchange A[i] with A[smallest]
+        
+        // Restituiamo 1 (lo scambio corrente) + gli scambi fatti ricorsivamente
+        return 1 + MIN-HEAPIFY-COUNT(A, smallest)
+        
+    else
+        // Caso base: la proprietà di min-heap è rispettata, 0 scambi
+        return 0

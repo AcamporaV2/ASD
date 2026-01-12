@@ -7,6 +7,46 @@ Ogni torta di babà da c(t) come costo. Quanti babà al massimo puoi ricavare co
 
 */
 
+
+COMPRA-BABA-FRAZIONARIO(c, B, E, N)
+    // 1. Calcolo delle densità e Ordinamento
+    // Calcola il rapporto babà/costo per ogni torta i
+    for i = 1 to N
+        ratio[i] = B[i] / c[i]
+    
+    // Ordina le torte in modo decrescente in base a ratio[i]
+    // (Nota: c e B vengono permutati di conseguenza per mantenere la corrispondenza)
+    sort torte 1...N in ordine decrescente di ratio
+    
+    // 2. Inizializzazione
+    for i = 1 to N
+        x[i] = 0    // x rappresenta la frazione della torta i acquistata
+    
+    baba_totali = 0
+    budget_rimanente = E
+    i = 1
+    
+    // 3. Ciclo Greedy (Selezione)
+    while i <= N and budget_rimanente > 0
+        if c[i] <= budget_rimanente
+            // Caso: Acquisto intero
+            x[i] = 1
+            baba_totali = baba_totali + B[i]
+            budget_rimanente = budget_rimanente - c[i]
+        else
+            // Caso: Acquisto frazionario
+            x[i] = budget_rimanente / c[i]
+            baba_totali = baba_totali + (x[i] * B[i])
+            budget_rimanente = 0
+        
+        i = i + 1
+        
+    return baba_totali
+
+----------------------------------------------------------
+
+
+
 ZAINO 0-1 perchè non possiamo fare parte
 
 

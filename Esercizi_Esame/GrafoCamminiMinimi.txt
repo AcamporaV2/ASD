@@ -8,15 +8,17 @@ che restituisca i nodi foglia dell’albero dei cammini minimi radicato in s.
 
 
 DIJKSTRA (G, w , s)
+
   for each v in V[G]
     d[v] <- infinito
     padre[v] <- NIL
+  
   d[s] <- 0
 
  Q <- V[G]
  S <- insieme vuoto
 
-while q != vuoto 
+while Q != vuoto 
     u <- EXTRACT-MIN(Q)
     S = S U {u}
     for each v in Adj[U]
@@ -28,16 +30,16 @@ while q != vuoto
 -Sopra parte DIJKSTRA, sotto calcolo
 
 Foglie <- insieme vuoto
-PadrePres[num_nodi] <- FALSE per ogni nodo in V[G]
+Is_Parent[num_nodi] <- FALSE per ogni nodo in V[G]
 
 // Marca tutti i nodi che SONO padri
 for each u in V[G]
     if padre[u] ≠ NIL
-        PadrePres[padre[u]] <- TRUE
+        Is_Parent[padre[u]] <- TRUE
 
 // Un nodo è foglia se è raggiungibile E non è padre di nessuno
 for each u in V[G]
-    if d[u] < ∞ and PadrePres[u] == FALSE
+    if d[u] < ∞ and Is_Parent[u] == FALSE
         Foglie = Foglie ∪ {u}
         
 return foglie 

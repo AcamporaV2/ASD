@@ -3,8 +3,8 @@ Fare dijkstra e trovare l'arco di peso mediano
 DIJKSTRA(G,w,s)
 
 for each u in V[G]
-    d[v] = infinito 
-    padre[v] = NIL 
+    d[u] = infinito 
+    padre[u] = NIL 
 
 d[s] = 0
 

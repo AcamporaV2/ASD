@@ -1,0 +1,34 @@
+/*
+Dato un grafo G = (V, E), scrivere un algoritmo in pseudocodice che restituisca l' arco 
+non leggero di peso minimo
+*/
+
+
+
+
+
+KRUSKAL 
+
+    min_peso = infinito 
+    min_edge = NULL 
+
+    for each u in V[G]
+        MAKE-SET(u)
+    
+    Sort(E)
+
+    S = insieme vuoto 
+
+    for each (u,v) in E[G]
+
+        if FIND-SET(u) !=FIND-SET(v)
+            S = S U {(u,v)}
+            Union(u,v)
+
+        else 
+            //è già ordinato 
+                min_peso = w(u,v)
+                min_edge = (u,v)
+
+
+    return min_peso, min_edge        

@@ -9,6 +9,7 @@ for each vertice S in V[G]
     for each vertice U in V[G] //Resetta i nodi ogni volta che cambiamo nodo S per controllare se tutti sono adiacenti
         color[U] = white
         padre[u] = null
+    time = 0
     DFS(G, S)
     for each vertice U in V[G]
         if color[U] = white

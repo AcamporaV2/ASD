@@ -4,33 +4,27 @@ Hai solo E euro e la pasticceria sfortunatamente ha solo N torte di babà e non 
 Ogni torta di babà però ha B[t] babà interni (cioè la torta di babà è come se fosse un contenitore).
 Ogni torta di babà da c(t) come costo. Quanti babà al massimo puoi ricavare con E euro?
 
-// N: Numero di torte (Numero oggetti n)
-    // c: Array dei costi c[1...N] (Pesi)
-    // B: Array dei babà B[1...N] (Valori)
+GREEDY-BABA-FRAZIONARIO(c, B, N, E)
+ per i = 1 a N
+     // Calcoliamo la densità: babà per ogni euro
+      ratio[i] = B[i] / c[i]
+  
+    ordina le torte da 1 a N tale che ratio[1] ≥ ratio[2] ≥ ... ≥ ratio[N]
+    totale_baba = 0       // Il bottino totale
+    soldi_rimasti = E     // Il portafoglio della mamma
+    i = 1 
 
+while soldi_rimasti > 0 and i <= N
+    if c[i] <= soldi_rimasti
+        // Caso 1: Compro tutta la torta
+                soldi_rimasti = soldi_rimasti - c[i]
+        totale_baba = totale_baba + B[i]
+    else
+       // Caso 2: Compro solo una frazione
+       frazione = soldi_rimasti / c[i]
+        totale_baba = totale_baba + (B[i] * frazione)
+        soldi_rimasti = 0   // Questo farà terminare il while al prossimo check
 
-Sia M[0...N, 0...W] una matrice nuova 
+   i = i + 1    // Passo alla prossima torta
 
-
-for w = o to W 
-    M[0,j] = 0
-
-for i = 1 to n 
-    M[i, 0] = 0
-
-
-    // Ciclo principale per riempire la matrice
-    // i rappresenta l'indice della torta corrente (da 1 a N)
-    for i = 1 to N
-        // w rappresenta il budget corrente (da 1 a W)
-        for w = 1 to W
-            
-            // Se il costo della torta corrente (c[i]) è maggiore del budget attuale (w)
-            if c[i] > w
-                // Non possiamo prendere la torta, copiamo il valore della riga precedente
-                M[i, w] = M[i-1, w]
-            else
-                
-                
-                //Primo valore Esclusa, secondo inclusa
-                M[i, w] = max(M[i-1, w], M[i-1, w - c[i]] + B[i])
+return totale_baba

@@ -7,24 +7,29 @@ un algoritmo ricorsivo che restituisca la somma dei pesi del più lungo ciclo in
 
 
 
-DFS-LUNGO-CICLO(G)
-    Peso_max ← -∞
-    for each s in V[G]
-        for each u in V[G]
-            color[u] ← WHITE
-        DFS-VISITA(G, s, s, 0, Peso_max)
-    return Peso_max
+MaxPeso <- -infinito
+
+TROVA-CICLO-MAX (G, w)
+  for each s in V[G]
+    Visitate <- insieme vuoto
+    DFS-CICLO(s, s, 0, Visitate)
+  return MaxPeso
 
 
-DFS-VISITA(G, s, u, peso_corrente, Peso_max)
-    color[u] ← GRAY
+DFS-CICLO (start, u, pesoCorr, Visitate)
+  Visitate = Visitate ∪ {u}  // Marco u come parte del cammino corrente
 
-    for each v in Adj[u]
-        if v == s then
-            if peso_corrente + w(u,v) > Peso_max then
-                Peso_max ← peso_corrente + w(u,v)
-        else if color[v] == WHITE then
-            DFS-VISITA(G, s, v, peso_corrente + w(u,v), Peso_max)
+  for each v in Adj[u]
+    
+    // Caso Base: se il vicino 'v' è il nodo di partenza 'start', ho chiuso un ciclo
+    if v == start
+      if pesoCorr + w(u,v) > MaxPeso
+         MaxPeso = pesoCorr + w(u,v)
 
-    color[u] ← WHITE   // backtrack
+    // Passo Ricorsivo: se 'v' non è già nel cammino corrente, continuo a esplorare
+    else if v ∉ Visitate
+      DFS-CICLO(start, v, pesoCorr + w(u,v), Visitate)
 
+  // Backtracking: rimuovo u dai visitati prima di risalire
+  // Questo permette di trovare cicli diversi che passano per lo stesso nodo
+  Visitate = Visitate - {u}
