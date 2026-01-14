@@ -5,6 +5,7 @@ u all'albero
 PRIM(G,w,r)
 
 Q = V[G]
+
 For each u in V[G] -{r}
     key[u] = infinito 
     padre[u] = nil 
@@ -21,21 +22,22 @@ while Q != vuoto
             key[v] = w(u,v)
 
 
-
-
+------------------------------------------
 
 Q = V[G]
 
-for each u in V[G] - {r}
-    key[u] = infinito
-    padre[u] = nil 
+for each u in V[G] -{r}
+    dist[u] = infinito
+    padre[u] = NIL 
 
-key[r] = 0
+dist[r] = 0 
+padre[r] = 0
 
-while Q != vuoto 
+while Q non è vuoto 
     u = extractMin(Q)
 
-        for each (u,v) in Adj[u]
-            if v è in Q e w(u,v) < key[v]
-                key[v] = w(u,v)
-                padre[v] = u 
+    for each v in Adj[u]
+        if v in Q and w(u,v) < dist[v]
+
+            dist[v] = w(u,v)
+            padre[v] = u 

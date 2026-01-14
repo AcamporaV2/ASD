@@ -28,25 +28,18 @@ while Q non è vuota
             padre[v] = u 
             DECREASE-KEY(Q,v,d[v])
 
+----------------------------------------------
 
+for each v in V[G] -{s}
+    dist[v] = infinito
+    padre[v] = NIL 
 
-
-
-
-
-
-
-for each u in v[G]
-    d[u] = inf 
-    padre[u] = NIL 
-
-d[s] = 0
-padre[s] = NIL
+dist[s] = 0 
 
 S = {}
-Q= V[G]
+Q = V[G]
 
-while Q non è vuota 
+While Q non è vuoto 
 
     u = extractMin(Q)
     S = S u {u}

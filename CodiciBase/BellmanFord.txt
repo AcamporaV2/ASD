@@ -19,7 +19,7 @@ for i = 1 to V[G]-1
 
         if d[v] > d[u] + w(u,v)
             d[v] = d[u] + w(u,v)
-            padre[u] = u 
+            padre[v] = u 
 
 //ciclo negativo
 for each (u,v) in E[G]
@@ -27,3 +27,24 @@ for each (u,v) in E[G]
         return FALSE 
 
 Return TRUE
+
+
+foe each v in V[G] - {s}
+    dist[v] = infinito
+    padre[v] = NIL 
+
+dist[s] = 0
+
+for i = 1 to |V[G]| - 1
+
+    for each (u,v) in E[G]
+        if d[v] > d[u] + w(u,v)
+            d[v] = d[u] + w(u,v)
+            padre[v] = u
+    
+
+for each (u,v) in E[G]
+    if d[v] > d[u] + w(u,v)
+        return FALSE 
+
+return TRUE

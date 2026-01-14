@@ -1,0 +1,59 @@
+Dato un grafo G(V,E) orientato e pesato (con pesi w: E -> R) e un nodo sorgente s ∈ V, 
+si vuole trovare la profondità massima (numero di archi) tra tutti i cammini minimi che partono da s.
+
+
+
+
+BELLMAN-FORD per le distanze 
+
+
+BELLMAN
+
+    for each v in V[G] - {s}
+        dist[v] = infinito 
+        padre[v] = NIL 
+    
+
+    dist[s] = 0 
+
+    for i = 1 to V[G] - 1
+
+        for each (u,v) in E[G]
+
+            if dist[v] > dist[u] + w(u,v)
+                dist[v] = dist[u] + w(u,v)
+                padre[v] = u 
+
+    
+    for each (u,v) in E[G]
+        if dist[v] > dist[u] + w(u,v)
+            return FALSE 
+
+    return TRUE 
+
+
+
+
+Calcolo-Prof(Nodi, sorgente, distanze, padri)
+
+    max_prof = 0
+
+    for each v in V[G]
+        if dist[v] < infinito 
+
+            profondita_v = 0
+            nodo_curr = v 
+
+
+            while nodo_curr != sorgente 
+                profondita_v = profondita_v +1 
+                nodo_curr = padre[nodo_curr]
+            
+
+
+            if profondita_v > max_prof 
+                max_prof = profondita_v
+    
+
+return max_prof
+                
