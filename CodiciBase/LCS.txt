@@ -56,3 +56,26 @@ for i = 2 to n
         b[i,j] = b[i, j-1] 
 
 return b 
+
+
+
+LCS-MEMOIZED(X, Y)
+1.  m = X.length
+2.  n = Y.length
+3.  Sia c[0..m, 0..n] una nuova tabella
+4.  for i = 0 to m
+5.      for j = 0 to n
+6.          c[i, j] = -1  // Valore speciale per indicare "non calcolato"
+7.  return LOOKUP-LCS(X, Y, m, n, c)
+
+
+LOOKUP-LCS(X, Y, i, j, c)
+1.  if c[i, j] != -1
+2.      return c[i, j]
+3.  if i == 0 or j == 0
+4.      c[i, j] = 0
+5.  else if X[i] == Y[j]
+6.      c[i, j] = 1 + LOOKUP-LCS(X, Y, i-1, j-1, c)
+7.  else
+8.      c[i, j] = max(LOOKUP-LCS(X, Y, i-1, j, c), LOOKUP-LCS(X, Y, i, j-1, c))
+9.  return c[i, j]
