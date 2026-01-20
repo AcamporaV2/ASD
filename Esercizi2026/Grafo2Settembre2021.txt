@@ -1,0 +1,39 @@
+Dato un grafo orientato G=(V,E) e pesato con funzione peso w: E->R, scrivere un algoritmo, in pseudocodice,
+ che restituisca TRUE se ogni nodo è raggiungibile da ogni altro nodo e FALSE altrimenti.
+
+
+
+ //Grafo fortemente connesso usando la DFS
+
+
+
+FORTEMENTE-CONNESSO 
+
+    for each v in V[G]
+        visitato[v] = FALSE 
+
+    for each v in V[G]
+        if visitato[v] == false 
+            DFS(G, v)
+
+    
+    for each v in V[G]
+        if visitato[v] == false 
+            return false 
+
+    G_T = trasposto(G)
+
+
+    for each v in V[G]
+        visitato[v] = FALSE 
+
+
+    for each v in V[G]
+        if visitato[v] == false 
+            DFS(G_T, v)
+
+    for each v in V[G]
+        if visitato[v] == false 
+            return false 
+
+    return true
