@@ -1,0 +1,38 @@
+Dato un grafo orientato G = (V,E), scrivere un algoritmo, in pseucodice,
+ che calcoli il numero dei cicli, di lunghezza maggiore di 1, presenti nel grafo
+
+DFS-COUNT-CYCLES(G)
+    cicli = 0    // Variabile globale o contatore principale
+    time = 0
+    
+    for each u in V[G]
+        color[u] = WHITE
+        padre[u] = NIL
+        
+    for each u in V[G]
+        if color[u] == WHITE
+            DFS-VISIT(u, cicli)
+            
+    return cicli
+
+
+DFS-VISIT(u, cicli) // cicli è passato per riferimento
+    time = time + 1
+    d[u] = time
+    color[u] = GRAY
+    
+    for each v in Adj[u]
+        
+        // Se trovo un nodo bianco, scendo in profondità
+        if color[v] == WHITE
+            padre[v] = u
+            DFS-VISIT(v, cicli)
+            
+        // Se trovo un nodo GRIGIO, è un back-edge (ciclo)
+        else if color[v] == GRAY
+            // Controllo lunghezza > 1
+            if v != u
+                cicli = cicli + 1
+                
+    color[u] = BLACK
+    time = time + 1 // (opzionale, per completezza cormen f[u])
