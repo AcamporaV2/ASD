@@ -1,0 +1,38 @@
+l vostroprovider di internet vi ha dato la possibilità di accedere ad un videoserver per un’ora e di fare liberamente il download di un file alla volta. 
+Il videoserver vi mette anche a disposizione per ogni suo film F il suo tempo stimato di download. 
+Supponete che nell’ora a vostra disposizione la velocità di download rimanga costante e che non sia possibile scaricare contemporaneamente più film. 
+Scrivete un algoritmo in peseudocodice che massimizzi il numero di film scaricati nel tempo a disposizione.Stimate la complessità computazionale del vostro algoritmo
+
+
+
+
+
+ALGORITMO MaximizeDownloads(F, t_max)
+
+    // Inizializzazione
+    tempo_speso = 0
+    film_scaricati = 0
+    
+    // Creazione della Coda di Priorità (Min-Heap)
+    Q = CodaDiPriorità_Vuota()
+
+    // FASE 1: Costruzione della coda (Inserimento)
+    // Inseriamo tutti i tempi di download nella coda
+    FOR i = 1 TO n DO
+        Insert(Q, F[i].tempo)
+
+    // FASE 2: Estrazione Greedy
+    WHILE (Q non è vuota) DO
+        
+        // Estraiamo il film con la durata minore (SJF)
+        tempo_corrente_film = ExtractMin(Q)
+
+        // Controlliamo se "ci sta" nel tempo rimasto
+        IF (tempo_speso + tempo_corrente_film <= t_max) THEN
+            tempo_speso = tempo_speso + tempo_corrente_film
+            film_scaricati = film_scaricati + 1
+        ELSE
+            // Se il film più corto rimasto non entra, non ne entreranno altri
+            BREAK 
+            
+    RETURN film_scaricati

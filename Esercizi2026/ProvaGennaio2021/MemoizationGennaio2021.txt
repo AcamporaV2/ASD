@@ -1,0 +1,4 @@
+Si supponga di registrareil proprio peso corporeo ogni giorno. Dopo ogni n giorni vogliamo conoscere 
+la maggiore variazione di peso che si è verificata in un intervallo di giorni consecutivi.
+Si scriva in pseudocodice un algoritmo ricorsivo che, ricevuto in input le n misurazioni, 
+restituisca la maggiore variazione di peso in giorni consecutivi

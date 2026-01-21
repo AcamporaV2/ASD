@@ -1,0 +1,28 @@
+Dato un grafo non orientato G=(V,E) pesato con funzione peso ω:E->R.
+Si scriva in pseudocodice un algoritmo che restituisca l’arco leggero e non sicuro di peso mediano
+
+
+
+KRUSKAL
+
+A= insieme vuoto 
+
+NonSicuri = insieme vuoto 
+
+for each v in V[G]
+    MAKE-SET(v)
+
+Sort(E)
+
+for each (u,v) in V[G]
+    if FIND-SET(u) != FIND-SET(v)
+        A= A u {(u,v)}
+        Union(u,v)
+    
+    else 
+        NonSicuri = NonSicuri u {(u,v)}
+    
+
+n = |NonSicuri|
+
+return NonSicuri[n/2]

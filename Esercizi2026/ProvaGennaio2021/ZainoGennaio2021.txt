@@ -1,0 +1,67 @@
+Vostro padre è appassionato di vino. Vostro padre è anche affetto da diabete e non può bere vini con un grado alcolico elevato.Poiché domani festeggerà gli anni, 
+avete deciso di regalargli alcune bottiglie, acquistandole su Amazon.
+Supponendo che  il vostro budget è di K euro e che per ognibottiglia disponibile b sia notosia il suo prezzo P(b) e sia il grado alcolemico A(b), 
+scrivete un algoritmo che determini le bottiglie da acquistare minimizzando il grado alcolemico complessivamente acquistato.
+Supponete che P(b) ed A(b) siano interi, per ogni bottiglia b.
+
+
+REGALO-VINO-ARRAY(P, A, n, K)
+
+    // Inizializzazione delle due matrici
+    // B = Matrice numero Bottiglie
+    // G = Matrice somma Gradi alcolici
+    
+    // Inizializziamo la riga 0 e colonna 0 a 0
+    for j = 0 to K
+        B[0, j] = 0
+        G[0, j] = 0
+       
+    for i = 1 to n
+        B[i, 0] = 0
+        G[i, 0] = 0
+       
+        for j = 1 to K
+       
+            // Caso 1: La bottiglia costa troppo per il budget j
+            if P[i] > j
+                // Copiamo semplicemente i valori della riga precedente
+                B[i, j] = B[i-1, j]
+                G[i, j] = G[i-1, j]
+             
+            // Caso 2: La bottiglia può entrare nel budget
+            else
+                // --- Opzione 1: ESCLUDO la bottiglia (non la compro) ---
+                b_escluso = B[i-1, j]
+                g_escluso = G[i-1, j]
+             
+                // --- Opzione 2: INCLUDO la bottiglia (la compro) ---
+                // Guardo lo stato precedente sottraendo il prezzo P[i]
+                // Aggiungo 1 al conteggio bottiglie e A[i] ai gradi
+                b_incluso = 1 + B[i-1, j - P[i]]
+                g_incluso = A[i] + G[i-1, j - P[i]]
+             
+                // --- CONFRONTO ---
+                
+                // Criterio 1: Preferisco chi mi dà PIÙ bottiglie
+                if b_incluso > b_escluso
+                    B[i, j] = b_incluso
+                    G[i, j] = g_incluso
+                 
+                // Criterio 2: A parità di bottiglie, preferisco MENO alcol
+                else if b_incluso == b_escluso
+                    if g_incluso < g_escluso
+                        // Prendo l'opzione inclusa perché ha meno alcol
+                        B[i, j] = b_incluso
+                        G[i, j] = g_incluso
+                    else
+                        // Prendo l'opzione esclusa (stesse bottiglie, meno o stesso alcol)
+                        B[i, j] = b_escluso
+                        G[i, j] = g_escluso
+                
+                // Criterio 3: L'incluso ha meno bottiglie, quindi lo scarto
+                else
+                    B[i, j] = b_escluso
+                    G[i, j] = g_escluso
+
+    // Alla fine restituiamo i valori nell'angolo in basso a destra delle due matrici
+    return (B[n, K], G[n, K])

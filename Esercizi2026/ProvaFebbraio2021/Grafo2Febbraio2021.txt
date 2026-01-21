@@ -1,0 +1,2 @@
+Dato un grafo orientato G=(V,E) ed un albero radicato Tcon radice g e composto da tutti i nodi V,
+ scrivere un algoritmo in pseudocodice che restituisca TRUE se T corrisponde all’albero DF del grafo G e FALSE altriment
