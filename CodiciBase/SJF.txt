@@ -1,0 +1,16 @@
+
+// Supponiamo che gli aerei siano dati come array t[1..N] dove t[i] è il tempo per l'i-simo aereo
+
+funzione MinTempoAttesa(t[1..N]):
+    crea una coda di priorità Q
+    per i da 1 a N:
+        inserisci Q, t[i]         // Inserisci il tempo di decollo nella coda di priorità
+
+    tempo_totale = 0
+    tempo_corrente = 0
+    mentre Q non è vuota:
+        ti = estrai_min(Q)        // Estrai l'aereo col tempo di decollo minore
+        tempo_corrente = tempo_corrente + ti
+        tempo_totale = tempo_totale + tempo_corrente
+
+    ritorna tempo_totale
