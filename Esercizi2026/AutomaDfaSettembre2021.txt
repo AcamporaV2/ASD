@@ -1,0 +1,5 @@
+Fornire la definizione di Automa finito deterministico (DFA). 
+
+Dato l’alfabeto Ʃ=(0,1), scrivere il linguaggio L accettato dal DFA tale che il  DFA accetti solo numeri primi. (3 punti)
+
+SUL QUADERNO

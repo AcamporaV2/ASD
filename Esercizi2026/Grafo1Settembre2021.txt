@@ -1,0 +1,22 @@
+Dato un gravo non orientato orientato con funzione peso w:E->R. Si scriva in pseudocodice un algoritmo che restituisca l'arco leggero 
+non sicuro di peso minimo.
+
+KRUSKAL
+
+A = insieme vuoto
+
+for each v in V[G]
+    MAKE-SET(v)
+
+Sort(E)
+
+for each (u,v) in E[G]
+    if FIND-SET(u) != FIND-SET(v)
+        A= A u {(u,v)}
+        Union(u,v)
+    else 
+        min_edge = (u,v)
+        min_peso = w(u,v)
+
+
+return min_edge, min_peso

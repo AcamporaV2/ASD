@@ -1,0 +1,43 @@
+Dato un grafo orientato G = (V,E) e pesato con funzione peso w: E -> R ed un nodo sorgente s € V, 
+scrivere un algoritmo, in pseudocodice, 
+che restituisca la profondità massima dei cammini minimi (7 punti)
+
+
+
+BELLMAN-FORD 
+
+for each v in V[G] - {s}
+    d[v] = infinito 
+    padre[v] = NIL 
+
+    depth[v] = 0
+
+d[s] = 0
+padre[s] = NIL 
+
+
+for i = 1 to |V[G]|-1
+    //Relax con depth 
+    for each (u,v) in E[G]
+        if d[v] > d[u] + w(u,v)
+
+            d[v] = d[u] + w(u,v)
+            padre[v] = u 
+
+            depth[v] = depth[u] + 1
+
+
+
+//Cicli negativi
+for each (u,v) in E[G]
+    if d[v] > d[u] + w(u,v)
+        return FALSE
+
+max_depth = -1
+
+for each u in V[G]
+    if d[u] != infinito
+        if depth[u] > max_depth
+            max_depth = depth[u]
+
+return max_depth

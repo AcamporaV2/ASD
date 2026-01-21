@@ -1,0 +1,63 @@
+FASTEST-WAY(a, t, e, x, n)
+    // ---------------------------------------------------------
+    // 1. CASO BASE (j = 1)
+    // Calcoliamo i tempi per la prima stazione di ogni linea.
+    // ---------------------------------------------------------
+
+    // Equazione: f1[1] = e1 + a[1,1]
+    f1[1] = e1 + a[1, 1]
+    
+    // Equazione: f2[1] = e2 + a[2,1]
+    f2[1] = e2 + a[2, 1]
+
+    // ---------------------------------------------------------
+    // 2. PASSO RICORSIVO (Iterazione da j = 2 a n)
+    // Calcoliamo progressivamente i tempi ottimi per ogni stazione successiva.
+    // ---------------------------------------------------------
+    for j = 2 to n
+        
+        // --- CALCOLO PER LA LINEA 1 (f1[j]) ---
+        // Equazione: f1[j] = min( f1[j-1] + a[1,j],  f2[j-1] + t[2,j-1] + a[1,j] )
+        
+        costo_rimanendo_su_1 = f1[j-1] + a[1, j]
+        costo_venendo_da_2   = f2[j-1] + t[2, j-1] + a[1, j]
+
+        if costo_rimanendo_su_1 <= costo_venendo_da_2
+            f1[j] = costo_rimanendo_su_1
+            l[1, j] = 1 // Tengo traccia: vengo dalla linea 1
+        else
+            f1[j] = costo_venendo_da_2
+            l[1, j] = 2 // Tengo traccia: vengo dalla linea 2
+
+
+        // --- CALCOLO PER LA LINEA 2 (f2[j]) ---
+        // Equazione: f2[j] = min( f2[j-1] + a[2,j],  f1[j-1] + t[1,j-1] + a[2,j] )
+        
+        costo_rimanendo_su_2 = f2[j-1] + a[2, j]
+        costo_venendo_da_1   = f1[j-1] + t[1, j-1] + a[2, j]
+
+        if costo_rimanendo_su_2 <= costo_venendo_da_1
+            f2[j] = costo_rimanendo_su_2
+            l[2, j] = 2 // Tengo traccia: vengo dalla linea 2
+        else
+            f2[j] = costo_venendo_da_1
+            l[2, j] = 1 // Tengo traccia: vengo dalla linea 1
+
+    // ---------------------------------------------------------
+    // 3. SOLUZIONE FINALE (Uscita)
+    // Aggiungiamo i tempi di uscita x1 e x2 e prendiamo il minimo.
+    // ---------------------------------------------------------
+    
+    // Equazione: f* = min( f1[n] + x1,  f2[n] + x2 )
+    
+    tempo_uscita_linea_1 = f1[n] + x1
+    tempo_uscita_linea_2 = f2[n] + x2
+
+    if tempo_uscita_linea_1 <= tempo_uscita_linea_2
+        f_star = tempo_uscita_linea_1
+        l_star = 1 // L'ultima stazione è sulla linea 1
+    else
+        f_star = tempo_uscita_linea_2
+        l_star = 2 // L'ultima stazione è sulla linea 2
+
+    return f_star, l_star

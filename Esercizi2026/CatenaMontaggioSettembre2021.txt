@@ -1,0 +1,110 @@
+La Fiat per la produzione della nuova panda ha installato nello stabilimento di Pomigliano d’Arco K catene di montaggio.
+
+Ogni catena di montaggio ha L stazioni di lavoro. 
+
+Ogni stazione di lavoro ha un tempo di lavorazione differente  T.
+
+Inoltre il telaio della nuova panda impiega un tempo iniziale I per entrare nella catena di montaggio ed 
+un tempo differente U per ogni catena di montaggio per uscire. 
+Si assuma che il tempo di migrazione tra due stazioni successive all’interno della stessa catena sia e. 
+Infine, per fornire all’impianto la massima flessibilità si preveda la possibilità che la nuova panda possa migrare 
+da una catena di montaggio all’altra e tale operazione impieghi un tempo, differente per ogni catena, pari ad S.
+
+Si risolva, mediante la programmazione dinamica, il problema di individuazione per ogni vettura del percorso più rapido, 
+scrivendo le relative equazioni di ricorrenza. Successivamente si scriva, un algoritmo di memoization, 
+in pseudocodice, che, utilizzando le equazioni di ricorrenza suddette, individui per ogni vettura il percorso più rapido.
+
+
+
+/* =================================================================================
+ LEGENDA VARIABILI - PROBLEMA FIAT PANDA
+ =================================================================================
+ 
+ PARAMETRI DIMENSIONALI:
+ -----------------------
+ K : Intero. Il numero totale di catene di montaggio (es. 2, 3...).
+     Indice 'k' varia da 1 a K.
+ L : Intero. Il numero di stazioni di lavoro su ogni catena.
+     Indice 'j' varia da 1 a L.
+
+ TEMPI DI LAVORAZIONE E TRASFERIMENTO (INPUT):
+ ---------------------------------------------
+ T[k][j] : Matrice. Tempo necessario alla stazione 'j' della catena 'k' 
+           per lavorare il telaio.
+ I[k]    : Array. Tempo "Initial". Tempo necessario per entrare nella catena 'k' 
+           dall'inizio.
+ U[k]    : Array. Tempo "Ultimate" (o Uscita). Tempo per uscire dalla fabbrica 
+           dopo l'ultima stazione della catena 'k'.
+ e       : Costante. Tempo "elementare" di trasferimento. È il tempo per passare 
+           dalla stazione j alla j+1 rimanendo sulla STESSA catena.
+ S[k]    : Array. Tempo "Switch". È il tempo necessario per spostare il telaio 
+           dalla catena 'k' verso un'altra catena. (Il testo dice "differente 
+           per ogni catena", quindi dipende dalla catena).
+
+ VARIABILI DI STATO (MEMORIA):
+ -----------------------------
+ memo[k][j] : Matrice di appoggio (Cache).
+              Memorizza il tempo minimo calcolato per arrivare fino 
+              all'uscita della stazione 'j' sulla catena 'k'.
+              Inizializzata a -1 (o NIL) per indicare "non ancora calcolato".
+ =================================================================================
+*/
+
+// Funzione Ricorsiva con Memoization
+FUNCTION CalcolaPercorsoPanda(k, j)
+
+    // 1. VERIFICA MEMORIA (Lookup)
+    // Se abbiamo già calcolato il valore per questa stazione e catena,
+    // lo restituiamo immediatamente senza rifare i calcoli.
+    IF memo[k][j] != -1 THEN
+        RETURN memo[k][j]
+    
+    // 2. CASO BASE (Prima Stazione)
+    // Se siamo alla stazione 1, il tempo è solo l'ingresso + lavorazione.
+    IF j == 1 THEN
+        memo[k][j] = I[k] + T[k][j]
+        RETURN memo[k][j]
+    
+    // 3. PASSO RICORSIVO
+    
+    // Opzione A: Rimanere sulla stessa catena
+    // Prendo il tempo per finire la stazione precedente (j-1) su questa catena (k),
+    // aggiungo il tempo di trasferimento interno 'e'.
+    valore_stessa = CalcolaPercorsoPanda(k, j-1) + e
+    
+    // Opzione B: Arrivare da un'altra catena (Cambio linea)
+    // Dobbiamo controllare tutte le altre catene 'm' e vedere qual è la più conveniente.
+    valore_cambio = INFINITY
+    
+    FOR m = 1 TO K
+        IF m != k THEN
+            // Calcolo il costo: arrivare alla staz. precedente su catena 'm' 
+            // + costo 'S[m]' per scendere dalla catena 'm' e venire qui.
+            costo_transizione = CalcolaPercorsoPanda(m, j-1) + S[m]
+            
+            IF costo_transizione < valore_cambio THEN
+                valore_cambio = costo_transizione
+    
+    // 4. MEMORIZZAZIONE E RITORNO
+    // Il tempo per questa stazione è il tempo di lavorazione T[k][j] più
+    // il minore tra "rimanere sulla stessa" e "cambiare catena".
+    memo[k][j] = T[k][j] + MIN(valore_stessa, valore_cambio)
+    
+    RETURN memo[k][j]
+
+// Funzione Principale per ottenere il risultato finale
+FUNCTION TrovaMigliorTempoTotale()
+    min_total_time = INFINITY
+    
+    // Una volta arrivati alla fine della linea (L), dobbiamo aggiungere
+    // il tempo di uscita U[k] e vedere quale catena finisce prima.
+    FOR k = 1 TO K
+        time = CalcolaPercorsoPanda(k, L) + U[k]
+        IF time < min_total_time THEN
+            min_total_time = time
+            
+    RETURN min_total_time
+
+
+
+    
