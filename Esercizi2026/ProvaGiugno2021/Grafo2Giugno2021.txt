@@ -3,6 +3,9 @@ scrivere un algoritmo, in pseudocodice,
 che restituisca la profondità massima dei cammini minimi (7 punti)
 
 
+//Ricorda che l'altezza è una cosa simile
+
+
 
 BELLMAN-FORD 
 
