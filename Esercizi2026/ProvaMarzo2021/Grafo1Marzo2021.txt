@@ -1,0 +1,46 @@
+ALGORITMO FoglieSPT(G, s, w)
+    Input: Grafo G=(V,E), nodo sorgente s, pesi w
+    Output: Lista dei nodi foglia dell'albero dei cammini minimi
+
+    // --- FASE 1: Dijkstra Standard ---
+    PER OGNI vertice v in V:
+        d[v] ← ∞       // Distanza
+        π[v] ← NIL     // Padre nell'SPT
+    
+    d[s] ← 0
+    Q ← coda con priorità contenente tutti i vertici V (chiave: d)
+
+    MENTRE Q non è vuota:
+        u ← ESTRAI-MIN(Q)
+        
+        PER OGNI vertice v adiacente a u:
+            RELAX(u, v, w) // Vedi sotto per la procedura Relax standard
+
+    // --- FASE 2: Identificazione delle Foglie ---
+    
+    // Creiamo un array booleano per segnare chi è padre
+    Dichiara is_parent[1...|V|] inizializzato a FALSE
+
+    // Se un nodo 'v' ha un padre 'π[v]', allora 'π[v]' NON è una foglia
+    PER OGNI v in V:
+        SE π[v] ≠ NIL:
+            is_parent[π[v]] ← TRUE
+
+    // Raccogliamo i nodi che sono nell'albero ma non sono padri
+    ListaFoglie ← lista vuota
+
+    PER OGNI v in V:
+        // Condizione 1: d[v] < ∞ (il nodo è raggiungibile, fa parte dell'albero)
+        // Condizione 2: is_parent[v] == FALSE (nessuno punta a lui come padre)
+        SE d[v] < ∞ AND is_parent[v] == FALSE:
+            AGGIUNGI v a ListaFoglie
+
+    RESTITUISCI ListaFoglie
+
+
+// Procedura di rilassamento standard (per completezza)
+PROCEDURA RELAX(u, v, w)
+    SE d[v] > d[u] + w(u, v):
+        d[v] ← d[u] + w(u, v)
+        π[v] ← u
+        AGGIORNA-PRIORITÀ(Q, v, d[v])

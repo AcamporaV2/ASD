@@ -1,0 +1,42 @@
+Sei una madre e vuoi comprare per festeggiare dei babà a tuo figlio. 
+Hai solo E euro e la pasticceria sfortunatamente ha solo N torte di babà e non i babà singoli. 
+Ogni torta di babà però ha B[t] babà interni (cioè la torta di babà è come se fosse un contenitore). 
+Ogni torta di babà da c(t) come costo. Quanti babà al massimo puoi ricavare con E euro?
+
+
+
+KNAPSACK-FRAZIONARIO(B, c, E)
+    // Input: B = array babà, c = array costi, E = Budget
+    // Assumiamo le torte siano già ordinate per densità (B[i]/c[i]) decrescente
+    
+    n = length(c)
+    
+    // Inizializzazione
+    for i = 1 to n
+        X[i] = 0.0      // Frazione della torta i acquistata
+        
+    budget_rimanente = E
+    totale_baba = 0
+    i = 1
+
+    // Ciclo principale: scorro finché ho torte E ho soldi
+    while (i <= n) and (budget_rimanente > 0)
+    
+        if c[i] <= budget_rimanente
+            // CASO 1: Compro la torta INTERA
+            X[i] = 1
+            budget_rimanente = budget_rimanente - c[i]
+            totale_baba = totale_baba + B[i]
+            
+        else
+            // CASO 2: Compro una FRAZIONE (ho finito i soldi)
+            X[i] = budget_rimanente / c[i]
+            
+            // Qui c'è il dettaglio importante sul "floor" (vedi nota sotto)
+            totale_baba = totale_baba + (B[i] * X[i]) 
+            
+            budget_rimanente = 0 // Questo farà terminare il while al prossimo check
+            
+        i = i + 1
+
+    return totale_baba

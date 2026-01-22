@@ -1,2 +1,58 @@
 Dato un grafo orientato G=(V,E) ed un albero radicato Tcon radice g e composto da tutti i nodi V,
- scrivere un algoritmo in pseudocodice che restituisca TRUE se T corrisponde all’albero DF del grafo G e FALSE altriment
+ scrivere un algoritmo in pseudocodice che restituisca TRUE se T corrisponde all’albero DF del grafo G e FALSE altrimenti
+
+
+ ALGORITMO CheckDFS(G, T, g)
+    // G = (V, E) Grafo orientato
+    // T = Albero radicato con figli definiti per ogni nodo
+    // g = Radice dell'albero T
+
+    // 1. Inizializzazione variabili globali per i tempi
+    time = 0
+    d = array di interi (tempo di scoperta)
+    f = array di interi (tempo di fine)
+    
+    // Inizializza tutti i nodi (opzionale in pseudocodice, ma corretto)
+    for each u in V do
+        d[u] = 0
+        f[u] = 0
+
+    // 2. Eseguiamo la visita SOLO seguendo i rami di T
+    // Se T non è valido strutturalmente (es. archi in T che non sono in G),
+    // la funzione ritornerà FALSE subito.
+    valid_structure = DFS_Time_Simul(T, g, d, f, G)
+    
+    if valid_structure == FALSE then
+        return FALSE
+
+    // 3. Verifica la coerenza degli archi di G rispetto ai tempi calcolati
+    for each u in V do
+        for each v in Adj[G, u] do  // Scorre tutti i vicini REALI in G
+            
+            // Condizione di violazione DFS:
+            // Esiste un arco (u,v), ma v viene scoperto dopo che u è finito.
+            // Questo significa che v era "bianco" e raggiungibile da u, 
+            // ma T ha deciso di chiudere u senza visitarlo.
+            if d[v] > f[u] then
+                return FALSE
+
+    return TRUE
+
+
+// Funzione di supporto ricorsiva
+FUNCTION DFS_Time_Simul(T, u, d, f, G)
+    time = time + 1
+    d[u] = time
+
+    for each v in Figli[T, u] do // Itera solo sui figli nel'albero T
+        
+        // Controllo di base: l'arco dell'albero deve esistere nel grafo
+        if v non è in Adj[G, u] then
+            return FALSE
+            
+        if DFS_Time_Simul(T, v, d, f, G) == FALSE then
+            return FALSE
+
+    time = time + 1
+    f[u] = time
+    return TRUE

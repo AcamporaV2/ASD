@@ -1,0 +1,37 @@
+Dato un grafo non orientato G, una sorgente s e un intero k, creare un algoritmo che calcolato il cammino minimo, 
+restituisca il numero di nodi che si trovano a distanza maggiore di k
+
+
+BFS
+
+for each u in V[G] - {s}
+    color[u] = white  
+    d[u] = infinto
+    padre[u] = NIL 
+
+d[s] = 0 
+color[s] = gray 
+
+Q= coda vuota 
+ENQUEUE(Q,s)
+
+while Q non è vuota 
+
+    u = DEQUEUE(Q)
+
+    for each v in Adj[u]
+        if color[v] == white 
+            color[v] = gray 
+            padre[v] = u 
+            d[v] = d[u] +1 
+            ENQUEUE(Q,v)
+
+    color[u] = black 
+
+num_nodi = 0
+
+for each v in V[G]
+    if d[v] > k and d[v] != infinito
+        num_nodi = num_nodi +1 
+
+return num_nodi
