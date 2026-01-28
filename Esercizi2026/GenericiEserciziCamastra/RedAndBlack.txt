@@ -1,0 +1,61 @@
+Sia T un BST in cui ogni nodo ha un attributo c {rosso,nero}. 
+Scrivere un algoritmo che restituisced TRUE se T è un albero red/black e FALSE altrimenti
+
+
+IS-RED-BLACK(T)
+    x = Radice[T]
+
+    // Proprietà 2: La radice deve essere Nera
+    // Un albero vuoto (NIL) soddisfa tutte le proprietà RB
+    IF x == NIL
+        RETURN TRUE
+    
+    IF Colore[x] == ROSSO
+        RETURN FALSE
+
+    // Chiama la funzione ricorsiva
+    // Se restituisce -1 (errore), allora non è un RB
+    IF VERIFICA-NODO(x) == -1
+        RETURN FALSE
+    ELSE
+        RETURN TRUE
+
+
+VERIFICA-NODO(x)
+    // Caso Base: Foglia (NIL)
+    // Proprietà 3: Le foglie sono nere. 
+    // Contiamo il NIL come 1 nodo nero per l'altezza nera.
+    IF x == NIL
+        RETURN 1
+
+    // Passo Ricorsivo: calcoliamo l'altezza nera dei sottoalberi
+    bh_sx = VERIFICA-NODO(Sinistro[x])
+    bh_dx = VERIFICA-NODO(Destro[x])
+
+    // Propagazione Errore: se un sottoalbero ha fallito, ritorna errore (-1)
+    IF bh_sx == -1 OR bh_dx == -1
+        RETURN -1
+
+    // Proprietà 5: Verifica Uguaglianza Altezza Nera
+    IF bh_sx != bh_dx
+        RETURN -1
+
+    // Proprietà 4: Verifica Violazione Rosso-Rosso
+    // Se x è ROSSO, i figli NON possono essere ROSSI.
+    IF Colore[x] == ROSSO
+        
+        // Controllo figlio sinistro: deve esistere ED essere rosso per dare errore
+        IF Sinistro[x] != NIL AND Colore[Sinistro[x]] == ROSSO
+            RETURN -1
+            
+        // Controllo figlio destro
+        IF Destro[x] != NIL AND Colore[Destro[x]] == ROSSO
+            RETURN -1
+    
+    // Calcolo Altezza Nera da restituire al padre
+    // Se il nodo corrente è NERO, incrementa il conteggio
+    IF Colore[x] == NERO
+        RETURN bh_sx + 1
+    ELSE
+        // Se è ROSSO, l'altezza nera non cambia
+        RETURN bh_sx

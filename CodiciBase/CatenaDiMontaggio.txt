@@ -1,63 +1,95 @@
 FASTEST-WAY(a, t, e, x, n)
-    // ---------------------------------------------------------
-    // 1. CASO BASE (j = 1)
-    // Calcoliamo i tempi per la prima stazione di ogni linea.
-    // ---------------------------------------------------------
-
-    // Equazione: f1[1] = e1 + a[1,1]
+    // Inizializzazione delle prime stazioni
     f1[1] = e1 + a[1, 1]
-    
-    // Equazione: f2[1] = e2 + a[2,1]
     f2[1] = e2 + a[2, 1]
-
-    // ---------------------------------------------------------
-    // 2. PASSO RICORSIVO (Iterazione da j = 2 a n)
-    // Calcoliamo progressivamente i tempi ottimi per ogni stazione successiva.
-    // ---------------------------------------------------------
-    for j = 2 to n
-        
-        // --- CALCOLO PER LA LINEA 1 (f1[j]) ---
-        // Equazione: f1[j] = min( f1[j-1] + a[1,j],  f2[j-1] + t[2,j-1] + a[1,j] )
-        
-        costo_rimanendo_su_1 = f1[j-1] + a[1, j]
-        costo_venendo_da_2   = f2[j-1] + t[2, j-1] + a[1, j]
-
-        if costo_rimanendo_su_1 <= costo_venendo_da_2
-            f1[j] = costo_rimanendo_su_1
-            l[1, j] = 1 // Tengo traccia: vengo dalla linea 1
-        else
-            f1[j] = costo_venendo_da_2
-            l[1, j] = 2 // Tengo traccia: vengo dalla linea 2
-
-
-        // --- CALCOLO PER LA LINEA 2 (f2[j]) ---
-        // Equazione: f2[j] = min( f2[j-1] + a[2,j],  f1[j-1] + t[1,j-1] + a[2,j] )
-        
-        costo_rimanendo_su_2 = f2[j-1] + a[2, j]
-        costo_venendo_da_1   = f1[j-1] + t[1, j-1] + a[2, j]
-
-        if costo_rimanendo_su_2 <= costo_venendo_da_1
-            f2[j] = costo_rimanendo_su_2
-            l[2, j] = 2 // Tengo traccia: vengo dalla linea 2
-        else
-            f2[j] = costo_venendo_da_1
-            l[2, j] = 1 // Tengo traccia: vengo dalla linea 1
-
-    // ---------------------------------------------------------
-    // 3. SOLUZIONE FINALE (Uscita)
-    // Aggiungiamo i tempi di uscita x1 e x2 e prendiamo il minimo.
-    // ---------------------------------------------------------
     
-    // Equazione: f* = min( f1[n] + x1,  f2[n] + x2 )
+    // Iterazione attraverso le stazioni da 2 a n
+    FOR j = 2 TO n
+        
+        // Calcolo per la Linea 1
+        IF f1[j-1] + a[1, j] <= f2[j-1] + t[2, j-1] + a[1, j] THEN
+            f1[j] = f1[j-1] + a[1, j]
+            l1[j] = 1  // Siamo rimasti sulla linea 1
+        ELSE
+            f1[j] = f2[j-1] + t[2, j-1] + a[1, j]
+            l1[j] = 2  // Siamo arrivati dalla linea 2
+        END IF
+        
+        // Calcolo per la Linea 2
+        IF f2[j-1] + a[2, j] <= f1[j-1] + t[1, j-1] + a[2, j] THEN
+            f2[j] = f2[j-1] + a[2, j]
+            l2[j] = 2  // Siamo rimasti sulla linea 2
+        ELSE
+            f2[j] = f1[j-1] + t[1, j-1] + a[2, j]
+            l2[j] = 1  // Siamo arrivati dalla linea 1
+        END IF
+        
+    END FOR
     
-    tempo_uscita_linea_1 = f1[n] + x1
-    tempo_uscita_linea_2 = f2[n] + x2
+    // Calcolo finale includendo i tempi di uscita
+    IF f1[n] + x1 <= f2[n] + x2 THEN
+        f_star = f1[n] + x1
+        l_star = 1
+    ELSE
+        f_star = f2[n] + x2
+        l_star = 2
+    END IF
+    
+    RETURN f_star, l_star, l1, l2
 
-    if tempo_uscita_linea_1 <= tempo_uscita_linea_2
-        f_star = tempo_uscita_linea_1
-        l_star = 1 // L'ultima stazione è sulla linea 1
-    else
-        f_star = tempo_uscita_linea_2
-        l_star = 2 // L'ultima stazione è sulla linea 2
 
-    return f_star, l_star
+
+
+
+
+
+
+
+    GENERALIZED-FASTEST-WAY(a, t, e, x, n, num_lines)
+    // a[i, j]: costo stazione j su linea i
+    // t[k, i, j]: costo trasferimento da linea k a linea i dopo la stazione j
+    
+    // 1. Base Case: Inizializzazione prima colonna
+    FOR i = 1 TO num_lines
+        f[i, 1] = e[i] + a[i, 1]
+    END FOR
+    
+    // 2. Programmazione Dinamica
+    FOR j = 2 TO n          // Per ogni stazione (colonna)
+        FOR i = 1 TO num_lines  // Per ogni linea attuale (riga)
+            
+            // Trova il minimo costo proveniente da qualsiasi linea k precedente
+            min_val = INFINITY
+            best_prev_line = -1
+            
+            FOR k = 1 TO num_lines  // Controllo tutte le linee precedenti
+                
+                // Costo: accumulato su k + trasferimento k->i + lavorazione attuale
+                // Nota: t[k, i, j-1] deve essere 0 se k == i
+                current_val = f[k, j-1] + t[k, i, j-1] + a[i, j]
+                
+                IF current_val < min_val THEN
+                    min_val = current_val
+                    best_prev_line = k
+                END IF
+            END FOR
+            
+            f[i, j] = min_val
+            l[i, j] = best_prev_line // Salviamo il percorso
+        
+        END FOR
+    END FOR
+    
+    // 3. Calcolo finale con tempi di uscita
+    final_min = INFINITY
+    final_line = -1
+    
+    FOR i = 1 TO num_lines
+        total_time = f[i, n] + x[i]
+        IF total_time < final_min THEN
+            final_min = total_time
+            final_line = i
+        END IF
+    END FOR
+    
+    RETURN final_min, final_line, l

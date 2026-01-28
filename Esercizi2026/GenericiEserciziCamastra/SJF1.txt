@@ -1,0 +1,22 @@
+Una pizzeria durante una partita di calcio ha contemporaneamente richieste di pizze da più clienti.Il pizzaiolo deve infornare quindi p pizze, ciascuna con tempo T[p] di cottura. 
+Bisogna schedulare le pizze dando in input al forno le pizze 𝑝1...𝑝𝑛e i corrispondenti tempi 𝑇[𝑝1]...𝑇[𝑝𝑛], in modo da minimizzare il tempo medio di attesa per il cliente
+
+
+SJF(T[1..n])
+
+Q= coda di priorità
+
+for i = 1 to n 
+    INSERT(Q,t[i])
+
+tempo_totale = 0
+tempo_corrente = 0
+
+while q non è vuota 
+
+    ti = Extract-min(Q)
+
+    tempo_corrente = tempo_corrente + ti 
+    tempo_totale  = tempo_totale + tempo_corrente
+
+return tempo_totale
