@@ -1,0 +1,43 @@
+
+Dato una coda di min prioritá, implementata mediante un heap, scrivere un algoritmo che restituisca, come output, il numero degli scambi necessari ad eseguire il metodo EXTRACT_MIN
+
+EXTRACT-MIN(A)
+    // 1. Controllo underflow
+    if A.heapsize < 1
+        error "Heap underflow"
+
+    // 2. Primo scambio (Radice <-> Ultima foglia)
+    // Nota: salviamo in scambi_iniziali
+    SWAP(A[1], A[A.heapsize])
+    
+    // 3. Riduciamo la dimensione
+    A.heapsize = A.heapsize - 1
+
+    // 4. Chiamiamo la versione MODIFICATA di Heapify
+    // Passiamo '1' perché si parte dalla radice
+    scambi_heapify = MIN-HEAPIFY-COUNT(A, 1)
+
+    // 5. Ritorniamo 1 (lo scambio iniziale) + quelli fatti dall'heapify
+    return 1 + scambi_heapify
+
+
+
+MIN-HEAPIFY(A,i)
+
+l = left(i)
+r = right(i)
+
+if l <= A.heapsize AND A[l] < A[min]
+    min = l 
+else 
+    min = i 
+
+if r <= A.heapsize AND A[r] < A[min]
+    min = r 
+
+if min != i 
+    swap(A[i], A[min])
+    scambi = MIN-HEAPIFY (A, min)
+    return 1 + scambi 
+else 
+    return 0 

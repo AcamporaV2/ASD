@@ -1,0 +1,39 @@
+
+Dato un grafo restituire, se presente, il ciclo di peso negativo presente nel grafo
+
+
+
+for each v in V[G]
+    d[v] = infinito
+    pi[v] = NIL 
+
+d[s] = 0
+
+for i = 1 to |V[G]|-1
+
+    for each (u,v) in E[G]
+        if d[v] > d[u] + w(u,v)
+            d[v] = d[u] + w(u,v)
+            pi[v] = u 
+
+//si ricontrolla dopo la relax 
+for each (u,v) in E[G]
+    if d[v] > d[u] + w(u,v)
+
+    curr = v 
+    
+    for i = 1 to |V[G]|
+        curr = pi[curr]
+
+    Ciclo = Lista vuota 
+    tempo = curr 
+
+    repeat 
+        Aggiunti tempo in testa a ciclo 
+        tempo = pi[tempo]
+
+    
+    until tempo == curr
+
+
+return NIL 

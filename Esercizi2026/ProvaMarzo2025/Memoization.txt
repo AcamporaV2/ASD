@@ -1,0 +1,27 @@
+Scrivi un algoritmo in pseuduocodice che utilizzando la memorization restituisce F(x,y)= max {F(x-1,y-1)+1, F(x-1,y),F(x,y-1)}. Indicare se gode della Sottostruttura Ottima
+
+
+for i = 0 to x 
+    for j = 0 to y
+        Memo[i,j] = NIL 
+
+
+
+
+Memoization(Memo, i, j)
+
+    if Memo[i,j] != NIL 
+        Return Memo[i,j]
+
+    if i == 0 or j == 0
+        Memo[i,j] = 1
+    
+    diagonale = Memoization(Memo, i-1, j-1) + 1
+    orizzontale = Memoization(Memo, i-1, j)
+    verticale = Memoization(Memo,i, j-1)
+
+    risultato = max (diagonale,orizzontale,verticale)
+
+    Memo[i,j] = risultato
+
+    return Memo[i,j]

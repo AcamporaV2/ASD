@@ -1,0 +1,35 @@
+Si scriva un algoritmo che calcoli la distanza di editing tra il proprio nome e il proprio cognome
+
+
+DISTANZA-EDITING(Nome,cognome)
+
+m = Length[Nome]
+n = Length[Cognome]
+
+
+sia D[0..m,0..n] una tabella nuova 
+
+
+for i = 0 to m 
+    D[i,0] = i 
+
+for j = 0 to n 
+
+    D[0,j] = j 
+
+For i = 1 to m 
+    for j = 1 to n 
+
+        If Nome[i] == Cognome[j]
+            costo = 0  //Match 
+        else 
+            costo = 1 //Sostituzione 
+
+        cancellazione = D[i-1,j] + 1
+        inserzione = D[i, j-1] + 1
+        sostituzione = D[i-1, j-1] + costo 
+
+        D[i,j] = MIN(cancellazione,inserzione,sostituzione)
+
+
+return D[m,n]

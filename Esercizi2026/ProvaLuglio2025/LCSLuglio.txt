@@ -1,0 +1,26 @@
+calcolare la soluzione F(x,y) a partire da un x e y in input
+F(i,0)=1 e F(0,j)=1 e F(x,y) si calcola come :
+
+Max(F(x-1,y-1)+1, F(x-1,y)*F(x,y-1))
+
+
+
+for i = 0 to x 
+    A[i,0] = 1 
+for j = 0 to y 
+    A[0,j] = 1
+
+for i = 1 to x 
+    for j = 1 to y 
+
+        somma = A[i-1, j-1] + 1 
+        prodotto = A[i-1,j] * A[i,j-1]
+
+        if somma > prodotto 
+            A[i,j] = somma 
+        else 
+            A[i,j] = prodotto
+
+Return A[x,y]
+
+        

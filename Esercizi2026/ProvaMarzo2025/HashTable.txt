@@ -1,0 +1,50 @@
+Data un hash table H che utilizza il metodo dell'indirizzamento aperto per risolvere il problema delle collisioni.
+ Si supponga di risolvere il problema della cancellazione inserendo il simbolo # nella locazione contenente il termine che si vuole cancellare.
+ Scrivere, in pseudocodice, le funzioni INSERISCI e RICERCA debbano essere modificate opportunamente in una tabella di Hash H ad indirizzamento aperto che supporti la cancellazione.
+
+
+
+
+HASH-SEARCH
+i = 0
+repeat
+    j = h(k,i)
+    if T[j] == k
+        return j 
+    
+    i = i + 1 
+
+until T[j] == NIL or i == m
+Return NIL 
+
+
+
+
+HASH-INSERT
+i = 0 
+slot_ricilo = NIL 
+repeat
+    j = h(k,i)
+
+    if T[j] == k 
+        return "Chiave presente già"
+
+    if T[j] == # 
+        if slot_ricilo == NIL 
+            slot_ricilo = j //Memorizza il primo #
+
+    if T[j] == NIL 
+        if slot_ricilo != NIL 
+            T[slot_ricilo] = k 
+            return slot_ricilo
+        else 
+            T[j] = k 
+            return j
+    i + 1
+until i == m
+
+if slot_riciclato != NIL
+    T[slot_riciclato] = k
+    return slot_riciclato
+else
+    return "Errore: overflow tabella hash"

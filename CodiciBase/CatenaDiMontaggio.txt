@@ -93,3 +93,73 @@ FASTEST-WAY(a, t, e, x, n)
     END FOR
     
     RETURN final_min, final_line, l
+
+
+
+
+
+MEMOIZATION IN QUESTO CASO 
+
+
+    // Strutture Dati Globali
+MEMO[1..K, 1..L] // Inizializzata a -1 (o valore nullo)
+T[1..K, 1..L], U[1..K], S[1..K]
+I, e
+
+ALGORITMO CalcolaPercorsoMigliore()
+    min_total_time = INFINITY
+    best_last_line = -1
+
+    // Calcoliamo il costo finale per ogni possibile catena di uscita
+    FOR i = 1 TO K
+        // Chiamata ricorsiva per l'ultima stazione L
+        time = RICORSIVA_MEMO(i, L) + U[i]
+        
+        IF time < min_total_time THEN
+            min_total_time = time
+            best_last_line = i
+        END IF
+    END FOR
+    
+    RETURN min_total_time
+
+FUNZIONE RICORSIVA_MEMO(linea_corr, staz_corr)
+    // 1. Controllo se il valore è già in memoria (Memoization)
+    IF MEMO[linea_corr, staz_corr] != -1 THEN
+        RETURN MEMO[linea_corr, staz_corr]
+    END IF
+
+    // 2. Caso Base: Prima stazione
+    IF staz_corr == 1 THEN
+        risultato = I + T[linea_corr, 1]
+        MEMO[linea_corr, staz_corr] = risultato
+        RETURN risultato
+    END IF
+
+    // 3. Passo Ricorsivo: Trova il minimo dalle stazioni precedenti
+    min_prev = INFINITY
+    
+    FOR k = 1 TO K
+        // Calcolo costo trasferimento
+        costo_transito = 0
+        IF k == linea_corr THEN
+            costo_transito = e      // Costo interno
+        ELSE
+            costo_transito = S[linea_corr] // Costo cambio linea
+        END IF
+
+        // Chiamata ricorsiva
+        valore_precedente = RICORSIVA_MEMO(k, staz_corr - 1)
+        
+        totale_temp = valore_precedente + costo_transito
+        
+        IF totale_temp < min_prev THEN
+            min_prev = totale_temp
+        END IF
+    END FOR
+
+    // 4. Aggiungo il tempo di lavorazione attuale e salvo
+    risultato = min_prev + T[linea_corr, staz_corr]
+    MEMO[linea_corr, staz_corr] = risultato
+    
+    RETURN risultato

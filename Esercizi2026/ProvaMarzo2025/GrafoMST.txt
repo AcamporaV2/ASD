@@ -1,0 +1,37 @@
+Dato un grafo non orientato, pesato, con radice R. Calcolare l'altezza del MST radicato in R
+
+
+PRIM?
+
+
+PRIM 
+
+for each v in V[G] - {r}
+    key[v] = INFINTO 
+    pi[v] = NIL 
+    H[v] = 0
+
+key[r] = 0 
+pi[r] = NIL 
+H[r] = 0
+
+Q = V[G]
+
+max_alt = 0
+
+while Q non è vuota 
+
+    u = extractMin(Q)
+
+    if pi[u] != NIL 
+        H[u] = H[pi[u]] + 1
+
+    if H[u] > max_alt
+        max_alt = H[u]
+
+    for each v in Adj[u]
+        if v in Q and w(u,v) < key[v]
+            key[v] = w(u,v)
+            pi[v] = u 
+
+return max_alt 
