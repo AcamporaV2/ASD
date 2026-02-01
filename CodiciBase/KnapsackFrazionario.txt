@@ -24,28 +24,24 @@ k= k +1
 
 
 for k = 1 
-    X[k] = 0.0
+   X[k] = 0.0
 
-Capacity = tot 
-Value = 0.0
-k = 1
+value = 0.0
+capacity = TOT 
+k = 1 
 
-while k<= N and Capacity>0.0
+   while k <= N and capacity > 0.0
 
-    if W[k] <= Capacity
-        x[k] = 1.0
-        value = value + v[k]
-        Capacity = Capacity-w[k]
-    else 
-        X[k] = Capacity/W[k]
-        Value = value + X[k]*v[k]
-        Capacity = 0.0
+      if W[k] <= capacity 
+         X[k] = 1.0
+         Value = value + V[k]
+         Capacity = capacity - w[k]
+      else 
+         X[k] = Capacity/W[k]
+         Value = value + X[k]*V[k]
+         Capacity = 0.0
 
-k = k+1
-
-
-
-
+   k = k + 1 
 
 
 

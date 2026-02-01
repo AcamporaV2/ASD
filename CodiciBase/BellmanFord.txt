@@ -29,22 +29,27 @@ for each (u,v) in E[G]
 Return TRUE
 
 
-foe each v in V[G] - {s}
-    dist[v] = infinito
-    padre[v] = NIL 
 
-dist[s] = 0
 
-for i = 1 to |V[G]| - 1
+
+for each v in V[G]
+    d[v] = infinito
+    pi[v] = NIL 
+
+d[s] = 0 
+
+
+for i = 1 to V[G] - 1
 
     for each (u,v) in E[G]
         if d[v] > d[u] + w(u,v)
             d[v] = d[u] + w(u,v)
-            padre[v] = u
-    
+            pi[v] = u 
+
+
 
 for each (u,v) in E[G]
-    if d[v] > d[u] + w(u,v)
+    if d[v]> d[u] + w(u,v)
         return FALSE 
 
-return TRUE
+Return TRUE

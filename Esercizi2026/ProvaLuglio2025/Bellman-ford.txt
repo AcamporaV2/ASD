@@ -29,10 +29,8 @@ for each (u,v) in E[G]
     tempo = curr 
 
     repeat 
-        Aggiunti tempo in testa a ciclo 
+        Aggiunti tempo in testa a Ciclo 
         tempo = pi[tempo]
-
-    
     until tempo == curr
 
 

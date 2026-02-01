@@ -40,4 +40,4 @@ while Q non è vuoto
         if v in Q and w(u,v) < dist[v]
 
             dist[v] = w(u,v)
-            padre[v] = u 
+            padre[v] = u oi
