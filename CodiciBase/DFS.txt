@@ -38,33 +38,30 @@ f[u] = time
 
 
 --------------------------------
-DFS 
+DFS
 
 for each v in V[G]
-    color[v] = white 
-    padre[v] = nil 
-
-time = 0 
-
+    color[v] = white
+    padre[v] = NIL 
+time = 0
 for each v in V[G]
-    if color[v] == white
+    if color[v] == White 
         DFS-VISIT(v)
 
 
+DFS-VISIT(u)
 
-DFS-VISIT(u) 
+time = time + 1 
 
-time = time+ 1 
 d[u] = time 
+
 color[u] = gray 
 
-
 for each v in Adj[u]
-    if color[v]== white 
+    if color[v] == white 
         padre[v] = u 
         DFS-VISIT(v)
-    
 
 color[u] = black 
-time = time +1 
+time = time + 1
 f[u] = time 

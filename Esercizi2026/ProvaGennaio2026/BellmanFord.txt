@@ -1,0 +1,32 @@
+
+
+
+for each v in V[G]
+    d[v] = infinito
+    padre[v] = NIL 
+    Altezza[v] = 0
+
+d[s] = 0
+Altezza[s] = 0
+
+for i = 0 to V[G] -1
+
+    for each (u,v) in E[G]
+        if d[v] > d[u] + w(u,v)
+            d[v] = d[u] + w(u,v)
+            padre[v] = u 
+            Altezza[v] = Altezza[u] + 1
+
+
+for each (u,v) in E[G]
+    if d[v] > d[u] + w(u,v)
+        return FALSE 
+------------------------------------------
+max = 0
+
+for each v in V[G]
+    if d[v] != infito 
+        if Altezza[v] > max 
+            max = Altezza[v] 
+
+return max

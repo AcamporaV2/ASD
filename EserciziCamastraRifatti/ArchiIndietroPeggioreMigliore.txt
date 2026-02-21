@@ -3,7 +3,11 @@ se esiste un arco all’indietro, altrimenti FALSE.
 Determinare il caso peggiore ed il caso migliore
 
 
-
+Caso peggiore:
+    -ultimo nodo oppure non presente
+Caso migliore:
+    -presto nell'esplorazione
+    
 DFS(G) 
 
 For each u in V[G]

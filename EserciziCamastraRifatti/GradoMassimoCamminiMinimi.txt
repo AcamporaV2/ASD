@@ -10,22 +10,38 @@ scrivere un algoritmo, in pseudocodice, che restituisca il nodo di grado massimo
 
 DIJKSTRA(G,w,s)
 
-    for each u in V[G]
-        d[u] = infinito
-        padre[u] = NIL 
-
-    d[s] = 0
-
-    S = {}
-    Q = V[G]
-
-    while Q non è vuota 
-        u = extractMin(Q) 
-        S = S U {u}
-
-        for each v in Adj[u]
-            if d[v] > d[u] + w(u,v)
-                d[v]= d[u] + w(u,v)
-                padre[v] = u 
-                DECREASE-KEY
+    // FASE 1: Calcolo dei Cammini Minimi (Dijkstra)
+    Per ogni v in G.V:
+        dist[v] = +∞
+        padre[v] = NULL
+        grado_spt[v] = 0 
+    dist[s] = 0
     
+    Q = CodaDiPriorità(G.V) // Contiene tutti i nodi, ordinati per dist
+
+    Mentre Q non è vuota:
+        u = Extract-Min(Q)
+        
+        Per ogni v adiacente a u:
+            Se dist[u] + w(u, v) < dist[v]:
+                dist[v] = dist[u] + w(u, v)
+                padre[v] = u
+                Decrease-Key(Q, v, dist[v])
+
+            
+    Per ogni v in G.V:
+        Se padre[v] != NULL:
+            // v è figlio di padre[v], quindi aumentiamo il contatore del padre
+            p = padre[v]
+            grado_spt[p] = grado_spt[p] + 1
+
+    // FASE 3: Ricerca del Massimo
+    max_grado = -1
+    nodo_max = NULL
+
+    Per ogni v in G.V:
+        Se grado_spt[v] > max_grado:
+            max_grado = grado_spt[v]
+            nodo_max = v
+            
+    Restituisci nodo_max

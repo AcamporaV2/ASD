@@ -40,11 +40,6 @@ FASTEST-WAY(a, t, e, x, n)
 
 
 
-
-
-
-
-
     GENERALIZED-FASTEST-WAY(a, t, e, x, n, num_lines)
     // a[i, j]: costo stazione j su linea i
     // t[k, i, j]: costo trasferimento da linea k a linea i dopo la stazione j

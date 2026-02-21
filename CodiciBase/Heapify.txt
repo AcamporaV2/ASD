@@ -1,11 +1,33 @@
 HEAPSORT(A)
 
 Build-Max-Heap(A)
-for j = A.length downto 2
-    Swap(A[1], A[j])
-    A.heapsize = A.heapsize - 1
-    HEAPIFY(A, 1)
+    for j = A.length downto 2
+        Swap(A[1], A[j])
+        A.heapsize = A.heapsize - 1
+        HEAPIFY(A, 1)
 
+HEAP-INCREASE-KEY(A,i,key)
+    If key < A[i]
+        errore 
+    A[i] = key 
+    while i > 1 and A[parent(i)] < A[i]
+        swap A[parent(i)] <-> A[i]
+        i = parent(i)
+
+
+MAX-HEAP-INSERT(A,key)
+    A.heapsize = A.heapsize + 1
+    A[A.heapsize] = -infinito
+    HEAP-INCREASE-KEY(A, A.heapsize, key)
+
+HEAP-EXTRACT-MAX(A)
+    if A.heapsize < 1
+        errore 
+    max = A[1]
+    A[1] = A[heapsize]
+    A.heapsize = A.heapsize - 1
+    MAX-HEAPIFY(A,1)
+    return max 
 
 HEAPIFY-MAX(A, i)
     l = left(i)
