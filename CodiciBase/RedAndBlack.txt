@@ -1,15 +1,15 @@
 Sia T un BST in cui ogni nodo ha un attributo c {rosso,nero}. 
 Scrivere un algoritmo che restituisced TRUE se T è un albero red/black e FALSE altrimenti
 
-Proprietà 1 (Colori): Si assume implicitamente che ogni nodo abbia un attributo color ∈ {RED, BLACK}.
+1- Proprietà del Colore Ogni nodo è o rosso o nero.
 
-Proprietà 2 (Radice): Controllata esplicitamente alla riga 2 di IS-RED-BLACK.
+2- Proprietà della Radice La radice dell'albero è sempre nera.
 
-Proprietà 3 (Foglie): Gestita dal caso base della ricorsione , trattando i NIL come neri.
+3- Proprietà delle Foglie Ogni foglia (intesa come puntatore NIL o NULL) è nera.
 
-Proprietà 4 (Niente Rossi adiacenti): Controllata alla riga 5. Se un nodo è rosso, i suoi figli vengono ispezionati.
+4- Proprietà Rossa (o dei Rossi Adiacenti) Se un nodo è rosso, allora entrambi i suoi figli devono essere neri. (In altre parole, non possono esistere due nodi rossi consecutivi in un cammino padre-figlio).
 
-Proprietà 5 (Black-Height): Questa è la parte cruciale. Il controllo left-bh != right-bh alla riga 12 assicura che ogni cammino verso le foglie abbia lo stesso numero di nodi neri.
+5- Proprietà dell'Altezza Nera Per ogni nodo, tutti i cammini semplici che vanno da quel nodo alle foglie discendenti contengono lo stesso numero di nodi neri.
 
 IS-RED-BLACK(T)
     x = Radice[T]
