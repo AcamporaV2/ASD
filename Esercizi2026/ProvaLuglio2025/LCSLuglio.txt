@@ -13,13 +13,7 @@ for j = 0 to y
 for i = 1 to x 
     for j = 1 to y 
 
-        somma = A[i-1, j-1] + 1 
-        prodotto = A[i-1,j] * A[i,j-1]
-
-        if somma > prodotto 
-            A[i,j] = somma 
-        else 
-            A[i,j] = prodotto
+        A[i,j] = Max(F(x-1,y-1)+1, F(x-1,y)*F(x,y-1))
 
 Return A[x,y]
 

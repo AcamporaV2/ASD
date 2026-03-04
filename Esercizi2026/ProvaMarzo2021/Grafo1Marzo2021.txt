@@ -1,46 +1,42 @@
-ALGORITMO FoglieSPT(G, s, w)
-    Input: Grafo G=(V,E), nodo sorgente s, pesi w
-    Output: Lista dei nodi foglia dell'albero dei cammini minimi
+Dato un grafo G=(V,E), una sorgente s e un peso W Lista dei nodi foglia dell'albero dei cammini minimi
 
-    // --- FASE 1: Dijkstra Standard ---
-    PER OGNI vertice v in V:
-        d[v] ← ∞       // Distanza
-        π[v] ← NIL     // Padre nell'SPT
+
+Dijkstra(G,w,s)
+
+for each v in V[G] - {s}
+    d[v] = infinito
+    padre[v] = NIL 
     
-    d[s] ← 0
-    Q ← coda con priorità contenente tutti i vertici V (chiave: d)
+d[s] = 0
+padre[s] = NIL 
 
-    MENTRE Q non è vuota:
-        u ← ESTRAI-MIN(Q)
-        
-        PER OGNI vertice v adiacente a u:
-            RELAX(u, v, w) // Vedi sotto per la procedura Relax standard
+S = {}
+Q = V[G]
 
-    // --- FASE 2: Identificazione delle Foglie ---
-    
-    // Creiamo un array booleano per segnare chi è padre
-    Dichiara is_parent[1...|V|] inizializzato a FALSE
+while Q non è vuota 
 
-    // Se un nodo 'v' ha un padre 'π[v]', allora 'π[v]' NON è una foglia
-    PER OGNI v in V:
-        SE π[v] ≠ NIL:
-            is_parent[π[v]] ← TRUE
+    u = EXTRACT_MIN(Q)
 
-    // Raccogliamo i nodi che sono nell'albero ma non sono padri
-    ListaFoglie ← lista vuota
-
-    PER OGNI v in V:
-        // Condizione 1: d[v] < ∞ (il nodo è raggiungibile, fa parte dell'albero)
-        // Condizione 2: is_parent[v] == FALSE (nessuno punta a lui come padre)
-        SE d[v] < ∞ AND is_parent[v] == FALSE:
-            AGGIUNGI v a ListaFoglie
-
-    RESTITUISCI ListaFoglie
+    for each v in Adj[u]
+        if d[v] > d[u] + w(u,v)
+            d[v] = d[u] + w(u,v)
+            padre[v] = u 
 
 
-// Procedura di rilassamento standard (per completezza)
-PROCEDURA RELAX(u, v, w)
-    SE d[v] > d[u] + w(u, v):
-        d[v] ← d[u] + w(u, v)
-        π[v] ← u
-        AGGIORNA-PRIORITÀ(Q, v, d[v])
+
+sia Parente[1...|V[G]|] un nuovo array booleano
+
+for each v in V[G]
+    Parente[v] = FALSE 
+
+
+for each v in V[G]
+    if padre[v] != nil 
+        Parente[padre[v]] = TRUE 
+
+Foglie = nuova lista vuota 
+for each v in V[G]
+    if d[v] < infinito and Parente[v] == FALSE
+        Inserisci v in Foglie 
+
+Return foglie 
