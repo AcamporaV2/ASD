@@ -1,34 +1,26 @@
 Scrivere un algoritmo in pseudocodice, che risolva il problema dello zaino 01, utilizzando la tecnica della memoization
 
-ALGORITMO ZainoMemo(pesi[], valori[], W, n, M = NULL)
-    // 1. SETUP: Se M non esiste (prima chiamata), creala e inizializzala a -1
-    SE M è NULL ALLORA
-        M ← matrice di dimensione (n + 1) x (W + 1) riempita con -1
-    FINE SE
 
-    // 2. CASO BASE: Zaino pieno o oggetti finiti
-    SE n == 0 OPPURE W == 0 ALLORA
-        RITORNA 0
-    FINE SE
+Sia M[0...n,0...W] una tabella n+1 x W+1
 
-    // 3. CHECK MEMO: Se il valore è già in memoria, usalo
-    SE M[n][W] != -1 ALLORA
-        RITORNA M[n][W]
-    FINE SE
 
-    // 4. PASSO RICORSIVO
-    // Nota: usiamo n-1 per accedere agli array (indicizzati da 0)
-    SE pesi[n-1] > W ALLORA
-        // L'oggetto non entra: passo al successivo senza aggiungerlo
-        risultato ← ZainoMemo(pesi, valori, W, n-1, M)
-    ALTRIMENTI
-        // L'oggetto entra: scelgo il massimo tra prenderlo (includi) o no (escludi)
-        escludi ← ZainoMemo(pesi, valori, W, n-1, M)
-        includi ← valori[n-1] + ZainoMemo(pesi, valori, W - pesi[n-1], n-1, M)
-        
-        risultato ← MAX(escludi, includi)
-    FINE SE
+ZainoMemoi(v,w,i,j,M)
 
-    // 5. SALVATAGGIO: Scrivo in memoria e ritorno
-    M[n][W] ← risultato
-    RITORNA risultato
+    if M[i,j] != NIL 
+        return M[i,j] 
+
+    if i == 0 or j == 0 
+        M[i,j] = 0 
+        return 0 
+    //peso maggiore di capacità j 
+    if w[i] > j 
+
+        M[i,j] = ZainoMemoi(v,w,i-1,j,M)
+    else 
+
+        Incluso = v[i] + ZainoMemoi(v,w, i-1, j- W[i], M)
+        Escluso = ZainoMemo(v,w,i-1,j,M)
+
+        M[i,j] = max(Incluso, Escluso)
+    
+    return M[i,j]

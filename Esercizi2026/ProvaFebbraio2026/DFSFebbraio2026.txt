@@ -1,0 +1,95 @@
+Dato un grafo connesso orientato G=(V,E) con funzione peso w : E -> R ed un vertice r in V, 
+si scriva un algoritmo in pseudocodice che restituisca un ciclo di peso negativo raggiungibile da r, se esiste, NULL altrimenti.
+
+
+
+DFS
+
+for each v in V[G]
+    color[v] = white 
+    padre[v] = NIL 
+    d[v] = infinito
+
+dist[r] = 0 
+return VISITA-DFS(G,w,r)
+
+
+
+VISITA-DFS(G,w,u)
+
+color[u] = gray 
+
+for each v in Adj[u] 
+
+    if d[v]> d[u]+ w(u,v)
+
+        d[v] = d[u] + w(u,v)
+        padre[v] = u 
+
+        if color[v] == gray 
+            Ciclo = lista vuota
+            curr = u 
+
+            while curr !=v 
+                Aggiungi curr in testa a Ciclo 
+                curr = padre[curr]
+            
+            Aggiungi v in Ciclo
+
+            return Ciclo 
+
+        else 
+
+            ciclo = VISITA-DFS(G,w,v)
+                if ciclo != NIL 
+                    return ciclo 
+
+color[u] = black 
+return NIL 
+
+
+
+
+
+
+-------------------------------------------------------------
+TROVA-CICLO-DFS-STANDARD(G, w, r)
+1  for each u ∈ G.V
+2      u.color = WHITE
+3      u.π = NIL
+4  
+5  return DFS-VISIT-STANDARD(G, w, r)
+
+
+DFS-VISIT-STANDARD(G, w, u)
+1  u.color = GRAY
+2  
+3  for each v ∈ G.Adj[u]
+4      if v.color == WHITE
+5          v.π = u
+6          ciclo = DFS-VISIT-STANDARD(G, w, v)
+7          if ciclo ≠ NIL
+8              return ciclo
+9              
+10     // Trovato un arco all'indietro: abbiamo un ciclo!
+11     else if v.color == GRAY
+12         peso_totale = w(u, v) // Iniziamo con il peso dell'arco di chiusura
+13         curr = u
+14         C = nuova lista vuota
+15         
+16         // Ricostruiamo il ciclo e sommiamo i pesi man mano che risaliamo
+17         while curr ≠ v
+18             Inserisci curr in testa a C
+19             peso_totale = peso_totale + w(curr.π, curr) // Somma il peso dell'arco precedente
+20             curr = curr.π
+21             
+22         Inserisci v in testa a C  // Inizio del ciclo
+23         Inserisci v in coda a C   // Chiusura visiva del ciclo (es. v -> ... -> u -> v)
+24         
+25         // Verifichiamo se il ciclo trovato è effettivamente negativo
+26         if peso_totale < 0
+27             return C
+28         // Se non è negativo, non facciamo nulla: proseguiamo il ciclo for
+29         
+30 u.color = BLACK
+31 return NIL

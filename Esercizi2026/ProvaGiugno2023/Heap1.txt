@@ -1,5 +1,6 @@
 
-Dato una coda di min prioritá, implementata mediante un heap, scrivere un algoritmo che restituisca, come output, il numero degli scambi necessari ad eseguire il metodo EXTRACT_MIN
+Dato una coda di min prioritá, implementata mediante un heap, scrivere un algoritmo che restituisca, come output,
+il numero degli scambi necessari ad eseguire il metodo EXTRACT_MIN
 
 EXTRACT-MIN(A)
     // 1. Controllo underflow

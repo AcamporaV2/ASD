@@ -22,6 +22,7 @@ for each (u,v) in E[G]
 
     curr = v 
     
+    //non sono sicuro di ciò perchè se sto a risalire fino a U poi come mi ricavo il ciclo intero?
     for i = 1 to |V[G]|
         curr = pi[curr]
 
