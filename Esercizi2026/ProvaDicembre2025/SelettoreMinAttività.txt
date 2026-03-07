@@ -1,0 +1,19 @@
+Risolvere il problema della selezione di attività usando una coda di min-priorità
+
+
+GAS(s, f)
+  n = s.length
+  A = ∅
+  // Aggiungiamo un'attività fittizia a_0 con f[0] = 0 per avviare il confronto
+  f[0] = 0
+  k = 0      // 'k' è l'indice dell'ultima attività aggiunta (il tuo 'ultimo_f')
+ 
+ // Assumiamo Q già riempita con gli indici 1..n
+  while Q.heap-size > 0
+     u = EXTRACT-MIN(Q)    // Estrae l'indice dell'attività che finisce prima
+      
+      // Controlla se l'inizio di u è dopo la fine dell'attività k
+      if s[u] ≥ f[k]
+         A = A ∪ {u}
+         k = u             // Aggiorna l'indice dell'ultima attività scelta   
+return A

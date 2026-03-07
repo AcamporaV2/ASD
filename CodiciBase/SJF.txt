@@ -14,3 +14,24 @@ funzione MinTempoAttesa(t[1..N]):
         tempo_totale = tempo_totale + tempo_corrente
 
     ritorna tempo_totale
+
+
+
+
+
+    Q = coda vuota 
+
+    for i = 0 to n 
+        insert Q,T[i]
+
+
+    tempo_tot = 0
+    tempo_curr = 0
+
+    while q non è vuota 
+         
+            ti = extractMin(Q)
+            tempo_curr = ti + tempo_curr
+            tempo_tot = tempo_tot + tempo_curr
+
+    return tempo_totale
