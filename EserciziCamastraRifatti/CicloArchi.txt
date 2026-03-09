@@ -16,6 +16,48 @@ DFS(G)
 
     return false 
 
+DFS-VISIT(G, u)
+    time = time + 1 
+    d[u] = time 
+    color[u] = gray 
+
+    for each v in Adj[u]
+        // Controllo manuale del ciclo di lunghezza 2 (ignorando i self-loop)
+        if u != v
+            for each w in Adj[v]
+                if w == u
+                    return true    // Trovato l'arco di ritorno!
+
+        // Normale prosecuzione della DFS
+        if color[v] == white
+            pi[v] = u 
+            if DFS-VISIT(G, v) == true 
+                return true 
+
+    color[u] = black 
+    time = time + 1 
+    f[u] = time 
+
+    return false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 DFS-VISIT(u)
     time = time +1 
     d[u] = time 

@@ -6,7 +6,7 @@ scrivere un algoritmo, in pseudocodice, che restituisca il nodo di grado massimo
 (7 punti)
 
 
-
+DAG ordinamento topologico
 
 DIJKSTRA(G,w,s)
 
