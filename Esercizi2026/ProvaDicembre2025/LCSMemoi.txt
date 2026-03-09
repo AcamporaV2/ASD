@@ -1,0 +1,28 @@
+Risolvere il problema della LCS con la tecnica della memoization
+
+
+
+LCS-MEMOIZED(X, Y)
+1.  m = X.length
+2.  n = Y.length
+3.  Sia c[0..m, 0..n] una nuova tabella
+4.  for i = 0 to m
+5.      for j = 0 to n
+6.          c[i, j] = -1  // Valore speciale per indicare "non calcolato"
+7.  return LCS-MEMO-AUX(X, Y, m, n, c)
+
+
+LCS-MEMO-AUX(X, Y, i, j, c)
+ 1  // Se il valore è già stato calcolato, lo restituisce subito
+ 2  if c[i, j] ≠ -1
+ 3      return c[i, j]
+ 4      
+ 5  // Calcola il valore se non è in memoria
+ 6  if i == 0 or j == 0
+ 7      c[i, j] = 0
+ 8  elseif X[i] == Y[j]
+ 9      c[i, j] = LCS-MEMO-AUX(X, Y, i-1, j-1, c) + 1
+10  else
+11      c[i, j] = max(LCS-MEMO-AUX(X, Y, i-1, j, c), LCS-MEMO-AUX(X, Y, i, j-1, c))
+12      
+13  return c[i, j]

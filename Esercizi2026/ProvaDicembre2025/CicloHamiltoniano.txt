@@ -1,0 +1,46 @@
+HAMILTONIAN-CYCLE(G)
+ 1  n = |G.V|
+ 2  let path[1..n] be a new array
+ 3  
+ 4  // Inizializza tutti i vertici come non visitati
+ 5  for each u ∈ G.V
+ 6      visited[u] = FALSE
+ 7  
+ 8  // Sceglie un vertice s QUALSIASI come punto di partenza
+ 9  s = un vertice arbitrario ∈ G.V
+10  
+11  // Inserisce il vertice di partenza nella prima posizione del percorso
+12  path[1] = s
+13  visited[s] = TRUE
+14  
+15  // Lancia la ricorsione partendo da 's', per riempire la posizione 2
+16  return HAM-CYCLE-AUX(G, s, path, visited, 2, n)
+
+
+
+HAM-CYCLE-AUX(G, u, path, visited, pos, n)
+ 1  // Caso base: abbiamo inserito tutti gli 'n' vertici nel percorso
+ 2  if pos > n
+ 3      // Verifica se c'è un arco che chiude il ciclo (dall'ultimo nodo al primo)
+ 4      if path[1] ∈ G.Adj[u]
+ 5          return TRUE
+ 6      else
+ 7          return FALSE
+ 8          
+ 9  // Esplora tutti i vertici adiacenti al vertice corrente 'u'
+10  for each v ∈ G.Adj[u]
+11      if visited[v] == FALSE
+12          // Scegli il vertice 'v'
+13          path[pos] = v
+14          visited[v] = TRUE
+15          
+16          // Esplora ricorsivamente partendo da 'v'
+17          if HAM-CYCLE-AUX(G, v, path, visited, pos + 1, n) == TRUE
+18              return TRUE
+19              
+20          // BACKTRACKING: annulla la scelta se non ha portato a una soluzione
+21          visited[v] = FALSE
+22          // Non è necessario cancellare path[pos] perché verrà sovrascritto
+23          
+24  // Se nessun vicino porta a una soluzione, restituisce FALSE
+25  return FALSE
