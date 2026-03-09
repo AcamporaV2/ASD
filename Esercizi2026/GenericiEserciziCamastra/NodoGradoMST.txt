@@ -1,0 +1,29 @@
+Grafo che ritorna i pesi minimi non appartenenti all'mst e dire che se un MST è unico 
+
+
+KRUSKAL
+
+A = {}
+
+for each v in V[G]
+    grado[v] = 0 
+    MAKE-SET(v)
+
+Sort(E)
+
+for each (u,v) in E[G]
+    if FIND-SET(u) != FIND-SET(v)
+        A = A u {(u,v)}
+        grado[u]= grado[u] + 1
+        grado[v] = grado[u] + 1
+        Union(u,v)
+
+min = infinito 
+min_nodo = NIL 
+
+for each v in V[G]
+    if grado[v] < min 
+        min = grado[v]
+        min_nodo = v 
+
+return min, min_nodo

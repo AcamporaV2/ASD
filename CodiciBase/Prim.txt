@@ -41,3 +41,38 @@ while Q non è vuoto
 
             dist[v] = w(u,v)
             padre[v] = u oi
+
+
+
+
+
+
+MST-PRIM-MAX-DEPTH-V2(G, w, r)
+1  for ogni vertice u ∈ G.V
+2      u.key = ∞
+3      u.π = NIL
+4      u.depth = 0
+5  
+6  r.key = 0
+7  Q = G.V  
+8  
+9  max_depth = 0
+10 nodo_max_depth = r
+11
+12 while Q ≠ ∅
+13     u = EXTRACT-MIN(Q)
+14     
+15     
+20             
+21     // 2. Esploriamo i vicini e aggiorniamo le stime
+22     for ogni v ∈ G.Adj[u]
+23         if v ∈ Q e w(u, v) < v.key
+24             v.π = u                  // Aggiorniamo il padre
+25             v.depth = u.depth + 1    // LOGICAMENTE SUBITO DOPO: aggiorniamo la profondità
+26             v.key = w(u, v)          // Aggiorniamo la chiave per la coda di priorità
+27            // 1. Il nodo 'u' è ora definitivamente inserito nell'MST.
+16     // Controlliamo se batte il record di profondità.
+17     if u.depth > max_depth
+18         max_depth = u.depth
+19         nodo_max_depth = u 
+28 return nodo_max_depth
