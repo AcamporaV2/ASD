@@ -7,53 +7,39 @@ si vuole trovare la profondità massima (numero di archi) tra tutti i cammini mi
 BELLMAN-FORD per le distanze 
 
 
-BELLMAN
+BELLMAN_FORD_MAX_PROFONDITA(G, w, s)
 
-    for each v in V[G] - {s}
-        dist[v] = infinito 
-        padre[v] = NIL 
-    
+    // 1. Inizializzazione
+    for each u in V[G]
+        d[u] = +∞
+        h[u] = 0
+    d[s] = 0
 
-    dist[s] = 0 
-
-    for i = 1 to V[G] - 1
-
-        for each (u,v) in E[G]
-
-            if dist[v] > dist[u] + w(u,v)
-                dist[v] = dist[u] + w(u,v)
-                padre[v] = u 
-
-    
-    for each (u,v) in E[G]
-        if dist[v] > dist[u] + w(u,v)
-            return FALSE 
-
-    return TRUE 
-
-
-
-
-Calcolo-Prof(Nodi, sorgente, distanze, padri)
-
-    max_prof = 0
-
-    for each v in V[G]
-        if dist[v] < infinito 
-
-            profondita_v = 0
-            nodo_curr = v 
-
-
-            while nodo_curr != sorgente 
-                profondita_v = profondita_v +1 
-                nodo_curr = padre[nodo_curr]
-            
-
-
-            if profondita_v > max_prof 
-                max_prof = profondita_v
-    
-
-return max_prof
+    // 2. Rilassamento degli archi
+    for i = 1 to |V[G]| - 1
+        for each (u, v) in E[G]
+            if d[u] != +∞
                 
+                // Caso 1: Scoperto un cammino con costo strettamente inferiore
+                if d[v] > d[u] + w(u, v)
+                    d[v] = d[u] + w(u, v)
+                    h[v] = h[u] + 1
+                
+                // Caso 2: Scoperto un cammino minimo alternativo
+                else if d[v] == d[u] + w(u, v)
+                    // Aggiorniamo solo se il nuovo cammino ha più archi
+                    if h[v] < h[u] + 1
+                        h[v] = h[u] + 1
+
+    // 3. Verifica cicli di peso negativo (standard)
+    for each (u, v) in E[G]
+        if d[u] != +∞ and d[v] > d[u] + w(u, v)
+            return "Errore: Ciclo di peso negativo"
+
+    // 4. Estrazione della massima profondità tra tutti i cammini minimi
+    max_profondita = 0
+    for each u in V[G]
+        if d[u] != +∞ and h[u] > max_profondita
+            max_profondita = h[u]
+
+    return max_profondita
