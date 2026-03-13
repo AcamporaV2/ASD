@@ -1,0 +1,45 @@
+ Dato un grafo non orientato G = (V, E), un nodo sorgente s € V, scri
+vere un algoritmo, in pseudocodice, che restituisca la lista dei nodi, il cui
+cammino minimo dal nodo sorgente s é massimo. (7 punti)
+
+
+for each v in V[G] - {s}
+    color[v] = white 
+    pi[v] = NIL 
+    d[v] = Infinito
+
+d[s] = 0 
+color[s] = gray 
+
+Q = Vuota 
+ENQUEUE(Q,s)
+
+While Q non è vuota 
+
+    u = DEQUEUE(Q)
+
+    for each v in Adj[u]
+        if color[v] == white 
+            color[v] == gray 
+            d[v] = d[u] + 1
+            pi[v] = u 
+            ENQUEUE(Q,v)
+
+    color[u] = black 
+
+
+Nodi = Lista vuota 
+max = -1 
+
+for each u in V[G]
+    
+    if d[u] != infinito 
+        if d[u] > max 
+
+            max = d[u] 
+            Nodi = {u}
+        else if d[u] == max 
+
+            Inserisci u in Nodi 
+
+Return Nodi 

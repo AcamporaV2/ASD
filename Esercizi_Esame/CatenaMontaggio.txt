@@ -17,20 +17,50 @@ utilizzando le equazioni di ricorrenza suddette, individui per ogni vettura il p
 FASTESR WAY
 
 
-Memo = array[K][L] // inizializza a NIL
+MEMOIZED-FASTEST-WAY(I, U, T, e, S, K, L)
+    crea nuove tabelle memo[1..K, 1..L] e prev[1..K, 1..L]
+    per i = 1 a K
+        per j = 1 a L
+            memo[i, j] = ∞
+    
+    tempo_totale_min = ∞
+    ultima_catena_ottima = -1
+    
+    per i = 1 a K
+        tempo_corrente = LOOKUP-FASTEST-WAY(i, L, I, T, e, S, K, L, memo, prev) + U[i]
+        se tempo_corrente < tempo_totale_min
+            tempo_totale_min = tempo_corrente
+            ultima_catena_ottima = i
+            
+    ritorna tempo_totale_min, ultima_catena_ottima, prev
 
-function PercorsoRapido(T, I, U, e, S, K, L):
-    for k = 1 to K:
-        Memo[k][1] = I + T[k][1]
-    for l = 2 to L:
-        for k = 1 to K:
-            stay = Memo[k][l-1] + e + T[k][l]
-            migrate = INFINITY
-            for k' = 1 to K:
-                if k' ≠ k:
-                    migrate = min(migrate, Memo[k'][l-1] + S[k'][k] + T[k][l])
-            Memo[k][l] = min(stay, migrate)
-    min_time = INFINITY
-    for k = 1 to K:
-        min_time = min(min_time, Memo[k][L] + U[k])
-    return min_time
+
+LOOKUP-FASTEST-WAY(i, j, I, T, e, S, K, L, memo, prev)
+    se memo[i, j] < ∞
+        ritorna memo[i, j]
+        
+    se j == 1
+        memo[i, j] = I[i] + T[i, 1]
+    altrimenti
+        costo_min = LOOKUP-FASTEST-WAY(i, j-1, I, T, e, S, K, L, memo, prev) + e
+        migliore_catena = i
+        
+        per k = 1 a K
+            se k ≠ i
+                costo_cambio = LOOKUP-FASTEST-WAY(k, j-1, I, T, e, S, K, L, memo, prev) + S[k, i]
+                se costo_cambio < costo_min
+                    costo_min = costo_cambio
+                    migliore_catena = k
+                    
+        memo[i, j] = T[i, j] + costo_min
+        prev[i, j] = migliore_catena
+        
+    ritorna memo[i, j]
+
+
+PRINT-STATIONS(prev, ultima_catena_ottima, L)
+    catena_attuale = ultima_catena_ottima
+    stampa "Stazione " L ", catena " catena_attuale
+    per j = L decrescente fino a 2
+        catena_attuale = prev[catena_attuale, j]
+        stampa "Stazione " j-1 ", catena " catena_attuale
