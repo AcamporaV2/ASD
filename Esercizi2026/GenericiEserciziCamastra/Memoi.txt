@@ -1,0 +1,21 @@
+$c[i][0] = 0$ e $c[0][j] = 0 per ogni i,j
+
+ $c[i][j] = max(c[i-1][j], c[i][j-1]) + 1$
+
+
+
+
+Memoi (i,j,c)
+
+if c[i][j] != nil 
+    return c[i][j]
+
+if i == 0 or j == 0
+    c[i][j] = 0 
+
+val_1 = Memoi(i-1,j,c)
+val_2 = Memoi(i,j-1, c)
+
+c[i][j] = max(val_1,val_2)
+
+return c[i][j]
