@@ -17,6 +17,18 @@ repeat
 until T[j] == NIL or i == m
 Return NIL 
 
+HASH-DELET
+i = 0
+repeat
+    j = h(k,i)
+    if T[j] == k
+        T[j] = # 
+        return j 
+    
+    i = i + 1 
+
+until T[j] == NIL or i == m
+Return NIL 
 
 
 

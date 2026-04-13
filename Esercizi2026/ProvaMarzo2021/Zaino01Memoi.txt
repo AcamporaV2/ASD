@@ -19,7 +19,7 @@ ZainoMemoi(v,w,i,j,M)
     else 
 
         Incluso = v[i] + ZainoMemoi(v,w, i-1, j- W[i], M)
-        Escluso = ZainoMemo(v,w,i-1,j,M)
+        Escluso = ZainoMemoi(v,w,i-1,j,M)
 
         M[i,j] = max(Incluso, Escluso)
     
