@@ -1,0 +1,27 @@
+Kruskal dove restituiamo gli archi di peso minore non nell'MST
+
+
+Kruskal
+
+for each v in V[G]
+    MAKE-SET(v)
+
+MST = insieme vuoto
+R = insieme vuoto
+min_peso = infinito
+
+Sort(E)
+
+for each (u,v) in E[G]
+    if FIND-SET(u) != FIND-SET(v)
+        MST = MST u {(u,v)}
+        UNION(u,v)
+    else 
+        if min_peso == infinito 
+            min_peso = w(u,v)
+            R = R u {(u,v)}
+        else if w(u,v) == min_peso
+            R = R u {(u,v)}
+        
+
+return R

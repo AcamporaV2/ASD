@@ -1,0 +1,28 @@
+Hash insert e ricerca con la #
+ Si supponga di risolvere il problema della cancellazione inserendo il simbolo # nella locazione contenente il termine che si vuole cancellare.
+ Scrivere, in pseudocodice, le funzioni INSERISCI e RICERCA debbano essere modificate opportunamente in una tabella di Hash H ad indirizzamento aperto che supporti la cancellazione.
+
+
+
+HASH-SEARCH
+i = 0
+repeat
+    j = h(k,i)
+    if T[j] == k 
+        return j
+    i = i +1
+until i == m or T[j] == NIL 
+
+
+
+HASH-INSERT
+i = 0 
+repeat 
+    j = h(k,i)
+    if T[j] == NIL or T[j] == #
+        T[j] = k 
+        return j 
+    else 
+        i = i + 1
+
+until i == m 

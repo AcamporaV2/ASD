@@ -1,0 +1,38 @@
+Prim dove restituiamo il nodo di grado minore escludendo le foglie
+
+
+for each v in V[G]
+    key[v] = infinito
+    padre[v] = nil 
+    grado[v] = 0
+
+key[s] = 0
+
+Q = V[G]
+
+while Q!= vuoto 
+
+    u = extract-min(Q)
+
+    for each v in Adj[u]
+        if v in Q and w(u,v) < key[v]
+            padre[v] = u 
+            key[v] = w(u,v)
+    
+
+for each v in V[G]
+    if padre[v] != NIL 
+        grado[v] = grado[v] + 1
+        grado[padre[v]] = grado[padre[v]]+1
+
+
+min_nodo = NIL 
+min_grado = infinito
+
+for each v in V[G]
+    if grado[v] > 1 
+        if grado[v] < min_grado
+            min_nodo = v 
+            min_grado = grado[v]
+
+return min_nodo
