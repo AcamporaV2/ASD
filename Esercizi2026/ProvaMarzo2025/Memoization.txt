@@ -25,3 +25,11 @@ Memoization(Memo, i, j)
     Memo[i,j] = risultato
 
     return Memo[i,j]
+
+
+Il problema gode della Sottostruttura ottima poichè la soluzione globale può essere costruita a partire dalle soluzioni dei suoi sottoprobleim
+Infatti il nostro risultato globale F(x,y) è definito prendendo il massimo tra le 3 scelte possibili
+
+-F(x-1,y-1)
+-F(x-1,y)
+-F(x,y-1)

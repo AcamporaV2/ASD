@@ -12,7 +12,6 @@ BELLMAN-FORD
 for each v in V[G] - {s}
     d[v] = infinito 
     padre[v] = NIL 
-
     depth[v] = 0
 
 d[s] = 0
@@ -27,10 +26,6 @@ for i = 1 to |V[G]|-1
             d[v] = d[u] + w(u,v)
             padre[v] = u 
 
-            depth[v] = depth[u] + 1
-
-
-
 //Cicli negativi
 for each (u,v) in E[G]
     if d[v] > d[u] + w(u,v)
@@ -38,9 +33,16 @@ for each (u,v) in E[G]
 
 max_depth = -1
 
-for each u in V[G]
-    if d[u] != infinito
-        if depth[u] > max_depth
-            max_depth = depth[u]
+for each v in V[G]
+    if d[v] < infinito
+        curr_prof = 0
+        x = v 
+        while padre[x] != NIL 
+            curr_prof = curr_prof + 1
+            x = padre[x]
+        
+        if curr_prof > max_depth 
+            max_depth = curr_prof
+
 
 return max_depth

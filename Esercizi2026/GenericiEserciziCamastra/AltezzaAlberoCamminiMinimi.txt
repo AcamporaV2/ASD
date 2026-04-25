@@ -1,7 +1,52 @@
 Dato un grafo G = (V,E) orientato e pesato con funzione peso w: E -> R ed un Nodo s in V,
-Scrivere un algoritmo in pseudocodice che restituisca l'alzetta dell'albero dei cammini minimi.
+Scrivere un algoritmo in pseudocodice che restituisca l'altezza dell'albero dei cammini minimi.
 
 BELLMAN
+
+sia H un array di dimensione V[G] inzializzato a NIL
+
+for each v in V[G]
+    d[v] = infinito 
+    pi[v] = NIL 
+    H[v] = -1
+
+d[s] = 0
+
+for i = 1 to |V[G]|-1
+    for each (u,v) in E[G]
+        if d[v] > d[u] + w(u,v)
+            d[v] = d[u] + w(u,v)
+            pi[v] = u 
+    
+
+for each (u,v) in E[G]
+    if d[v] > d[u] + w(u,v)
+        return ERROR
+
+
+max_altezza = 0
+
+for each v in V[G]
+    if d[v] != infinito 
+        max_altezza = Max(max_altezza, ALTEZZA(v))
+
+return max_altezza
+
+
+ALTEZZA(v)
+
+if v == s 
+    return 0
+
+if H[v] != NIL
+    return H[v]
+
+H[v] = ALTEZZA(pi(v)) + 1
+
+return H[v]
+
+
+-------------------------------------------------------------------------------------------
 
 for each v in V[G]
     d[v] = infinito

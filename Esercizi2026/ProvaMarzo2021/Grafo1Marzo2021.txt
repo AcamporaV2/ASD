@@ -29,7 +29,6 @@ sia Parente[1...|V[G]|] un nuovo array booleano
 for each v in V[G]
     Parente[v] = FALSE 
 
-
 for each v in V[G]
     if padre[v] != nil 
         Parente[padre[v]] = TRUE 

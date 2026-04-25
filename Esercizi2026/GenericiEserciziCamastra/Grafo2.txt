@@ -15,6 +15,7 @@ d[s] = 0
 S = insieme vuoto 
 Q= V[G]
 
+
 while Q non è vuota 
 
     u = extractmin(Q)
@@ -26,10 +27,8 @@ while Q non è vuota
             d[v] = d[u] + w(u,v)
             pi[v] = u 
 
-Nodi_pari = lista vuota 
+    if d[u] == k 
+        INSERT(Nodi_pari,v)
 
-for each v in V[G]
-    if d[v] == k 
-        INSERT(Nodi_pari, v)
 
 return Nodi_pari

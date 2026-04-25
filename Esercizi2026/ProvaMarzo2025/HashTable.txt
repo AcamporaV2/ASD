@@ -31,32 +31,14 @@ until T[j] == NIL or i == m
 Return NIL 
 
 
-
-HASH-INSERT
-i = 0 
-slot_ricilo = NIL 
-repeat
-    j = h(k,i)
-
-    if T[j] == k 
-        return "Chiave presente già"
-
-    if T[j] == # 
-        if slot_ricilo == NIL 
-            slot_ricilo = j //Memorizza il primo #
-
-    if T[j] == NIL 
-        if slot_ricilo != NIL 
-            T[slot_ricilo] = k 
-            return slot_ricilo
-        else 
-            T[j] = k 
-            return j
-    i + 1
-until i == m
-
-if slot_riciclato != NIL
-    T[slot_riciclato] = k
-    return slot_riciclato
-else
-    return "Errore: overflow tabella hash"
+HASH-INSERT(T, k)
+1  i = 0
+2  repeat
+3      j = h(k, i)
+4      // MODIFICA: Accettiamo sia NIL che il simbolo di cancellazione '#'
+5      if T[j] == NIL oppure T[j] == '#'
+6          T[j] = k
+7          return j
+8      i = i + 1
+9  until i == m
+10 error "hash table overflow"

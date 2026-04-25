@@ -13,6 +13,8 @@ color[s] = gray
 
 Q = Vuota 
 ENQUEUE(Q,s)
+Nodi = Lista vuota 
+max = -1 
 
 While Q non è vuota 
 
@@ -26,20 +28,14 @@ While Q non è vuota
             ENQUEUE(Q,v)
 
     color[u] = black 
-
-
-Nodi = Lista vuota 
-max = -1 
-
-for each u in V[G]
-    
     if d[u] != infinito 
-        if d[u] > max 
+            if d[u] > max 
 
-            max = d[u] 
-            Nodi = {u}
-        else if d[u] == max 
+                max = d[u] 
+                Nodi = {u}
+            else if d[u] == max 
 
-            Inserisci u in Nodi 
+                Inserisci u in Nodi 
 
+   
 Return Nodi 

@@ -15,6 +15,7 @@ color[s] = Gray
 Q = coda vuota 
 ENQUEUE(Q,s)
 
+
 while Q non è vuota 
 
     u = extractMin(Q)
@@ -27,11 +28,8 @@ while Q non è vuota
             ENQUEU(Q,v)
     
     color[u] = BLACK 
-
-Num_nodi = 0
-
-for each v in V[G]
-    if d[v] != infinito and d[v] > k 
+    if d[u] != infinito and d[u] > k 
         Num_nodi = Num_nodi + 1
+
 
 return num_nodi

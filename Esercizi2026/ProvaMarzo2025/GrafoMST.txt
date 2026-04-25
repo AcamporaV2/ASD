@@ -21,13 +21,7 @@ PRIM-HEIGHT(G, w, r)
     while Q ≠ ∅
         u = EXTRACT-MIN(Q)
 
-        // Calcolo dell'altezza (π[u] è già definitivo e fuori da Q)
-        if π[u] ≠ NIL
-            H[u] = H[π[u]] + 1
 
-        // Aggiornamento altezza massima
-        if H[u] > max_alt
-            max_alt = H[u]
 
         // Scansione adiacenti e relax
         for each v in Adj[u]
@@ -35,5 +29,11 @@ PRIM-HEIGHT(G, w, r)
                 key[v] = w(u, v)
                 π[v] = u
                 // (Implica un DECREASE-KEY su Q)
+        // Calcolo dell'altezza (π[u] è già definitivo e fuori da Q)
+        if π[u] ≠ NIL
+            H[u] = H[π[u]] + 1
 
+        // Aggiornamento altezza massima
+        if H[u] > max_alt
+            max_alt = H[u]
     return max_alt
