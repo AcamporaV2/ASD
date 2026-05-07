@@ -19,4 +19,6 @@ while q non è vuota
     tempo_corrente = tempo_corrente + ti 
     tempo_totale  = tempo_totale + tempo_corrente
 
-return tempo_totale
+tempo_medio =  tempo_totale/n 
+
+return tempo_medio

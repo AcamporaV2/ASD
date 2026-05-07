@@ -26,26 +26,26 @@ while(Q!= Vuoto)
     color[u] = BLACK 
 
 --------------------------------------------
-for each u in V[G] - {s}
+for each v in V[G]
     color[u] = white 
-    padre[u] = NIL 
     d[u] = infinito
+    pi[u] = NIL 
 
-color[s] = GRAY 
-d[s] = 0 
-padre[s] = nil 
+color[s] = grey 
+d[s] = 0
 
 Q = coda vuota 
 ENQUEUE(Q,s)
 
-while Q!=vuoto 
+while Q non è vuota 
 
-    u = DEQUEU(Q)
+    u = DEQUEUE(Q)
 
-    for each v in Adj[u]
-        if color[v] = white 
-            color[v] = gray 
-            padre[v] = u 
-            d[v] = d[u] + 1
+    for each v in Adj[u] 
+        if color[v] == white 
+            color[v] == grey 
+            d[v] = d[u] +1
+            pi[v] = u 
+            ENQUEUE(Q,v)
     
     color[u] = black 

@@ -30,3 +30,39 @@ for each v in V[G]
             max = Altezza[v] 
 
 return max
+
+
+
+
+ALTEZZA-CAMMINI-MINIMI(G, w, s)
+1.  // FASE 1: Bellman-Ford standard per stabilizzare l'albero
+2.  INITIALIZE-SINGLE-SOURCE(G, s)
+3.  for i = 1 to |G.V| - 1:
+4.      for ogni arco (u, v) ∈ G.E:
+5.          RELAX(u, v, w)
+6.  
+7.  // Controllo cicli negativi (fondamentale per la correttezza)
+8.  for ogni arco (u, v) ∈ G.E:
+9.      if v.d > u.d + w(u, v):
+10.         error "Il grafo contiene cicli negativi"
+11.
+12. // FASE 2: Calcolo dell'altezza sull'albero dei predecessori pi
+13. // Inizializziamo le altezze a 0
+14. for ogni vertice v ∈ G.V:
+15.     v.h = (v == s) ? 0 : -1 
+16.
+17. // Usiamo una BFS per calcolare i livelli dell'albero SPT
+18. Q = Nuova Coda
+19. ENQUEUE(Q, s)
+20. max_h = 0
+21. mentre Q non è vuota:
+22.     u = DEQUEUE(Q)
+23.     // Esaminiamo tutti i vicini, ma seguiamo solo gli archi dell'albero
+24.     for ogni v ∈ G.Adj[u]:
+25.         if v.pi == u: 
+26.             v.h = u.h + 1
+27.             if v.h > max_h:
+28.                 max_h = v.h
+29.             ENQUEUE(Q, v)
+30.
+31. return max_h

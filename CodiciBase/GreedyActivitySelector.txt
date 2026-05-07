@@ -7,3 +7,29 @@ GREEDY-ACTIVITY-SELECTOR(s, f)
           A = A U {a_m}
           k = m
   return A
+
+
+
+GREEDY-ACTIVITY-WITH-QUEUE(s, f)
+1.  n = s.length
+2.  A = ∅
+3.  Q = Nuova Min-Priority Queue
+4.  
+5.  // Inseriamo tutte le attività nella coda usando il tempo di fine come chiave
+6.  for i = 1 to n:
+7.      INSERT(Q, a_i, f[i]) 
+8.  
+9.  // Estraiamo la prima attività (quella che finisce prima in assoluto)
+10. if Q non è vuota:
+11.     a_i = EXTRACT-MIN(Q)
+12.     A = {a_i}
+13.     f_ultimo = f[i]   // Teniamo traccia del tempo di fine dell'ultima attività scelta
+14. 
+15. // Processiamo il resto delle attività
+16. mentre Q non è vuota:
+17.     a_m = EXTRACT-MIN(Q)
+18.     se s[m] >= f_ultimo:
+19.         A = A ∪ {a_m}
+20.         f_ultimo = f[m]
+21. 
+22. return A

@@ -1,0 +1,34 @@
+FASTEST-WAY-STELLANTIS(T, S, I, U, L, epsilon)
+1.  f1[1] = I1 + T[1,1]
+2.  f2[1] = I2 + T[2,1]
+3.  
+4.  FOR j = 2 TO L
+5.      // Calcolo per Linea 1
+6.      // Opzione A: Resto sulla linea 1 (pago epsilon)
+7.      // Opzione B: Arrivo dalla linea 2 (pago S, ma epsilon = 0)
+8.      IF f1[j-1] + epsilon + T[1,j] <= f2[j-1] + S[2,j-1] + T[1,j] THEN
+9.          f1[j] = f1[j-1] + epsilon + T[1,j]
+10.         l1[j] = 1
+11.     ELSE
+12.         f1[j] = f2[j-1] + S[2,j-1] + T[1,j]
+13.         l1[j] = 2
+14.
+15.     // Calcolo per Linea 2
+16.     // Opzione A: Resto sulla linea 2 (pago epsilon)
+17.     // Opzione B: Arrivo dalla linea 1 (pago S, ma epsilon = 0)
+18.     IF f2[j-1] + epsilon + T[2,j] <= f1[j-1] + S[1,j-1] + T[2,j] THEN
+19.         f2[j] = f2[j-1] + epsilon + T[2,j]
+20.         l2[j] = 2
+21.     ELSE
+22.         f2[j] = f1[j-1] + S[1,j-1] + T[2,j]
+23.         l2[j] = 1
+24. END FOR
+25.
+26. // Uscita finale (U include già il tempo per uscire dalla stazione L)
+27. IF f1[L] + U1 <= f2[L] + U2 THEN
+28.     f_star = f1[L] + U1
+29.     l_star = 1
+30. ELSE
+31.     f_star = f2[L] + U2
+32.     l_star = 2
+33. RETURN f_star, l_star, l1, l2

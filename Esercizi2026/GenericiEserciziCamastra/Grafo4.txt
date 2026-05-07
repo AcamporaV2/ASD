@@ -3,39 +3,34 @@ vere un algoritmo, in pseudocodice, che restituisca la lista dei nodi, il cui
 cammino minimo dal nodo sorgente s é massimo. (7 punti)
 
 
-for each v in V[G] - {s}
+for each v in V[G]
     color[v] = white 
-    pi[v] = NIL 
+    padre[v] = NIL 
     d[v] = Infinito
 
+color[s] = grey 
 d[s] = 0 
-color[s] = gray 
 
-Q = Vuota 
+max = - 1
+Nodi= {}
+Q = coda vuota 
 ENQUEUE(Q,s)
-Nodi = Lista vuota 
-max = -1 
 
-While Q non è vuota 
+while Q non è vuota 
 
     u = DEQUEUE(Q)
 
     for each v in Adj[u]
         if color[v] == white 
-            color[v] == gray 
+            color[v] = grey 
             d[v] = d[u] + 1
-            pi[v] = u 
+            padre[v] = u 
             ENQUEUE(Q,v)
+        
+        if d[v] > max 
+            max = d[v] 
+            Nodi = {v}
+        else if d[v] == max 
+            Nodi = Nodu U {v}
 
-    color[u] = black 
-    if d[u] != infinito 
-            if d[u] > max 
-
-                max = d[u] 
-                Nodi = {u}
-            else if d[u] == max 
-
-                Inserisci u in Nodi 
-
-   
-Return Nodi 
+    color[u] = black

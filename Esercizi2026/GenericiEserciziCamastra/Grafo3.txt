@@ -1,5 +1,5 @@
-Dato un grafo orientato $G$, rappresentato mediante una lista di adiacenza scrivere un algoritmo, 
-in pseudocodice, che restituisca la lista di puntatori ai vertici di $G$ di grado massimo.
+Dato un grafo orientato G, rappresentato mediante una lista di adiacenza scrivere un algoritmo, 
+in pseudocodice, che restituisca la lista di puntatori ai vertici di G di grado massimo.
 
 
 

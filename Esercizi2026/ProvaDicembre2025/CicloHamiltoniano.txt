@@ -1,46 +1,40 @@
-HAMILTONIAN-CYCLE(G)
- 1  n = |G.V|
- 2  let path[1..n] be a new array
- 3  
- 4  // Inizializza tutti i vertici come non visitati
- 5  for each u ∈ G.V
- 6      visited[u] = FALSE
- 7  
- 8  // Sceglie un vertice s QUALSIASI come punto di partenza
- 9  s = un vertice arbitrario ∈ G.V
-10  
-11  // Inserisce il vertice di partenza nella prima posizione del percorso
-12  path[1] = s
-13  visited[s] = TRUE
-14  
-15  // Lancia la ricorsione partendo da 's', per riempire la posizione 2
-16  return HAM-CYCLE-AUX(G, s, path, visited, 2, n)
+HAS-HAMILTONIAN-CYCLE(G)
+1  // Un ciclo in un grafo semplice richiede almeno 3 vertici
+2  se |G.V| < 3
+3      ritorna FALSE
+4      
+5  // Inizializzazione: nessun vertice è nel cammino
+6  per ogni vertice u ∈ G.V
+7      u.color = WHITE
+8      
+9  // Scegliamo un vertice di partenza arbitrario
+10 s = primo vertice di G.V 
+11 s.color = GRAY
+12 
+13 // Avviamo la ricerca ricorsiva passando: grafo, nodo corrente, nodo di partenza, contatore nodi
+14 ritorna HAMILTONIAN-VISIT(G, s, s, 1)
 
 
-
-HAM-CYCLE-AUX(G, u, path, visited, pos, n)
- 1  // Caso base: abbiamo inserito tutti gli 'n' vertici nel percorso
- 2  if pos > n
- 3      // Verifica se c'è un arco che chiude il ciclo (dall'ultimo nodo al primo)
- 4      if path[1] ∈ G.Adj[u]
- 5          return TRUE
- 6      else
- 7          return FALSE
- 8          
- 9  // Esplora tutti i vertici adiacenti al vertice corrente 'u'
-10  for each v ∈ G.Adj[u]
-11      if visited[v] == FALSE
-12          // Scegli il vertice 'v'
-13          path[pos] = v
-14          visited[v] = TRUE
-15          
-16          // Esplora ricorsivamente partendo da 'v'
-17          if HAM-CYCLE-AUX(G, v, path, visited, pos + 1, n) == TRUE
-18              return TRUE
-19              
-20          // BACKTRACKING: annulla la scelta se non ha portato a una soluzione
-21          visited[v] = FALSE
-22          // Non è necessario cancellare path[pos] perché verrà sovrascritto
-23          
-24  // Se nessun vicino porta a una soluzione, restituisce FALSE
-25  return FALSE
+HAMILTONIAN-VISIT(G, u, start, count)
+1  // Caso base: abbiamo visitato tutti i vertici del grafo
+2  se count == |G.V|
+3      // Controlliamo se c'è un arco che chiude il ciclo verso il nodo di partenza
+4      se start ∈ G.Adj[u]
+5          ritorna TRUE
+6      altrimenti
+7          ritorna FALSE
+8          
+9  // Passo ricorsivo: esploriamo i vicini del nodo corrente
+10 per ogni vertice v ∈ G.Adj[u]
+11     se v.color == WHITE
+12         v.color = GRAY       // Aggiungiamo 'v' al cammino corrente
+13         
+14         // Se l'esplorazione da 'v' trova un ciclo, propaghiamo il successo
+15         se HAMILTONIAN-VISIT(G, v, start, count + 1) == TRUE
+16             ritorna TRUE
+17             
+18         // Backtracking: se 'v' non porta a una soluzione, lo togliamo dal cammino
+19         v.color = WHITE      
+20 
+21 // Se nessun vicino porta a un ciclo Hamiltoniano
+22 ritorna FALSE

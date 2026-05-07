@@ -1,4 +1,4 @@
-Dato un albero MinHeap H di grandezza Heapsize+1, si estragga il minimo e losi  scambi con l'ultimo elemento. 
+Dato un albero MinHeap H di grandezza Heapsize+1, si estragga il minimo e losi  cambi con l'ultimo elemento. 
 Si scriva un algoritmo che prendendo in input H e la grandezza Heapsize, restituisce il numero di scambi in H necessari a ripristinare la proprietà dell'Heap.
 Qualora l'albero soddisfi la priorità dell'Heap, l'algoritmo deve restituire valore 0
 

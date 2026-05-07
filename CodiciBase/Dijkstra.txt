@@ -31,22 +31,20 @@ while Q non è vuota
 ----------------------------------------------
 
 for each v in V[G]
-    d[v] = infintio 
-    pi[v] = NIL 
+    d[v] = infinito
+    pi[v] = NIL
 
 d[s] = 0
 
-Q= V[G]
+Q = V[G]
 S = {}
 
 while Q non è vuota 
     
     u = extractMin(Q)
-
     S = S u {u}
 
-    for each v in Adj[u] 
+    for each v in Adj[u]
         if d[v] > d[u] + w(u,v)
-            d[v] = d[u]  + w (u,v)
+            d[v] = d[u] + w(u,v)
             pi[v] = u 
-            DECREASE-KEY
