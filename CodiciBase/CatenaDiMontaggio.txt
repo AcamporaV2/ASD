@@ -1,3 +1,10 @@
+f lavoro precedente
+a lavoro curr 
+t trasferimento
+e entrata
+x uscita 
+
+
 FASTEST-WAY(a, t, e, x, n)
     // Inizializzazione delle prime stazioni
     f1[1] = e1 + a[1, 1]

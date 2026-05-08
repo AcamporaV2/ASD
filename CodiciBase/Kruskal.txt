@@ -36,3 +36,19 @@ for each (u,v) in E[G]
         Union(u,v)
 
 Return A
+
+
+
+
+MST-KRUSKAL(G, w)
+1  A = ∅
+2  for each vertex v ∈ G.V
+3      MAKE-SET(v)
+4  Q = G.E
+5  BUILD-MIN-HEAP(Q)  // La chiave dell'heap è il peso w dell'arco
+6  while Q ≠ ∅
+7      (u, v) = EXTRACT-MIN(Q)
+8      if FIND-SET(u) ≠ FIND-SET(v)
+9          A = A ∪ {(u, v)}
+10         UNION(u, v)
+11 return A
